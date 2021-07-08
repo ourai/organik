@@ -1,0 +1,47 @@
+@import "./mixins";
+
+@include component-rules($petals--panel-component-name) {
+  padding:
+    var($__petals--panel-padding-y, $petals--panel-padding-y)
+    var($__petals--panel-padding-x, $petals--panel-padding-x);
+  border:
+    var($__petals--panel-border-width, $petals--panel-border-width) solid
+    var($__petals--panel-border-color, $petals--panel-border-color);
+  border-radius: var($__petals--panel-border-radius, $petals--panel-border-radius);
+  background-color: var($__petals--panel-bg, $petals--panel-bg);
+  box-shadow: var($__petals--panel-box-shadow, $petals--panel-box-shadow);
+
+  &-header {
+    height: var($__petals--panel-header-height, $petals--panel-header-height);
+    border-bottom:
+      var($__petals--panel-header-border-width, $petals--panel-header-border-width) solid
+      var($__petals--panel-header-border-color, $petals--panel-header-border-color);
+  }
+
+  &-body {
+    padding:
+      var($__petals--panel-body-padding-y, $petals--panel-body-padding-y)
+      var($__petals--panel-body-padding-x, $petals--panel-body-padding-x);
+  }
+
+  // Panel with fixed body height
+
+  &--fixedHeight {
+    @include fixed-body-height-with-var(
+      get-selector($petals--panel-component-name + "-header"),
+      var($__petals--panel-header-height, $petals--panel-header-height),
+      get-selector($petals--panel-component-name + "-footer"),
+      auto,
+      get-selector($petals--panel-component-name + "-body")
+    );
+  }
+}
+
+@include component-rules($petals--panel-header-component-name) {
+  &-title {
+    font-size: var($__petals--panel-header-font-size, $petals--panel-header-font-size);
+    font-weight: var($__petals--panel-header-font-weight, $petals--panel-header-font-weight);
+    color: var($__petals--panel-header-color, $petals--panel-header-color);
+    letter-spacing: var($__petals--panel-header-letter-spacing, $petals--panel-header-letter-spacing);
+  }
+}

@@ -1,0 +1,26 @@
+@import '../../popup/style/variables';
+
+@import './properties';
+
+$petals--date-picker-disabled-border-color: var(
+  $__petals--input-disabled-border-color,
+  $petals--input-disabled-border-color
+) !default;
+$petals--date-picker-disabled-bg: var($__petals--input-disabled-bg, $petals--input-disabled-bg) !default;
+
+$petals--date-picker-panel-border-width: var($__petals--popup-border-width, $petals--popup-border-width) !default;
+$petals--date-picker-panel-border-color: var($__petals--popup-border-color, $petals--popup-border-color) !default;
+$petals--date-picker-panel-border-radius: var($__petals--popup-border-radius, $petals--popup-border-radius) !default;
+$petals--date-picker-panel-box-shadow: var($__petals--popup-box-shadow, $petals--popup-box-shadow) !default;
+
+$petals--date-picker-date-current-font-weight: bold !default;
+$petals--date-picker-date-current-color: var($__petals--primary, $petals--primary) !default;
+$petals--date-picker-date-current-dot-size: 0 !default;
+
+$petals--date-picker-date-hover-color: var($__petals--primary-hover, $petals--primary-hover) !default;
+
+$petals--date-picker-date-active-color: $__petals--white !default;
+$petals--date-picker-date-active-bg: var($__petals--primary, $petals--primary) !default;
+
+$petals--date-picker-range-bg: var($__petals--hover-bg, $petals--hover-bg) !default;
+$petals--date-picker-range-hover-bg: var($__petals--date-picker-range-bg, $petals--date-picker-range-bg) !default;

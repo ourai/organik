@@ -1,0 +1,58 @@
+@import './properties';
+
+$petals--select-component-name: 'Select' !default;
+
+$petals--select-padding-y: $petals--input-padding-y !default;
+$petals--select-padding-x: $petals--input-padding-x !default;
+$petals--select-font-family: $petals--input-font-family !default;
+$petals--select-font-size: var($__petals--popup-font-size, $petals--popup-font-size) !default;
+$petals--select-height: $petals--input-height !default;
+$petals--select-indicator-padding: 1rem !default; // Extra padding to account for the presence of the background-image based indicator
+$petals--select-font-weight: $petals--input-font-weight !default;
+$petals--select-line-height: $petals--input-line-height !default;
+$petals--select-color: $petals--text-placeholder !default;
+$petals--select-disabled-color: $petals--disabled-color !default;
+$petals--select-bg: $petals--input-bg !default;
+$petals--select-disabled-bg: $petals--disabled-bg !default;
+$petals--select-disabled-border-color: #e4e7ed !default;
+$petals--select-bg-size: 16px 12px !default; // In pixels because image dimensions
+// $petals--select-indicator-color: $petals--gray-800 !default;
+// $petals--select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$petals--select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>") !default;
+
+$petals--select-background: no-repeat right $petals--select-padding-x center / $petals--select-bg-size !default; // Used so we can have multiple background elements (e.g., arrow and feedback icon)
+
+$petals--select-feedback-icon-padding-right: add(
+  1em * 0.75,
+  (2 * $petals--select-padding-y * 0.75) + $petals--select-padding-x + $petals--select-indicator-padding
+) !default;
+$petals--select-feedback-icon-position: center right ($petals--select-padding-x + $petals--select-indicator-padding) !default;
+$petals--select-feedback-icon-size: $petals--input-height-inner-half $petals--input-height-inner-half !default;
+
+$petals--select-border-width: $petals--input-border-width !default;
+$petals--select-border-color: $petals--input-border-color !default;
+$petals--select-border-radius: $petals--border-radius !default;
+$petals--select-box-shadow: $petals--box-shadow-inset !default;
+
+$petals--select-focus-border-color: $petals--primary !default;
+$petals--select-focus-width: $petals--input-focus-width !default;
+$petals--select-focus-box-shadow: 0 0 0 $petals--select-focus-width $petals--input-btn-focus-color !default;
+
+$petals--select-padding-y-sm: $petals--input-padding-y-sm !default;
+$petals--select-padding-x-sm: $petals--input-padding-x-sm !default;
+$petals--select-font-size-sm: $petals--input-font-size-sm !default;
+$petals--select-height-sm: $petals--input-height-sm !default;
+
+$petals--select-padding-y-lg: $petals--input-padding-y-lg !default;
+$petals--select-padding-x-lg: $petals--input-padding-x-lg !default;
+$petals--select-font-size-lg: $petals--input-font-size-lg !default;
+$petals--select-height-lg: $petals--input-height-lg !default;
+
+$petals--select-dropdown-padding-y: var($__petals--popup-padding-y, $petals--popup-padding-y) !default;
+$petals--select-dropdown-border-radius: var($__petals--popup-border-radius, $petals--popup-border-radius) !default;
+$petals--select-dropdown-box-shadow: var($__petals--popup-box-shadow, $petals--popup-box-shadow) !default;
+
+$petals--select-option-height: var($__petals--popup-item-height, $petals--popup-item-height) !default;
+$petals--select-option-padding-y: var($__petals--popup-item-padding-y, $petals--popup-item-padding-y) !default;
+$petals--select-option-padding-x: var($__petals--popup-item-padding-x, $petals--popup-item-padding-x) !default;
+$petals--select-option-color: var($__petals--popup-item-color, $petals--popup-item-color) !default;
+$petals--select-option-hover-bg: var($__petals--popup-item-hover-bg, $petals--popup-item-hover-bg) !default;

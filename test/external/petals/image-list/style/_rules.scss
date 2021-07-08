@@ -1,0 +1,32 @@
+.ImageList {
+  @include box-sizing(border-box);
+
+  * {
+    @include box-sizing(inherit);
+  }
+}
+
+.ImageList-group {
+  $gap: half($petals--image-list-gutter);
+
+  margin: {
+    right: -$gap;
+    left: -$gap;
+  }
+  @include pie-clearfix;
+
+  + .ImageList-group {
+    margin-top: $petals--image-list-gutter;
+  }
+}
+
+.ImageList-item {
+  $gap: half($petals--image-list-gutter);
+
+  float: left;
+  width: percentage(1 / 3);
+  padding: {
+    right: $gap;
+    left: $gap;
+  }
+}

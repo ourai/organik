@@ -1,0 +1,39 @@
+@import '../../popup/style/variables';
+
+@import './properties';
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$petals--dropdown-min-width: 10rem !default;
+$petals--dropdown-padding-y: var($__petals--popup-padding-y, $petals--popup-padding-y) !default;
+$petals--dropdown-spacer: 0.125rem !default;
+$petals--dropdown-font-size: var($__petals--popup-font-size, $petals--popup-font-size) !default;
+$petals--dropdown-color: $petals--body-color !default;
+$petals--dropdown-bg: $__petals--white !default;
+$petals--dropdown-border-color: rgba($__petals--black, 0.15) !default;
+$petals--dropdown-border-radius: var($__petals--popup-border-radius, $petals--popup-border-radius) !default;
+$petals--dropdown-border-width: $petals--border-width !default;
+$petals--dropdown-inner-border-radius: subtract(
+  $petals--dropdown-border-radius,
+  $petals--dropdown-border-width
+) !default;
+// $petals--dropdown-divider-bg: $petals--gray-200 !default;
+$petals--dropdown-divider-margin-y: $petals--spacer / 2 !default;
+$petals--dropdown-box-shadow: var($__petals--popup-box-shadow, $petals--popup-box-shadow) !default;
+
+$petals--dropdown-item-height: var($__petals--popup-item-height, $petals--popup-item-height) !default;
+$petals--dropdown-item-color: var($__petals--popup-item-color, $petals--popup-item-color) !default;
+$petals--dropdown-item-hover-color: var($__petals--popup-item-hover-color, $petals--popup-item-hover-color) !default;
+$petals--dropdown-item-hover-bg: var($__petals--popup-item-hover-bg, $petals--popup-item-hover-bg) !default;
+
+$petals--dropdown-item-active-color: $petals--active-color !default;
+$petals--dropdown-item-active-bg: $petals--active-bg !default;
+
+$petals--dropdown-item-disabled-color: $petals--disabled-color !default;
+
+$petals--dropdown-item-padding-y: var($__petals--popup-item-padding-y, $petals--popup-item-padding-y) !default;
+$petals--dropdown-item-padding-x: var($__petals--popup-item-padding-x, $petals--popup-item-padding-x) !default;
+
+// $petals--dropdown-header-color: $petals--gray-600 !default;

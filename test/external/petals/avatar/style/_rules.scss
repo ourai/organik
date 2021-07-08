@@ -1,0 +1,9 @@
+@include component-rules($petals--avatar-component-name) {
+  &--image {
+    background-color: transparent;
+
+    img {
+      width: 100%;
+    }
+  }
+}

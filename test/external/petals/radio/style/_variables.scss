@@ -1,0 +1,22 @@
+@import '../../border/style/variables';
+
+@import './properties';
+
+$petals--radio-border-width: var($__petals--border-width, $petals--border-width) !default;
+$petals--radio-border-color: var($__petals--border-color, $petals--border-color) !default;
+$petals--radio-border-radius: 100% !default;
+
+$petals--radio-hover-border-color: var(
+  $__petals--form-control-hover-border-color,
+  $petals--form-control-hover-border-color
+) !default;
+
+$petals--radio-checked-bg: var($__petals--primary, $petals--primary) !default;
+$petals--radio-checked-border-color: var($__petals--primary, $petals--primary) !default;
+
+$petals--radio-disabled-bg: var($__petals--disabled-bg, $petals--disabled-bg) !default;
+$petals--radio-disabled-border-color: var($__petals--disabled-border-color, $petals--disabled-border-color) !default;
+
+$petals--radio-icon-size: 4px !default;
+$petals--radio-icon-checked-color: $__petals--white !default;
+$petals--radio-icon-disabled-color: var($__petals--disabled-color, $petals--disabled-color) !default;

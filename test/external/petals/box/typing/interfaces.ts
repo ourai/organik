@@ -1,0 +1,3 @@
+interface IBoxComponent {}
+
+export { IBoxComponent };

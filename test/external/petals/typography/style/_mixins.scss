@@ -1,0 +1,45 @@
+@import "./variables";
+
+@mixin typo-common-rules($ignore-boldness: false) {
+  &--primary {
+    color: var($__petals--typography-primary, $petals--typography-primary);
+  }
+
+  &--success {
+    color: var($__petals--typography-success, $petals--typography-success);
+  }
+
+  &--warning {
+    color: var($__petals--typography-warning, $petals--typography-warning);
+  }
+
+  &--danger {
+    color: var($__petals--typography-danger, $petals--typography-danger);
+  }
+
+  &--info {
+    color: var($__petals--typography-info, $petals--typography-info);
+  }
+
+  &--secondary {
+    color: var($__petals--typography-secondary, $petals--typography-secondary);
+  }
+
+  &--overline {
+    text-decoration: overline;
+  }
+
+  &--lineThrough {
+    text-decoration: line-through;
+  }
+
+  &--underline {
+    text-decoration: underline;
+  }
+
+  @if $ignore-boldness == false {
+    &--bold {
+      font-weight: var($__petals--font-weight-bold, $petals--font-weight-bold);
+    }
+  }
+}

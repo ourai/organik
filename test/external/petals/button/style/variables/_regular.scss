@@ -1,0 +1,78 @@
+$petals--button-min-width: 0 !default;
+$petals--button-max-width: none !default;
+$petals--button-padding-y: var($__petals--form-control-padding-y, $petals--form-control-padding-y) !default;
+$petals--button-padding-x: var($__petals--form-control-padding-x, $petals--form-control-padding-x) !default;
+$petals--button-between-gap: 8px !default;
+
+$petals--button-font-family: var($__petals--form-control-font-family, $petals--form-control-font-family) !default;
+$petals--button-font-weight: var($__petals--font-weight, $petals--font-weight) !default;
+$petals--button-font-size: var($__petals--form-control-font-size, $petals--form-control-font-size) !default;
+$petals--button-line-height: var($__petals--form-control-line-height, $petals--form-control-line-height) !default;
+$petals--button-color: var($__petals--default-color, $petals--default-color) !default;
+$petals--button-white-space: null !default; // Set to `nowrap` to prevent text wrapping
+
+$petals--button-border-width: var($__petals--border-width, $petals--border-width) !default;
+$petals--button-border-color: var($__petals--default-border-color, $petals--default-border-color) !default;
+$petals--button-border-radius: var($__petals--form-control-border-radius, $petals--form-control-border-radius) !default;
+
+$petals--button-bg: var($__petals--default-bg, $petals--default-bg) !default;
+$petals--button-bg-image: var($__petals--default-bg-image, $petals--default-bg-image) !default;
+$petals--button-box-shadow: inset 0 1px 0 rgba($__petals--white, 0.15), 0 1px 1px rgba($__petals--black, 0.075) !default;
+
+$petals--button-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
+
+$petals--button-active-box-shadow: inset 0 3px 5px rgba($__petals--black, 0.125) !default;
+
+// Hovered
+
+$petals--button-hover-color: var($__petals--default-hover-color, $petals--default-hover-color) !default;
+$petals--button-hover-border-color: var(
+  $__petals--default-hover-border-color,
+  $petals--default-hover-border-color
+) !default;
+$petals--button-hover-bg: var($__petals--default-hover-bg, $petals--default-hover-bg) !default;
+$petals--button-hover-bg-image: var($__petals--default-hover-bg-image, $petals--default-hover-bg-image) !default;
+
+// Focused
+
+$petals--button-focus-width: var($__petals--form-control-focus-width, $petals--form-control-focus-width) !default;
+$petals--button-focus-color: var($__petals--default-active-color, $petals--default-active-color) !default;
+$petals--button-focus-border-color: var(
+  $__petals--default-active-border-color,
+  $petals--default-active-border-color
+) !default;
+$petals--button-focus-bg: var($__petals--default-active-bg, $petals--default-active-bg) !default;
+$petals--button-focus-bg-image: var($__petals--default-active-bg-image, $petals--default-active-bg-image) !default;
+$petals--button-focus-box-shadow: var(
+  $__petals--form-control-focus-box-shadow,
+  $petals--form-control-focus-box-shadow
+) !default;
+
+// Disabled
+
+$petals--button-disabled-color: var($__petals--default-disabled-color, $petals--default-disabled-color) !default;
+$petals--button-disabled-border-color: var(
+  $__petals--default-disabled-border-color,
+  $petals--default-disabled-border-color
+) !default;
+$petals--button-disabled-bg: var($__petals--default-disabled-bg, $petals--default-disabled-bg) !default;
+$petals--button-disabled-bg-image: var(
+  $__petals--default-disabled-bg-image,
+  $petals--default-disabled-bg-image
+) !default;
+$petals--button-disabled-opacity: var($__petals--default-disabled-opacity, $petals--default-disabled-opacity) !default;
+
+// Outlined
+
+$petals--button-outlined-border-color: $__petals--current !default;
+$petals--button-outlined-color: $__petals--white !default;
+
+// Borderless
+
+$petals--button-borderless-hover-color: var($__petals--button-hover-color, $petals--button-hover-color) !default;
+$petals--button-borderless-hover-bg: var($__petals--button-hover-bg, $petals--button-hover-bg) !default;
+$petals--button-borderless-focus-color: var($__petals--button-focus-color, $petals--button-focus-color) !default;
+$petals--button-borderless-focus-bg: var($__petals--button-focus-bg, $petals--button-focus-bg) !default;
+$petals--button-borderless-disabled-color: var($__petals--button-disabled-color, $petals--button-disabled-color) !default;
+$petals--button-borderless-disabled-bg: var($__petals--button-disabled-bg, $petals--button-disabled-bg) !default;

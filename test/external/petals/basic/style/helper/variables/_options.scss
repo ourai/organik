@@ -1,0 +1,15 @@
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$ss--enable-caret: true !default;
+$ss--enable-rounded: true !default;
+$ss--enable-shadows: false !default;
+$ss--enable-gradients: false !default;
+$ss--enable-transitions: true !default;
+$ss--enable-prefers-reduced-motion-media-query: true !default;
+$ss--enable-grid-classes: true !default;
+$ss--enable-pointer-cursor-for-buttons: true !default;
+$ss--enable-rfs: true !default;
+$ss--enable-validation-icons: true !default;
+$ss--enable-deprecation-messages: true !default;

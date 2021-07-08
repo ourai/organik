@@ -1,0 +1,15 @@
+*.log
+
+.*-tmp
+.*-cache
+.DS_Store
+.git
+.idea
+.jekyll-metadata
+.tmp
+
+_site
+
+bower_components
+node_modules
+dist

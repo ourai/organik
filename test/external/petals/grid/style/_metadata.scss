@@ -1,0 +1,38 @@
+$petals--grid-row-component-name: "GridRow" !default;
+$petals--grid-column-component-name: "GridCol" !default;
+
+// Grid breakpoints
+//
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$petals--grid-breakpoints: (
+  // xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+) !default;
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$petals--container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+) !default;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$petals--grid-columns: 24 !default;
+$petals--grid-gutter-width: 30px !default;
+$petals--grid-row-columns: 6 !default;
+
+// Container padding
+
+$petals--container-padding-x: $petals--grid-gutter-width / 2 !default;

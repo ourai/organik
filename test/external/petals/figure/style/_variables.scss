@@ -1,0 +1,14 @@
+@import './properties';
+
+$petals--figure-border-radius: rem(3px) !default;
+$petals--figure-bg-color: #f3f4f5 !default;
+
+$petals--figure-aspect-ratio-width: 4 !default;
+$petals--figure-aspect-ratio-height: 3 !default;
+
+$petals--figure-caption-padding: rem(5px) !default;
+$petals--figure-caption-vertical-padding: $petals--figure-caption-padding !default;
+$petals--figure-caption-horizontal-padding: $petals--figure-caption-padding !default;
+$petals--figure-caption-font-size: rem(12px) !default;
+$petals--figure-caption-text-color: $__petals--white !default;
+$petals--figure-caption-bg-color: rgba(0, 0, 0, 0.3) !default;

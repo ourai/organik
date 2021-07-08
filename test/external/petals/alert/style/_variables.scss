@@ -1,0 +1,16 @@
+@import '../../border/style/variables';
+
+// Alerts
+//
+// Define alert colors, border radius, and padding.
+
+$petals--alert-padding-y: 8px !default;
+$petals--alert-padding-x: 16px !default;
+$petals--alert-margin-bottom: 1rem !default;
+$petals--alert-border-radius: $petals--border-radius !default;
+$petals--alert-link-font-weight: $petals--font-weight-bold !default;
+$petals--alert-border-width: $petals--border-width !default;
+
+$petals--alert-bg-level: -10 !default;
+$petals--alert-border-level: -9 !default;
+$petals--alert-color-level: 6 !default;

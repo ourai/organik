@@ -1,0 +1,36 @@
+@include component-rules($petals--image-component-name) {
+  display: inline-block;
+
+  &-content {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-substitute {
+    @include stretch;
+
+    z-index: 1;
+    background: transparent none 50% 50% no-repeat;
+  }
+
+  &--fitCover,
+  &--fitContain {
+    position: relative;
+  }
+
+  &--fitCover &-substitute {
+    background-size: cover;
+  }
+
+  &--fitContain &-substitute {
+    background-size: contain;
+  }
+
+  &--fitCover &-content,
+  &--fitContain &-content {
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+  }
+}

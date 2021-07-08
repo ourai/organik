@@ -1,0 +1,28 @@
+// Use ellipsis() instead
+@mixin text-ellipsis {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+// Use squish-text() instead
+@mixin text-hide {
+  color: transparent;
+  border: 0 none;
+  font: 0px/0 a;
+  @include text-shadow(none);
+}
+
+// Use pie-clearfix() instead
+// refer to http://nicolasgallagher.com/micro-clearfix-hack/
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: $UN-space;
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}

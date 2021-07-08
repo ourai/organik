@@ -1,0 +1,43 @@
+@include component-rules($petals--flex-component-name) {
+  display: flex;
+
+  &--horizontal {
+    flex-flow: row;
+  }
+
+  &--horizontal#{&}--reverse {
+    flex-flow: row-reverse;
+  }
+
+  &--vertical {
+    flex-flow: column;
+  }
+
+  &--vertical#{&}--reverse {
+    flex-flow: column-reverse;
+  }
+
+  &--alignStart {
+    align-items: flex-start;
+  }
+
+  &--alignCenter {
+    align-items: center;
+  }
+
+  &--alignEnd {
+    align-items: flex-end;
+  }
+
+  &--justifyStart {
+    justify-content: flex-start;
+  }
+
+  &--justifyCenter {
+    justify-content: center;
+  }
+
+  &--justifyEnd {
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,25 @@
+@import '../../border/style/variables';
+
+// Tooltips
+
+$petals--tooltip-font-size: $petals--font-size-sm !default;
+$petals--tooltip-max-width: 200px !default;
+$petals--tooltip-color: $__petals--white !default;
+$petals--tooltip-bg: $petals--text-primary !default;
+$petals--tooltip-border-radius: $petals--border-radius !default;
+$petals--tooltip-opacity: 0.9 !default;
+$petals--tooltip-padding-y: 10px !default;
+$petals--tooltip-padding-x: 10px !default;
+$petals--tooltip-margin: 0 !default;
+
+$petals--tooltip-arrow-width: 0.8rem !default;
+$petals--tooltip-arrow-height: 6px !default;
+$petals--tooltip-arrow-color: $petals--tooltip-bg !default;
+
+// // Form tooltips must come after regular tooltips
+// $form-feedback-tooltip-padding-y: $petals--tooltip-padding-y !default;
+// $form-feedback-tooltip-padding-x: $petals--tooltip-padding-x !default;
+// $form-feedback-tooltip-font-size: $petals--tooltip-font-size !default;
+// $form-feedback-tooltip-line-height: null !default;
+// $form-feedback-tooltip-opacity: $petals--tooltip-opacity !default;
+// $form-feedback-tooltip-border-radius: $petals--tooltip-border-radius !default;

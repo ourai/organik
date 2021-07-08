@@ -1,0 +1,39 @@
+@import '../../form-control/style/variables';
+
+@import './properties';
+
+$petals--textarea-border-width: var($__petals--form-control-border-width, $petals--form-control-border-width) !default;
+$petals--textarea-border-color: var($__petals--form-control-border-color, $petals--form-control-border-color) !default;
+$petals--textarea-border-radius: var(
+  $__petals--form-control-border-radius,
+  $petals--form-control-border-radius
+) !default;
+$petals--textarea-border-radius-lg: var(
+  $__petals--form-control-border-radius-lg,
+  $petals--form-control-border-radius-lg
+) !default;
+$petals--textarea-border-radius-sm: var(
+  $__petals--form-control-border-radius-sm,
+  $petals--form-control-border-radius-sm
+) !default;
+$petals--textarea-box-shadow: var($__petals--form-control-box-shadow, $petals--form-control-box-shadow) !default;
+
+$petals--textarea-hover-border-color: var(
+  $__petals--form-control-hover-border-color,
+  $petals--form-control-hover-border-color
+) !default;
+
+$petals--textarea-focus-border-color: var(
+  $__petals--form-control-focus-border-color,
+  $petals--form-control-focus-border-color
+) !default;
+$petals--textarea-focus-box-shadow: var(
+  $__petals--form-control-focus-box-shadow,
+  $petals--form-control-focus-box-shadow
+) !default;
+
+$petals--textarea-disabled-bg: var($__petals--form-control-disabled-bg, $petals--form-control-disabled-bg) !default;
+$petals--textarea-disabled-border-color: var(
+  $__petals--form-control-disabled-border-color,
+  $petals--form-control-disabled-border-color
+) !default;

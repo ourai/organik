@@ -1,0 +1,17 @@
+.Tile {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  &.is-horizontal {
+    flex-direction: row;
+  }
+
+  &.is-vertical {
+    flex-direction: column;
+  }
+}
+
+.TileCell {
+  overflow: hidden;
+}

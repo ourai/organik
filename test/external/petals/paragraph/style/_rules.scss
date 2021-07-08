@@ -1,0 +1,10 @@
+@import "~@petals/typography/style/mixins";
+
+@include component-rules($petals--paragraph-component-name) {
+  @include typo-common-rules;
+
+  display: block;
+  margin-bottom: var($__petals--paragraph-between-gap, $petals--paragraph-between-gap);
+  font-size: var($__petals--paragraph-font-size, $petals--paragraph-font-size);
+  line-height: var($__petals--paragraph-line-height, $petals--paragraph-line-height);
+}

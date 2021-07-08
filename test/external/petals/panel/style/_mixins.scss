@@ -1,0 +1,62 @@
+@mixin fixed-body-height-with-var(
+  $header-selector: "",
+  $header-height: auto,
+  $footer-selector: "",
+  $footer-height: auto,
+  $body-selector: "",
+  $reset: false
+) {
+  @if $reset != true {
+    @if $body-selector == "" {
+      &,
+      #{$header-selector},
+      #{$footer-selector} {
+        @include box-sizing(border-box);
+      }
+
+      #{$header-selector},
+      #{$footer-selector} {
+        overflow: auto;
+      }
+    }
+
+    @else {
+      &,
+      #{$header-selector},
+      #{$body-selector},
+      #{$footer-selector} {
+        @include box-sizing(border-box);
+      }
+
+      #{$header-selector},
+      #{$body-selector},
+      #{$footer-selector} {
+        overflow: auto;
+      }
+
+      #{$body-selector} {
+        height: 100%;
+      }
+    }
+  }
+
+  @if $header-height != auto {
+    padding-top: $header-height;
+
+    #{$header-selector} {
+      height: $header-height;
+      margin-top: calc(#{$header-height} * -1);
+    }
+  }
+
+  @if $footer-height != auto {
+    padding-bottom: $footer-height;
+
+    #{$footer-selector} {
+      height: $footer-height;
+      margin-bottom: calc(#{$footer-height} * -1);
+    }
+  }
+
+  @content;
+}

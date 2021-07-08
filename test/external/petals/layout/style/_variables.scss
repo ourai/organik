@@ -1,0 +1,37 @@
+@import '../../border/style/variables';
+
+@import './properties';
+
+$petals--layout-container-component-name: 'LayoutContainer' !default;
+$petals--layout-main-component-name: 'LayoutMain' !default;
+$petals--layout-aside-component-name: 'LayoutAside' !default;
+$petals--layout-header-component-name: 'LayoutHeader' !default;
+$petals--layout-footer-component-name: 'LayoutFooter' !default;
+
+$petals--layout-container-bg: transparent !default;
+
+$petals--layout-main-margin: 0 !default;
+$petals--layout-main-padding: 0 !default;
+
+$petals--layout-aside-width: 200px !default;
+$petals--layout-aside-font-size: inherit !default;
+$petals--layout-aside-font-weight: inherit !default;
+$petals--layout-aside-color: inherit !default;
+$petals--layout-aside-bg: transparent !default;
+$petals--layout-aside-border-width: 0 !default;
+$petals--layout-aside-border-color: var($__petals--border-color, $petals--border-color) !default;
+
+$petals--layout-header-height: 60px !default;
+$petals--layout-header-padding-y: 0 !default;
+$petals--layout-header-padding-x: 24px !default;
+$petals--layout-header-font-size: var($__petals--font-size, $petals--font-size) !default;
+$petals--layout-header-color: #696c71 !default;
+$petals--layout-header-bg: $__petals--white !default;
+$petals--layout-header-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1) !default;
+
+$petals--layout-footer-height: 150px !default;
+$petals--layout-footer-padding-y: 0 !default;
+$petals--layout-footer-padding-x: 0 !default;
+$petals--layout-footer-font-size: inherit !default;
+$petals--layout-footer-color: inherit !default;
+$petals--layout-footer-bg: transparent !default;
