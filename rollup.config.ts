@@ -8,7 +8,7 @@ import replace from 'rollup-plugin-replace';
 
 const pkg = require('./package.json'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-const libraryName = 'handie';
+const libraryName = 'organik';
 
 export default {
   input: `src/index.ts`,
@@ -17,7 +17,7 @@ export default {
     { file: pkg.module, format: 'es', sourcemap: true },
   ],
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-  external: ['@ntks/toolbox', 'vue', 'vue-property-decorator'],
+  external: ['@ntks/toolbox'],
   watch: {
     include: 'src/**',
   },

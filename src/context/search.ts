@@ -8,7 +8,6 @@ import {
   SearchEvents,
   SearchContext,
 } from '../typing';
-import { getDataType } from '../data-type';
 import { getDefaultValue, createValueChecker } from '../input';
 import { resolveFieldMap } from '../model';
 import { createValueContext } from './value';

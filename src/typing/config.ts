@@ -1,6 +1,3 @@
-import Vue, { CreateElement, VNode } from 'vue';
-import { ElTableColumn } from 'element-ui/types/table-column';
-
 import { ComponentCtor } from './component';
 import { DataType } from './data-type';
 import { FieldDescriptor } from './model';
@@ -9,12 +6,11 @@ type ConfigType = Record<string, any>;
 
 type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
 
-type CellRenderer<Column> = (
-  h: CreateElement,
-  data: ColumnContext<Column>,
-) => VNode | string | null;
+type CellRenderer<Column> = (h: (...args: any[]) => any, data: ColumnContext<Column>) => any; // eslint-disable-line @typescript-eslint/ban-types
 
-interface TableColumn extends Partial<ElTableColumn> {
+interface TableColumn {
+  width?: string | number;
+  align?: string;
   render?: CellRenderer<TableColumn>;
   isValid?: () => boolean;
   [key: string]: any;
@@ -56,7 +52,7 @@ interface ActionDescriptor {
   confirm?: boolean | string;
   render?: ActionRenderer;
   config?: ActionConfig;
-  execute?: <ViewContext>(viewContext: ViewContext, vm: Vue) => Promise<any> | any;
+  execute?: <ViewContext>(viewContext: ViewContext, vm: any) => Promise<any> | any;
 }
 
 interface FilterDescriptor extends InputDescriptor {}
