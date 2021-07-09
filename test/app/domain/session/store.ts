@@ -73,9 +73,8 @@ const actions: SessionActions<SessionState> = {
 };
 
 export default {
-  namespace: MODULE_NAME,
+  name: MODULE_NAME,
   store: {
-    namespaced: true,
     state,
     mutations,
     actions,

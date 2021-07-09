@@ -26,7 +26,7 @@ let viewCreator = (() => function () {} as ComponentCtor) as ViewCreator; // esl
 
 function setViewCreator<R, VT, CT>(creator: ViewCreator<R, VT, CT>): void {
   if (isFunction(creator)) {
-    viewCreator = creator as any;
+    viewCreator = creator;
   }
 }
 
