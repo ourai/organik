@@ -12,7 +12,7 @@ function setStoreCreator(creator: StoreCreator): void {
   }
 }
 
-function resolveVuexStoreModules(moduleConfig: StoreModule[]): VuexStoreModuleTree {
+function resolveVuexModuleTree(moduleConfig: StoreModule[]): VuexStoreModuleTree {
   const modules: VuexStoreModuleTree = {};
 
   moduleConfig.forEach(({ name, store }) => {
@@ -26,7 +26,7 @@ function resolveVuexStoreModules(moduleConfig: StoreModule[]): VuexStoreModuleTr
 }
 
 function createStore(storeModules: StoreModule[]): any {
-  return storeCreator(resolveVuexStoreModules(storeModules));
+  return storeCreator(resolveVuexModuleTree(storeModules));
 }
 
-export { setStoreCreator, resolveVuexStoreModules, createStore };
+export { setStoreCreator, resolveVuexModuleTree, createStore };

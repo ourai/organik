@@ -1,8 +1,7 @@
 import { ComponentCtor } from '../component';
 import { DataValue } from '../value';
 import { RequestParams, ResponseResult, ResponseSuccess, ResponseFail } from '../http';
-import { ModelDescriptor } from '../model';
-import { ModuleDependencies, ModuleResources } from '../module';
+import { ModelDescriptor, ModuleDependencies, ModuleResources } from '../metadata';
 
 type Repository = any;
 

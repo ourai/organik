@@ -2,6 +2,8 @@ import { isBoolean, isString } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
+  ServerAction,
+  ViewRenderer,
   ModuleResources,
   ModuleDependencies,
   ModuleDescriptor,
@@ -19,6 +21,8 @@ function ensureModuleExists(name: string): ResolvedModule {
       exports: {},
       dependencies: {},
       componentRefs: {},
+      actions: [],
+      views: {},
       components: {},
     });
   }
@@ -30,6 +34,8 @@ function registerModule({
   name,
   imports = [],
   exports = {},
+  actions = [],
+  views = {},
   components = {},
 }: ModuleDescriptor): void {
   moduleMap.set(name, {
@@ -37,6 +43,8 @@ function registerModule({
     exports,
     dependencies: {},
     componentRefs: components,
+    actions,
+    views,
     components: ensureModuleExists(name).components, // 必须保证 `components` 这个属性的引用地址不变，否则在模块未注册时在部件和页面中使用会找不到依赖组件
   });
 }
@@ -134,6 +142,14 @@ function registerModules(descriptors: ModuleDescriptor[]): void {
   resolveComponents();
 }
 
+function getActions(moduleName: string): ServerAction[] {
+  return ensureModuleExists(moduleName).actions;
+}
+
+function getViews(moduleName: string): Record<string, ViewRenderer> {
+  return ensureModuleExists(moduleName).views;
+}
+
 function getComponents(
   moduleName: string,
   newComponents: { [key: string]: ComponentCtor } = {},
@@ -145,4 +161,4 @@ function getComponents(
   return components;
 }
 
-export { registerModules, getDependencies, getComponents };
+export { registerModules, getDependencies, getActions, getViews, getComponents };

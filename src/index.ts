@@ -1,4 +1,5 @@
 export {
+  ComponentGetter,
   ComponentDescriptor,
   DataTypeDescriptor,
   Pagination,
@@ -33,7 +34,7 @@ export {
 } from './typing';
 export { registerComponent } from './component';
 export { registerDataType } from './data-type';
-export { getComponents, registerModules } from './module';
+export { registerModules, getComponents, getActions, getViews } from './module';
 export { registerAction } from './action';
 export { createModuleContext, resolveViewContextInAction } from './context';
 export { setViewCreator, createView } from './view';

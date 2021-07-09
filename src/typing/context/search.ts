@@ -1,4 +1,4 @@
-import { FilterDescriptor } from '../config';
+import { FilterDescriptor } from '../metadata';
 import { ValueEvents, ValueContext } from './value';
 
 type SearchCondition = Record<string, any>;

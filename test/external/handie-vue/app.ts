@@ -1,12 +1,11 @@
-import { registerComponent, registerAction } from 'organik';
+import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 
-import { StoreModule, AppCreators, AppDescriptor, AppInstance } from '../types';
-import { ModuleDescriptor } from '../types/module';
-import { registerModules } from '../adapters';
+import { StoreModule, AppCreators, AppDescriptor, AppInstance } from './types';
+import { ModuleDescriptor } from './types/module';
 
-import { setRouterCreator, createRouter } from './router';
-import { setStoreCreator, createStore } from './store';
+import { setRouterCreator, createRouter } from './adapters/router';
+import { setStoreCreator, createStore } from './adapters/store';
 
 function setCreators({ router, store }: AppCreators): void {
   if (router) {

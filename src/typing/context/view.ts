@@ -8,7 +8,7 @@ import {
   ActionDescriptor,
   SearchDescriptor,
   ViewDescriptor,
-} from '../config';
+} from '../metadata';
 
 import { ValueContextDescriptor, ValueContext } from './value';
 import { ModuleContext } from './module';

@@ -3,7 +3,5 @@ export * from './value';
 export * from './data-type';
 export * from './http';
 export * from './event';
-export * from './model';
-export * from './module';
-export * from './config';
+export * from './metadata';
 export * from './context';
