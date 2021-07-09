@@ -1,8 +1,6 @@
-import { isFunction } from '@ntks/toolbox';
 import {
   ModuleContextDescriptor,
   ModuleContext as _ModuleContext,
-  ListViewContext,
   createModuleContext as _createModuleContext,
   setViewCreator,
 } from 'organik';
@@ -40,25 +38,13 @@ function createModuleContext<R>(descriptor: ModuleContextDescriptor<R>): ModuleC
   };
 }
 
-setViewCreator((context, renderer, providerGetter?) => {
-  let provider = { viewContext: context } as { [key: string]: any };
-
-  const { getSearch } = context as ListViewContext;
-
-  if (getSearch && getSearch()) {
-    provider.searchContext = (context as ListViewContext).getSearchContext();
-  }
-
-  if (isFunction(providerGetter)) {
-    provider = { ...provider, ...providerGetter!() };
-  }
-
-  return Vue.extend({
+setViewCreator((context, provider, renderer) =>
+  Vue.extend({
     name: context.getView().name,
     components: context.getComponents(),
     provide: provider,
     render: h => h(renderer),
-  });
-});
+  }),
+);
 
 export { ModuleContext, createModuleContext };
