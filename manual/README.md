@@ -1,5 +1,35 @@
 # 使用手册
 
+## 自定义
+
+### 数据类型
+
+```ts
+import { registerDataType } from 'organik';
+
+registerDataType({
+  name: 'boolean',
+  validator: value => typeof value === 'boolean',
+  defaultValueGetter: () => false
+});
+```
+
+### 视图部件创建器
+
+```ts
+import { setViewCreator } from 'organik';
+import Vue from 'vue';
+
+setViewCreator((context, provider, renderer) =>
+  Vue.extend({
+    name: context.getView().name,
+    components: context.getComponents(),
+    provide: provider,
+    render: h => h(renderer),
+  }),
+);
+```
+
 ## 注册模块
 
 在按领域/业务划分好的模块文件夹下创建一个 `index.ts` 文件：
