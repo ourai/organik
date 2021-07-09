@@ -1,8 +1,8 @@
-import { createDetailView } from 'handie-vue';
+import { createDetailViewGetter } from 'handie-vue';
 
 import context from '../../context';
 
-export default createDetailView(context, {
+export default createDetailViewGetter(context, {
   name: 'AnimationDetailView',
   fields: [
     { name: 'title', label: '标题' },

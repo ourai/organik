@@ -1,6 +1,8 @@
 import Vue, { ComponentOptions, AsyncComponent } from 'vue';
 import VueRouter, { RouteConfig as _RouteConfig, RouteRecord as _RouteRecord } from 'vue-router';
 
+type RouteComponent = ComponentOptions<Vue> | typeof Vue | AsyncComponent;
+
 type RouteMeta = {
   text?: string;
   icon?: string;
@@ -8,16 +10,24 @@ type RouteMeta = {
   auth?: string;
 };
 
-type RouteConfig = Omit<_RouteConfig, 'meta' | 'children' | 'component'> & {
-  component?: ComponentOptions<Vue> | typeof Vue | AsyncComponent;
-  children?: RouteConfig[];
+type BaseRouteConfig = Omit<_RouteConfig, 'meta' | 'children' | 'component'> & {
   meta?: RouteMeta;
+};
+
+type RouteConfig = BaseRouteConfig & {
+  component?: string | RouteComponent;
+  children?: RouteConfig[];
+};
+
+type ResolvedRouteConfig = BaseRouteConfig & {
+  component?: RouteComponent;
+  children?: ResolvedRouteConfig[];
 };
 
 type RouteRecord = Omit<_RouteRecord, 'meta'> & {
   meta: RouteMeta;
 };
 
-type RouterCreator = (routes: RouteConfig[]) => VueRouter;
+type RouterCreator = (routes: ResolvedRouteConfig[]) => VueRouter;
 
-export { RouteMeta, RouteConfig, RouteRecord, RouterCreator };
+export { RouteComponent, RouteMeta, RouteConfig, ResolvedRouteConfig, RouteRecord, RouterCreator };

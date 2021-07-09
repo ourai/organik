@@ -1,8 +1,9 @@
-import { registerComponent, registerAction, registerModules } from 'organik';
+import { registerComponent, registerAction } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 
 import { StoreModule, AppCreators, AppDescriptor, AppInstance } from '../types';
 import { ModuleDescriptor } from '../types/module';
+import { registerModules } from '../adapters';
 
 import { setRouterCreator, createRouter } from './router';
 import { setStoreCreator, createStore } from './store';

@@ -1,8 +1,6 @@
 import { RouteConfig } from '@/types';
 
-import { AnimationList, AnimationDetail, AnimationForm } from '../../domain/animation/views';
 import { ComicList } from '../../domain/comic/views';
-import { GameList, GameDetail } from '../../domain/game/views';
 import { NovelList } from '../../domain/novel/views';
 
 import AdminLayout from '../layouts/admin';
@@ -17,25 +15,25 @@ export default {
     {
       name: 'animationList',
       path: 'animations',
-      component: AnimationList,
+      component: 'animation.views.AnimationList',
       meta: { text: '动画', auth: 'animation:read' },
     },
     {
       name: 'animationDetail',
       path: 'animations/:id',
-      component: AnimationDetail,
+      component: 'animation.views.AnimationDetail',
       meta: { text: '动画详情', auth: 'animation:read', show: false },
     },
     {
       name: 'animationNewForm',
       path: 'animations/new',
-      component: AnimationForm,
+      component: 'animation.views.AnimationForm',
       meta: { text: '新建动画', auth: 'animation:edit', show: false },
     },
     {
       name: 'animationEditForm',
       path: 'animations/:id/edit',
-      component: AnimationForm,
+      component: 'animation.views.AnimationForm',
       meta: { text: '编辑动画', auth: 'animation:edit', show: false },
     },
     {
@@ -47,13 +45,13 @@ export default {
     {
       name: 'gameList',
       path: 'games',
-      component: GameList,
+      component: 'game.views.GameList',
       meta: { text: '游戏', auth: 'game:read' },
     },
     {
       name: 'gameDetail',
       path: 'games/:id',
-      component: GameDetail,
+      component: 'game.views.GameDetail',
       meta: { text: '游戏详情', auth: 'game:read', show: false },
     },
     {

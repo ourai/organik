@@ -10,5 +10,6 @@ setViewCreator((context, provider, renderer) =>
   }),
 );
 
+export * from './module';
 export * from './context';
 export * from './view';

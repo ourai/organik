@@ -2,6 +2,7 @@ import { ModuleDescriptor } from 'handie-vue';
 
 import { MODULE_NAME, testUtil } from './helper';
 import TestWidget from './widgets/test-widget';
+import * as views from './views';
 
 export default {
   name: MODULE_NAME,
@@ -16,4 +17,5 @@ export default {
     DetailView: 'common.widgets.DetailView',
     FormView: 'common.widgets.FormView',
   },
+  views,
 } as ModuleDescriptor;

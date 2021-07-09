@@ -1,10 +1,10 @@
-import { createTableView } from 'handie-vue';
+import { createTableViewGetter } from 'handie-vue';
 
 import context from '../../context';
 
 import TitleField from './TitleField.vue';
 
-export default createTableView(context, {
+export default createTableViewGetter(context, {
   name: 'GameListView',
   getList: 'getList',
   config: { operationColumnWidth: 250 },

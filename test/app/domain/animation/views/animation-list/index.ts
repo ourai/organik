@@ -1,11 +1,11 @@
-import { createTableView } from 'handie-vue';
+import { createTableViewGetter } from 'handie-vue';
 
 import context from '../../context';
 
 import TitleField from './TitleField.vue';
 import EpisodesField from './EpisodesField.vue';
 
-export default createTableView(context, {
+export default createTableViewGetter(context, {
   name: 'AnimationListView',
   config: { operationColumnWidth: 250 },
   fields: [
