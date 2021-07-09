@@ -53,8 +53,6 @@ function createListViewContext<R, VT, CT>(
   let dataSource: VT = [] as any;
   let dataSourceInited = false;
 
-  let val: VT = [] as any;
-
   let totalPage: number;
   let currentPage: number;
   let currentPageSize: number;
@@ -133,8 +131,6 @@ function createListViewContext<R, VT, CT>(
     ...ctx,
     getDataSource: () => dataSource,
     setDataSource,
-    getValue: () => val,
-    setValue: (value: VT) => (val = value),
     getSearch: () => search,
     getSearchContext: () => searchContext,
     getTotal: () => totalPage,

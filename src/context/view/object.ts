@@ -21,7 +21,6 @@ function createObjectViewContext<R, VT, CT>(
   };
 
   let dataSource: VT = {} as any;
-  let val: VT = {} as any;
 
   return {
     ...ctx,
@@ -30,8 +29,6 @@ function createObjectViewContext<R, VT, CT>(
       dataSource = data;
       ctx.emit('dataChange', data);
     },
-    getValue: () => val,
-    setValue: (value: VT) => (val = value),
   };
 }
 

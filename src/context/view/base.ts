@@ -34,7 +34,7 @@ function resolveFields(
 function createGenericViewContext<R, VT, CT>(
   moduleContext: ModuleContext<R>,
   options: ViewContextDescriptor<VT, CT>,
-): Omit<ViewContext<R, VT, CT>, 'getDataSource' | 'setDataSource' | 'getValue' | 'setValue'> {
+): Omit<ViewContext<R, VT, CT>, 'getDataSource' | 'setDataSource'> {
   const mergedFields = resolveFields(options.fields, moduleContext.getModel());
   const actions = (options.actions || [])
     .map(resolveAction)

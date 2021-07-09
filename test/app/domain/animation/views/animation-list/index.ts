@@ -21,6 +21,7 @@ export default createTableView(context, {
   actions: [
     { name: 'gotoCreateFormView', authority: 'animation:edit', primary: true },
     { name: 'deleteList', authority: 'animation:edit' },
+    { text: '选择一条及以上', context: 'both' },
     'gotoDetailView',
     { name: 'gotoEditFormView', authority: 'animation:edit' },
     { name: 'deleteOne', authority: 'animation:edit' },

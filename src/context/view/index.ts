@@ -36,6 +36,8 @@ function resolveViewContextInAction<VC extends ViewContext = ViewContext>(
     'getView',
     'getValue',
     'execute',
+    'on',
+    'off',
     'reload',
     'getList',
     'deleteOne',

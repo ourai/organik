@@ -47,9 +47,7 @@ function resolveVirtualNodeData(
       props.color = 'danger';
     }
 
-    if (action.context === 'batch') {
-      props.disabled = (viewContext as ListViewContext).getValue().length === 0;
-    }
+    props.disabled = vm.$data.disabled;
 
     nodeData.props = props;
   } else {

@@ -19,7 +19,7 @@
       :total="total"
       v-bind="tableProps"
       v-loading="loading"
-      @selection-change="handleSelectionChange"
+      @selection-change="context.setValue"
       @current-change="context.setCurrentPage"
       @size-change="context.setPageSize"
     />
@@ -40,8 +40,6 @@ import { isActionsAuthorized, resolveAuthorizedActions, resolveTableProps } from
   components: getComponents({ SearchRenderer, ActionRenderer }),
 })
 export default class TableView extends ListViewWidget {
-  private selected: any[] = [];
-
   private tableProps: DataTableProps = {} as any;
 
   private get searchable() {
@@ -63,11 +61,7 @@ export default class TableView extends ListViewWidget {
   }
 
   private get contextInActionGetter() {
-    return () => ({ ...resolveViewContextInAction(this.context), getValue: () => this.selected });
-  }
-
-  private handleSelectionChange(selected: any[]) {
-    this.selected = selected;
+    return () => ({ ...resolveViewContextInAction(this.context) });
   }
 
   protected created(): void {

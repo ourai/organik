@@ -92,6 +92,8 @@ type KeptViewContextKeysInAction =
   | 'getView'
   | 'getValue'
   | 'execute'
+  | 'on'
+  | 'off'
   | 'reload'
   | 'getList'
   | 'deleteOne'
