@@ -41,9 +41,8 @@ function resolveStoreModules(
 function createApp({
   plugins = [],
   creators,
-  controls,
-  actions,
-  modules,
+  components,
+  metadata = {},
   root,
   el,
   routes,
@@ -58,9 +57,11 @@ function createApp({
     setCreators(creators);
   }
 
-  if (controls) {
-    controls.forEach(registerComponent);
+  if (components) {
+    components.forEach(registerComponent);
   }
+
+  const { actions, modules } = metadata;
 
   if (actions) {
     actions.forEach(action => registerAction(action));

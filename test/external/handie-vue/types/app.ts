@@ -20,9 +20,11 @@ type MountEl = Element | string;
 interface AppDescriptor {
   plugins?: RuntimePlugin[];
   creators?: AppCreators;
-  controls?: Omit<ComponentDescriptor, 'type'>[];
-  actions?: ActionDescriptor[];
-  modules?: ModuleDescriptor[];
+  components?: ComponentDescriptor[]; // includes controls and widgets
+  metadata?: {
+    actions?: ActionDescriptor[];
+    modules?: ModuleDescriptor[];
+  };
   root: ComponentCtor;
   el?: MountEl;
   routes: RouteConfig[];
