@@ -1,5 +1,6 @@
 import { ModuleDescriptor } from 'handie-vue';
 
 import { MODULE_NAME } from './helper';
+import store from './store';
 
-export default { name: MODULE_NAME } as ModuleDescriptor;
+export default { name: MODULE_NAME, store } as ModuleDescriptor;

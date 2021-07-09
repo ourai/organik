@@ -1,7 +1,9 @@
+import { ComponentDescriptor, ActionDescriptor } from 'organik';
 import { VueConstructor, PluginObject, PluginFunction } from 'vue';
 
 import { RouterCreator, RouteConfig } from './router';
-import { StoreCreator, StoreDescriptor } from './store';
+import { StoreCreator, StoreModule } from './store';
+import { ModuleDescriptor } from './module';
 
 type RuntimePlugin<T extends any = never> = PluginObject<T> | PluginFunction<T>;
 
@@ -15,13 +17,16 @@ type AppCreators = {
 type MountEl = Element | string;
 
 interface AppDescriptor {
+  plugins?: RuntimePlugin[];
+  creators?: AppCreators;
+  controls?: Omit<ComponentDescriptor, 'type'>[];
+  actions?: ActionDescriptor[];
+  modules?: ModuleDescriptor[];
   root: VueConstructor;
   el?: MountEl;
   routes: RouteConfig[];
   provider?: Provider | (() => Provider);
-  store?: StoreDescriptor;
-  plugins?: RuntimePlugin[];
-  creators?: AppCreators;
+  storeModules?: StoreModule[];
 }
 
 interface AppInstance {

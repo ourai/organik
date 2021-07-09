@@ -1,4 +1,5 @@
 export {
+  ComponentDescriptor,
   DataTypeDescriptor,
   Pagination,
   ResponseExtra,

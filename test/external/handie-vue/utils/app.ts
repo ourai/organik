@@ -1,6 +1,8 @@
+import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 
-import { AppCreators, AppDescriptor, AppInstance } from '../types';
+import { StoreModule, AppCreators, AppDescriptor, AppInstance } from '../types';
+import { ModuleDescriptor } from '../types/module';
 
 import { setRouterCreator, createRouter } from './router';
 import { setStoreCreator, createStore } from './store';
@@ -15,14 +17,38 @@ function setCreators({ router, store }: AppCreators): void {
   }
 }
 
+function resolveStoreModules(
+  storeModules?: StoreModule[],
+  modules?: ModuleDescriptor[],
+): StoreModule[] {
+  if (storeModules) {
+    return storeModules;
+  }
+
+  const resolved: StoreModule[] = [];
+
+  if (modules) {
+    modules.forEach(({ name, store }) => {
+      if (store) {
+        resolved.push({ name, store });
+      }
+    });
+  }
+
+  return resolved;
+}
+
 function createApp({
   plugins = [],
   creators,
+  controls,
+  actions,
+  modules,
   root,
   el,
   routes,
   provider,
-  store,
+  storeModules,
 }: AppDescriptor): AppInstance {
   Vue.config.productionTip = false;
 
@@ -30,6 +56,18 @@ function createApp({
 
   if (creators) {
     setCreators(creators);
+  }
+
+  if (controls) {
+    controls.forEach(registerComponent);
+  }
+
+  if (actions) {
+    actions.forEach(action => registerAction(action));
+  }
+
+  if (modules) {
+    registerModules(modules);
   }
 
   const opts = {
@@ -42,12 +80,14 @@ function createApp({
     opts.el = el;
   }
 
-  if (provider) {
-    opts.provide = { ...opts.provide, ...provider };
+  const resolvedStoreModules = resolveStoreModules(storeModules, modules);
+
+  if (resolvedStoreModules.length > 0) {
+    opts.store = createStore(resolvedStoreModules);
   }
 
-  if (store) {
-    opts.store = createStore(store);
+  if (provider) {
+    opts.provide = { ...opts.provide, ...provider };
   }
 
   const app = new Vue(opts);

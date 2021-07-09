@@ -44,6 +44,13 @@ function createTableView<R, VT, CT>(
   return resolveView<R, VT, CT>(context, 'list', 'TableView', options);
 }
 
+function createTableViewGetter<R, VT, CT>(
+  context: UncertainContext<R, ListViewContext<R, VT, CT>>,
+  options?: PartialOptions<ListViewContextDescriptor<VT, CT>>,
+): () => VueConstructor {
+  return () => createTableView(context, options);
+}
+
 function createDetailView<R, VT, CT>(
   context: UncertainContext<R, ObjectViewContext<R, VT, CT>>,
   options?: PartialOptions<ObjectViewContextDescriptor<VT, CT>>,

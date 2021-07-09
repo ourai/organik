@@ -1,14 +1,7 @@
-import {
-  ModuleContextDescriptor,
-  ModuleContext as _ModuleContext,
-  createModuleContext as _createModuleContext,
-} from 'organik';
+import { ModuleContextDescriptor, createModuleContext as _createModuleContext } from 'organik';
 import Vue from 'vue';
 
-interface ModuleContext<R> extends _ModuleContext<R> {
-  commit: (type: string, payload?: any) => void;
-  dispatch: (type: string, payload?: any) => Promise<void>;
-}
+import { ModuleContext } from '../types/module';
 
 const vm = new Vue();
 
@@ -37,4 +30,4 @@ function createModuleContext<R>(descriptor: ModuleContextDescriptor<R>): ModuleC
   };
 }
 
-export { ModuleContext, createModuleContext };
+export { createModuleContext };

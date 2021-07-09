@@ -1,6 +1,6 @@
 import { isFunction } from '@ntks/toolbox';
 
-import { VuexStoreModule, StoreCreator, StoreModule, StoreDescriptor } from '../types';
+import { VuexStoreModule, StoreCreator, StoreModule } from '../types';
 
 type VuexStoreModuleTree = { [key: string]: VuexStoreModule };
 
@@ -12,7 +12,7 @@ function setStoreCreator(creator: StoreCreator): void {
   }
 }
 
-function resolveStoreModules(moduleConfig: StoreModule[]): VuexStoreModuleTree {
+function resolveVuexStoreModules(moduleConfig: StoreModule[]): VuexStoreModuleTree {
   const modules: VuexStoreModuleTree = {};
 
   moduleConfig.forEach(({ name, store }) => {
@@ -25,8 +25,8 @@ function resolveStoreModules(moduleConfig: StoreModule[]): VuexStoreModuleTree {
   return modules;
 }
 
-function createStore({ modules }: StoreDescriptor): any {
-  return storeCreator({ modules: resolveStoreModules(modules) });
+function createStore(storeModules: StoreModule[]): any {
+  return storeCreator(resolveVuexStoreModules(storeModules));
 }
 
-export { setStoreCreator, resolveStoreModules, createStore };
+export { setStoreCreator, resolveVuexStoreModules, createStore };
