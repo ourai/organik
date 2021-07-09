@@ -8,7 +8,6 @@ import controls from './shared/components';
 import actions from './entry/actions';
 import modules from './domain';
 import { routes, setInterceptors } from './entry';
-import App from './App.vue';
 
 setInterceptors();
 
@@ -20,7 +19,6 @@ createApp({
   },
   components: controls,
   metadata: { actions, modules },
-  root: App,
   el: '#app',
   routes,
 });

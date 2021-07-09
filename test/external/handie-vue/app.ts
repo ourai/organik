@@ -72,7 +72,7 @@ function createApp({
   }
 
   const opts = {
-    render: h => h(root),
+    render: h => h(root || Vue.extend({ name: 'HandieApp', render: h => h('router-view') })),
     router: createRouter(routes),
     provide: { routes },
   } as ComponentOptions<Vue>;

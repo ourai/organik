@@ -25,7 +25,7 @@ interface AppDescriptor {
     actions?: ActionDescriptor[];
     modules?: ModuleDescriptor[];
   };
-  root: ComponentCtor;
+  root?: ComponentCtor;
   el?: MountEl;
   routes: RouteConfig[];
   provider?: Provider | (() => Provider);
