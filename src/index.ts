@@ -33,10 +33,4 @@ export { registerComponent } from './component';
 export { getComponents, registerModules } from './module';
 export { registerAction } from './action';
 export { createModuleContext, resolveViewContextInAction } from './context';
-export {
-  setViewCreator,
-  createView,
-  createTableView,
-  createDetailView,
-  createFormView,
-} from './view';
+export { setViewCreator, createView } from './view';
