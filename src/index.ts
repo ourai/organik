@@ -1,4 +1,5 @@
 export {
+  DataTypeDescriptor,
   Pagination,
   ResponseExtra,
   ResponseResult,
@@ -30,6 +31,7 @@ export {
   ObjectViewContext,
 } from './typing';
 export { registerComponent } from './component';
+export { registerDataType } from './data-type';
 export { getComponents, registerModules } from './module';
 export { registerAction } from './action';
 export { createModuleContext, resolveViewContextInAction } from './context';
