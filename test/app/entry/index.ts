@@ -1,9 +1,19 @@
-// 必须按这个顺序引入
-// import '@/components';
-// import './actions';
-// import '../domain';
+import Vuex from 'vuex';
+import { createApp } from 'handie-vue';
 
-import routes from './router';
+import controls from '@/components';
+import modules from '../domain';
+import actions from './actions';
+import { setInterceptors } from './aspects';
+import routes from './routes';
 
-export { routes };
-export * from './aspects';
+setInterceptors();
+
+createApp({
+  plugins: [Vuex],
+  creators: { store: moduleTree => new Vuex.Store({ modules: moduleTree }) },
+  components: controls,
+  metadata: { actions, modules },
+  el: '#app',
+  routes,
+});
