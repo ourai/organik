@@ -1,6 +1,6 @@
 {
   "name": "organik",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Metadata-driven application framework for organic front-end development",
   "main": "dist/organik.umd.js",
   "module": "dist/organik.esm.js",
