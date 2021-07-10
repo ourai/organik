@@ -1,4 +1,4 @@
-import { isFunction, noop } from '@ntks/toolbox';
+import { isString, isFunction, noop } from '@ntks/toolbox';
 
 import {
   RequestParams,
@@ -9,7 +9,9 @@ import {
   RepositoryExecutor,
   ModuleContext,
 } from '../typing';
-import { getDependencies, getComponents } from '../module';
+import { ensureModuleExists, getDependencies, getComponents } from '../module';
+
+const moduleContextMap = new Map<string, ModuleContext<any>>();
 
 function isResultLogicallySuccessful(result: ResponseResult): boolean {
   return result.success === true;
@@ -58,18 +60,37 @@ function createRepositoryExecutor<R>(
   };
 }
 
-function createModuleContext<R>({
-  moduleName,
-  repository,
-  model,
-}: ModuleContextDescriptor<R>): ModuleContext<R> {
-  return {
+function constructModuleContextDescriptor(moduleName: string): ModuleContextDescriptor<any> {
+  const module = ensureModuleExists(moduleName);
+  const descriptor = { moduleName, repository: module.repository } as ModuleContextDescriptor<any>;
+
+  if (module.model) {
+    descriptor.model = module.model;
+  }
+
+  return descriptor;
+}
+
+function createModuleContext<R>(descriptor: ModuleContextDescriptor<R> | string): ModuleContext<R> {
+  const { moduleName, repository, model } = isString(descriptor)
+    ? constructModuleContextDescriptor(descriptor as string)
+    : (descriptor as ModuleContextDescriptor<R>);
+
+  if (moduleContextMap.has(moduleName)) {
+    return moduleContextMap.get(moduleName) as ModuleContext<R>;
+  }
+
+  const ctx = {
     getModuleName: () => moduleName,
     getModel: () => model,
     getDependencies: getDependencies.bind(null, moduleName),
     getComponents: getComponents.bind(null, moduleName),
     execute: createRepositoryExecutor(repository),
-  };
+  } as ModuleContext<R>;
+
+  moduleContextMap.set(moduleName, ctx);
+
+  return ctx;
 }
 
 export { createModuleContext };

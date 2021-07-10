@@ -1,12 +1,12 @@
-import { createFormViewGetter } from 'handie-vue';
+import { ViewDescriptor } from 'handie-vue';
 
-import context from '../../context';
-
-export default createFormViewGetter(context, {
+export default {
   name: 'AnimationFormView',
+  type: 'object',
+  render: 'FormView',
   fields: [
     { name: 'title', label: '标题' },
     { name: 'description', label: '简介' },
     { name: 'episodes', label: '剧集' },
   ],
-});
+} as ViewDescriptor;

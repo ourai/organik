@@ -1,4 +1,4 @@
-import { ComponentCtor } from '../component';
+import { ComponentCtor, ComponentGetter } from '../component';
 import { ConfigType, GenericRenderer, InputDescriptor } from './base';
 import { FieldDescriptor } from './model';
 import { ActionDescriptor } from './action';
@@ -26,7 +26,7 @@ interface ViewFieldDescriptor
 
 type ViewType = 'list' | 'object';
 
-interface ViewDescriptor<CT = ConfigType> {
+interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   name: string;
   type?: ViewType;
   render: GenericRenderer;
@@ -43,10 +43,10 @@ interface TableViewConfig {
   hidePagination?: boolean;
 }
 
-type ViewRenderer<CT extends any = ConfigType> =
+type ViewRenderer<CT extends ConfigType = ConfigType> =
   | ViewDescriptor<CT>
   | ComponentCtor
-  | (() => ComponentCtor);
+  | ComponentGetter;
 
 export {
   ColumnContext,

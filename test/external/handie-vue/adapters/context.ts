@@ -20,14 +20,19 @@ function callVuexMethodWithNamespace(
   store[methodName](`${namespace}/${type}`, payload);
 }
 
-function createModuleContext<R>(descriptor: ModuleContextDescriptor<R>): ModuleContext<R> {
-  const callVuexMethod = callVuexMethodWithNamespace.bind(null, descriptor.moduleName);
+function createModuleContext<R>(descriptor: ModuleContextDescriptor<R> | string): ModuleContext<R> {
+  const ctx = _createModuleContext<R>(descriptor) as ModuleContext<R>;
+  const flag = '__hacked_by_handie';
 
-  return {
-    ..._createModuleContext<R>(descriptor),
-    commit: callVuexMethod.bind(null, 'commit'),
-    dispatch: async (type: string, payload?: any) => callVuexMethod('dispatch', type, payload),
-  };
+  if (!(ctx as any)[flag]) {
+    const callVuexMethod = callVuexMethodWithNamespace.bind(null, ctx.getModuleName());
+
+    ctx.commit = callVuexMethod.bind(null, 'commit');
+    ctx.dispatch = async (type: string, payload?: any) => callVuexMethod('dispatch', type, payload);
+    ctx[flag] = true;
+  }
+
+  return ctx;
 }
 
 export { createModuleContext };

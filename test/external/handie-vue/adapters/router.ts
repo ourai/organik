@@ -1,8 +1,9 @@
-import { isString, isFunction, isPlainObject } from '@ntks/toolbox';
-import { ComponentGetter, getViews } from 'organik';
+import { isString, isFunction } from '@ntks/toolbox';
+import { ComponentGetter, ViewDescriptor, ViewRenderer, getViews, createView } from 'organik';
 import VueRouter from 'vue-router';
 
 import { RouteComponent, RouteConfig, ResolvedRouteConfig, RouterCreator } from '../types';
+import { createModuleContext } from './context';
 
 let routerCreator = (() => function () {} as any) as RouterCreator; // eslint-disable-line @typescript-eslint/no-empty-function
 
@@ -10,6 +11,18 @@ function setRouterCreator(creator: RouterCreator): void {
   if (isFunction(creator)) {
     routerCreator = creator;
   }
+}
+
+function resolveRouteComponent(moduleName: string, viewRenderer: ViewRenderer): RouteComponent {
+  let component: RouteComponent | undefined;
+
+  if (isFunction(viewRenderer)) {
+    component = (viewRenderer as ComponentGetter)();
+  } else {
+    component = createView(createModuleContext(moduleName), viewRenderer as ViewDescriptor);
+  }
+
+  return component;
 }
 
 function resolveRoutes(routes: RouteConfig[]): ResolvedRouteConfig[] {
@@ -22,9 +35,7 @@ function resolveRoutes(routes: RouteConfig[]): ResolvedRouteConfig[] {
         const viewRenderer = getViews(moduleName)[viewName];
 
         if (viewRenderer) {
-          if (isFunction(viewRenderer)) {
-            resolved.component = (viewRenderer as ComponentGetter)();
-          }
+          resolved.component = resolveRouteComponent(moduleName, viewRenderer);
         }
       } else {
         resolved.component = component as RouteComponent;

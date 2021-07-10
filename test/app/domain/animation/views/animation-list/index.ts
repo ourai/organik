@@ -1,12 +1,12 @@
-import { createTableViewGetter } from 'handie-vue';
-
-import context from '../../context';
+import { ViewDescriptor } from 'handie-vue';
 
 import TitleField from './TitleField.vue';
 import EpisodesField from './EpisodesField.vue';
 
-export default createTableViewGetter(context, {
+export default {
   name: 'AnimationListView',
+  type: 'list',
+  render: 'TableView',
   config: { operationColumnWidth: 250 },
   fields: [
     { name: 'title', label: '标题', render: TitleField, config: { width: '300' } },
@@ -32,4 +32,4 @@ export default createTableViewGetter(context, {
       { name: 'description', label: '简介' },
     ],
   },
-});
+} as ViewDescriptor;

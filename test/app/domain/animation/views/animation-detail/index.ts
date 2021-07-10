@@ -1,12 +1,12 @@
-import { createDetailViewGetter } from 'handie-vue';
+import { ViewDescriptor } from 'handie-vue';
 
-import context from '../../context';
-
-export default createDetailViewGetter(context, {
+export default {
   name: 'AnimationDetailView',
+  type: 'object',
+  render: 'DetailView',
   fields: [
     { name: 'title', label: '标题' },
     { name: 'description', label: '简介' },
     { name: 'episodes', label: '剧集' },
   ],
-});
+} as ViewDescriptor;

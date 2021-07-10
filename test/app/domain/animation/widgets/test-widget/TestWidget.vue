@@ -5,10 +5,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-import context from '../../context';
+import { getComponents } from '../../context';
 
 @Component({
-  components: context.getComponents(),
+  components: getComponents(),
 })
 export default class TestWidget extends Vue {}
 </script>

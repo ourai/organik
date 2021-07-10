@@ -1,4 +1,5 @@
 import { ComponentCtor } from '../component';
+import { ModelDescriptor } from './model';
 import { ServerAction } from './action';
 import { ViewRenderer } from './view';
 
@@ -14,10 +15,12 @@ type ModuleViews = Record<string, ViewRenderer>;
 
 type ModuleDescriptor = {
   name: string;
-  imports?: string[];
-  exports?: Partial<Record<ModuleResourceType, Record<string, any>>>;
+  model?: ModelDescriptor;
+  repository?: any;
   actions?: ServerAction[];
   views?: ModuleViews;
+  imports?: string[];
+  exports?: Partial<Record<ModuleResourceType, Record<string, any>>>;
   components?: ModuleComponentRefs;
 };
 
@@ -27,14 +30,13 @@ type ResolvedModule = Required<Omit<ModuleDescriptor, 'name' | 'components'>> & 
   dependencies: Record<string, any>;
   componentRefs: ModuleComponentRefs;
   components: ModuleComponents;
-  actions: ServerAction[];
-  views: ModuleViews;
 };
 
 export {
   ModuleResourceType,
   ModuleResources,
   ModuleDependencies,
+  ModuleViews,
   ModuleDescriptor,
   ModuleComponents,
   ResolvedModule,

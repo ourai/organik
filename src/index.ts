@@ -26,6 +26,8 @@ export {
   SearchCondition,
   SearchContext,
   ViewType,
+  ViewDescriptor,
+  ViewRenderer,
   ListViewContextDescriptor,
   ObjectViewContextDescriptor,
   ViewContext,

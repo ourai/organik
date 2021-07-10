@@ -3,9 +3,9 @@ import { isBoolean, isString } from '@ntks/toolbox';
 import {
   ComponentCtor,
   ServerAction,
-  ViewRenderer,
   ModuleResources,
   ModuleDependencies,
+  ModuleViews,
   ModuleDescriptor,
   ModuleComponents,
   ResolvedModule,
@@ -17,12 +17,14 @@ const moduleMap = new Map<string, ResolvedModule>();
 function ensureModuleExists(name: string): ResolvedModule {
   if (!moduleMap.has(name)) {
     moduleMap.set(name, {
+      model: undefined as any,
+      repository: {},
+      actions: [],
+      views: {},
       imports: [],
       exports: {},
       dependencies: {},
       componentRefs: {},
-      actions: [],
-      views: {},
       components: {},
     });
   }
@@ -32,19 +34,23 @@ function ensureModuleExists(name: string): ResolvedModule {
 
 function registerModule({
   name,
-  imports = [],
-  exports = {},
+  model = undefined as any,
+  repository = {},
   actions = [],
   views = {},
+  imports = [],
+  exports = {},
   components = {},
 }: ModuleDescriptor): void {
   moduleMap.set(name, {
+    model,
+    repository,
+    actions,
+    views,
     imports,
     exports,
     dependencies: {},
     componentRefs: components,
-    actions,
-    views,
     components: ensureModuleExists(name).components, // 必须保证 `components` 这个属性的引用地址不变，否则在模块未注册时在部件和页面中使用会找不到依赖组件
   });
 }
@@ -146,7 +152,7 @@ function getActions(moduleName: string): ServerAction[] {
   return ensureModuleExists(moduleName).actions;
 }
 
-function getViews(moduleName: string): Record<string, ViewRenderer> {
+function getViews(moduleName: string): ModuleViews {
   return ensureModuleExists(moduleName).views;
 }
 
@@ -161,4 +167,11 @@ function getComponents(
   return components;
 }
 
-export { registerModules, getDependencies, getActions, getViews, getComponents };
+export {
+  ensureModuleExists,
+  registerModules,
+  getActions,
+  getViews,
+  getDependencies,
+  getComponents,
+};
