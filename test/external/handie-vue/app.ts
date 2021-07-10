@@ -91,7 +91,7 @@ function createApp({
   const resolvedStoreModules = resolveStoreModules(storeModules, modules);
 
   if (resolvedStoreModules.length > 0) {
-    opts.store = createStore(resolvedStoreModules);
+    (opts as any).store = createStore(resolvedStoreModules);
   }
 
   if (provider) {
