@@ -5,7 +5,7 @@ import {
   ViewFieldDescriptor,
   ActionContextType,
   ActionDescriptor,
-  RepositoryExecutor,
+  ServerActionExecutor,
   ModuleContext,
   ViewContextDescriptor,
   ViewContext,
@@ -31,10 +31,10 @@ function resolveFields(
   );
 }
 
-function createGenericViewContext<R, VT, CT>(
-  moduleContext: ModuleContext<R>,
+function createGenericViewContext<VT, CT>(
+  moduleContext: ModuleContext,
   options: ViewContextDescriptor<VT, CT>,
-): Omit<ViewContext<R, VT, CT>, 'getDataSource' | 'setDataSource'> {
+): Omit<ViewContext<VT, CT>, 'getDataSource' | 'setDataSource'> {
   const mergedFields = resolveFields(options.fields, moduleContext.getModel());
   const actions = (options.actions || [])
     .map(resolveAction)
@@ -74,12 +74,11 @@ function createGenericViewContext<R, VT, CT>(
 }
 
 function resolvePartialContext<
-  R,
   ViewContextDescriptor,
   SpecificViewContext,
   SpecificActionName extends keyof SpecificViewContext
 >(
-  executor: RepositoryExecutor<keyof R>,
+  executor: ServerActionExecutor,
   options: ViewContextDescriptor,
   actionNames: SpecificActionName[],
 ): Pick<SpecificViewContext, SpecificActionName> {

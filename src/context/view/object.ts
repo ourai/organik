@@ -6,16 +6,15 @@ import {
 } from '../../typing';
 import { createGenericViewContext, resolvePartialContext } from './base';
 
-function createObjectViewContext<R, VT, CT>(
-  moduleContext: ModuleContext<R>,
+function createObjectViewContext<VT, CT>(
+  moduleContext: ModuleContext,
   options: ObjectViewContextDescriptor<VT, CT>,
-): ObjectViewContext<R, VT, CT> {
+): ObjectViewContext<VT, CT> {
   const ctx = {
-    ...createGenericViewContext<R, VT, CT>(moduleContext, { ...options, defaultValue: {} as any }),
+    ...createGenericViewContext<VT, CT>(moduleContext, { ...options, defaultValue: {} as any }),
     ...resolvePartialContext<
-      R,
       ObjectViewContextDescriptor<VT, CT>,
-      ObjectViewContext<R, VT, CT>,
+      ObjectViewContext<VT, CT>,
       keyof ObjectShorthandRequest
     >(moduleContext.execute, options, ['insert', 'update', 'getOne']),
   };

@@ -6,7 +6,7 @@ interface ModuleDescriptor extends _ModuleDescriptor {
   store?: VuexStoreModule;
 }
 
-interface ModuleContext<R> extends _ModuleContext<R> {
+interface ModuleContext extends _ModuleContext {
   commit: (type: string, payload?: any) => void;
   dispatch: (type: string, payload?: any) => Promise<void>;
 }

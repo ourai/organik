@@ -50,10 +50,10 @@ interface ObjectViewContextDescriptor<
 > extends Omit<ViewContextDescriptor<VT, CT>, 'defaultValue'>,
     ObjectShorthandRequest {}
 
-interface ViewContext<R = any, VT = any, CT = ConfigType>
-  extends Pick<ModuleContext<R>, 'getComponents'>,
+interface ViewContext<VT = any, CT = ConfigType>
+  extends Pick<ModuleContext, 'getComponents'>,
     ValueContext<VT> {
-  getModuleContext: () => ModuleContext<R>;
+  getModuleContext: () => ModuleContext;
   getView: () => ViewDescriptor<CT>;
   getFields: () => ViewFieldDescriptor[];
   getActions: () => ActionDescriptor[];
@@ -66,7 +66,7 @@ interface ViewContext<R = any, VT = any, CT = ConfigType>
   setBusy: (busy: boolean) => void;
 }
 
-interface ListViewContext<R = any, VT = any, CT = ConfigType> extends ViewContext<R, VT, CT> {
+interface ListViewContext<VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
   getSearch: () => SearchDescriptor | ComponentCtor | undefined;
   getSearchContext: () => SearchContext | undefined;
   getTotal: () => number;
@@ -81,7 +81,7 @@ interface ListViewContext<R = any, VT = any, CT = ConfigType> extends ViewContex
   deleteList: ShorthandRequest<string[] | Record<string, any>>;
 }
 
-interface ObjectViewContext<R = any, VT = any, CT = ConfigType> extends ViewContext<R, VT, CT> {
+interface ObjectViewContext<VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
   getOne: ShorthandRequest<string>;
   insert: ShorthandRequest;
   update: ShorthandRequest;

@@ -2,9 +2,9 @@ import { isBoolean, isString } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
-  ServerAction,
   ModuleResources,
   ModuleDependencies,
+  ModuleActions,
   ModuleViews,
   ModuleDescriptor,
   ModuleComponents,
@@ -18,8 +18,7 @@ function ensureModuleExists(name: string): ResolvedModule {
   if (!moduleMap.has(name)) {
     moduleMap.set(name, {
       model: undefined as any,
-      repository: {},
-      actions: [],
+      actions: {},
       views: {},
       imports: [],
       exports: {},
@@ -35,8 +34,7 @@ function ensureModuleExists(name: string): ResolvedModule {
 function registerModule({
   name,
   model = undefined as any,
-  repository = {},
-  actions = [],
+  actions = {},
   views = {},
   imports = [],
   exports = {},
@@ -44,7 +42,6 @@ function registerModule({
 }: ModuleDescriptor): void {
   moduleMap.set(name, {
     model,
-    repository,
     actions,
     views,
     imports,
@@ -148,7 +145,7 @@ function registerModules(descriptors: ModuleDescriptor[]): void {
   resolveComponents();
 }
 
-function getActions(moduleName: string): ServerAction[] {
+function getActions(moduleName: string): ModuleActions {
   return ensureModuleExists(moduleName).actions;
 }
 

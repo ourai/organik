@@ -11,13 +11,14 @@ type ModuleDependencies = Record<string, ModuleResources>;
 
 type ModuleComponentRefs = Record<string, boolean | string>;
 
+type ModuleActions<K extends string = string> = Record<K, ServerAction>;
+
 type ModuleViews = Record<string, ViewRenderer>;
 
-type ModuleDescriptor = {
+type ModuleDescriptor<K extends string = string> = {
   name: string;
   model?: ModelDescriptor;
-  repository?: any;
-  actions?: ServerAction[];
+  actions?: ModuleActions<K>;
   views?: ModuleViews;
   imports?: string[];
   exports?: Partial<Record<ModuleResourceType, Record<string, any>>>;
@@ -36,6 +37,7 @@ export {
   ModuleResourceType,
   ModuleResources,
   ModuleDependencies,
+  ModuleActions,
   ModuleViews,
   ModuleDescriptor,
   ModuleComponents,

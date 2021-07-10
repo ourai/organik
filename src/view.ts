@@ -12,38 +12,38 @@ import {
 import { getWidget } from './component';
 import { createViewContext } from './context';
 
-type MixedViewContext<R, VT, CT> = ListViewContext<R, VT, CT> | ObjectViewContext<R, VT, CT>;
+type MixedViewContext<VT, CT> = ListViewContext<VT, CT> | ObjectViewContext<VT, CT>;
 
 type ViewProvider = { [key: string]: any };
 
-type ViewCreator<R = any, VT = any, CT = any> = (
-  context: MixedViewContext<R, VT, CT>,
+type ViewCreator<VT = any, CT = any> = (
+  context: MixedViewContext<VT, CT>,
   provider: ViewProvider,
   renderer: GenericRenderer,
 ) => ComponentCtor;
 
 let viewCreator = (() => function () {} as ComponentCtor) as ViewCreator; // eslint-disable-line @typescript-eslint/no-empty-function
 
-function setViewCreator<R, VT, CT>(creator: ViewCreator<R, VT, CT>): void {
+function setViewCreator<VT, CT>(creator: ViewCreator<VT, CT>): void {
   if (isFunction(creator)) {
     viewCreator = creator;
   }
 }
 
-function createView<R, VT, CT>(
-  context: ModuleContext<R> | MixedViewContext<R, VT, CT>,
+function createView<VT, CT>(
+  context: ModuleContext | MixedViewContext<VT, CT>,
   options?: ListViewContextDescriptor<VT, CT> | ObjectViewContextDescriptor<VT, CT>,
   providerGetter?: () => ViewProvider,
 ): ComponentCtor {
   const resolved = options
-    ? createViewContext(context as ModuleContext<R>, options)
-    : (context as MixedViewContext<R, VT, CT>);
+    ? createViewContext(context as ModuleContext, options)
+    : (context as MixedViewContext<VT, CT>);
   const view = resolved.getView();
 
   let provider = { viewContext: resolved } as ViewProvider;
 
   if ((options as ListViewContextDescriptor<VT, CT>).search) {
-    provider.searchContext = (resolved as ListViewContext<R, VT, CT>).getSearchContext();
+    provider.searchContext = (resolved as ListViewContext<VT, CT>).getSearchContext();
   }
 
   if (isFunction(providerGetter)) {

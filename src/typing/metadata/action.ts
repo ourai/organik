@@ -26,6 +26,7 @@ interface ActionDescriptor {
 
 interface ServerAction extends ActionDescriptor {
   type: 'server';
+  execute: <RT, PT>(params?: PT) => Promise<RT>;
 }
 
 interface ClientAction extends ActionDescriptor {

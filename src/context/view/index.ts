@@ -13,19 +13,19 @@ import {
 import { createListViewContext } from './list';
 import { createObjectViewContext } from './object';
 
-function createViewContext<R, VT, CT>(
-  moduleContext: ModuleContext<R>,
+function createViewContext<VT, CT>(
+  moduleContext: ModuleContext,
   options: ListViewContextDescriptor<VT, CT> | ObjectViewContextDescriptor<VT, CT>,
-): ListViewContext<R, VT, CT> | ObjectViewContext<R, VT, CT> {
+): ListViewContext<VT, CT> | ObjectViewContext<VT, CT> {
   return options.type === 'object'
-    ? (createObjectViewContext<R, VT, CT>(
+    ? (createObjectViewContext<VT, CT>(
         moduleContext,
         options as ObjectViewContextDescriptor<VT, CT>,
-      ) as ObjectViewContext<R, VT, CT>)
-    : (createListViewContext<R, VT, CT>(
+      ) as ObjectViewContext<VT, CT>)
+    : (createListViewContext<VT, CT>(
         moduleContext,
         options as ListViewContextDescriptor<VT, CT>,
-      ) as ListViewContext<R, VT, CT>);
+      ) as ListViewContext<VT, CT>);
 }
 
 function resolveViewContextInAction<VC extends ViewContext = ViewContext>(

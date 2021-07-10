@@ -1,17 +1,15 @@
 import { ComponentCtor } from '../component';
 import { DataValue } from '../value';
 import { RequestParams, ResponseResult, ResponseSuccess, ResponseFail } from '../http';
-import { ModelDescriptor, ModuleDependencies, ModuleResources } from '../metadata';
+import { ModelDescriptor, ModuleResources, ModuleDependencies, ModuleActions } from '../metadata';
 
-type Repository = any;
-
-interface ModuleContextDescriptor<R extends Repository = Repository> {
+interface ModuleContextDescriptor<K extends string = string> {
   moduleName: string;
-  repository: R;
+  actions: ModuleActions<K>;
   model?: ModelDescriptor;
 }
 
-type RepositoryExecutor<ActionName extends any = any, VT extends DataValue = DataValue> = {
+type ServerActionExecutor<ActionName extends string = string, VT extends DataValue = DataValue> = {
   (actionName: ActionName, success?: ResponseSuccess<VT>, fail?: ResponseFail<VT>): Promise<
     ResponseResult<VT>
   >;
@@ -23,12 +21,12 @@ type RepositoryExecutor<ActionName extends any = any, VT extends DataValue = Dat
   ): Promise<ResponseResult<VT>>;
 };
 
-interface ModuleContext<R> {
+interface ModuleContext<K extends string = string> {
   getModuleName: () => string;
   getModel: () => ModelDescriptor | undefined;
   getDependencies: (refPath?: string) => ModuleDependencies | ModuleResources | undefined;
   getComponents: () => Record<string, ComponentCtor>;
-  execute: RepositoryExecutor<keyof R>;
+  execute: ServerActionExecutor<K>;
 }
 
-export { ModuleContextDescriptor, RepositoryExecutor, ModuleContext };
+export { ModuleContextDescriptor, ServerActionExecutor, ModuleContext };

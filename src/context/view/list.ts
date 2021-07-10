@@ -31,16 +31,15 @@ function resolveListRequestParams(
   return params;
 }
 
-function createListViewContext<R, VT, CT>(
-  moduleContext: ModuleContext<R>,
+function createListViewContext<VT, CT>(
+  moduleContext: ModuleContext,
   options: ListViewContextDescriptor<VT, CT>,
-): ListViewContext<R, VT, CT> {
+): ListViewContext<VT, CT> {
   const ctx = {
-    ...createGenericViewContext<R, VT, CT>(moduleContext, { ...options, defaultValue: [] as any }),
+    ...createGenericViewContext<VT, CT>(moduleContext, { ...options, defaultValue: [] as any }),
     ...resolvePartialContext<
-      R,
       ListViewContextDescriptor<VT, CT>,
-      ListViewContext<R, VT, CT>,
+      ListViewContext<VT, CT>,
       keyof ListShorthandRequest
     >(moduleContext.execute, options, ['getList', 'deleteOne', 'deleteList']),
   };

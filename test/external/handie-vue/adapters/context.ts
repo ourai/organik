@@ -20,8 +20,8 @@ function callVuexMethodWithNamespace(
   store[methodName](`${namespace}/${type}`, payload);
 }
 
-function createModuleContext<R>(descriptor: ModuleContextDescriptor<R> | string): ModuleContext<R> {
-  const ctx = _createModuleContext<R>(descriptor) as ModuleContext<R>;
+function createModuleContext(descriptor: ModuleContextDescriptor | string): ModuleContext {
+  const ctx = _createModuleContext(descriptor) as ModuleContext;
   const flag = '__hacked_by_handie';
 
   if (!(ctx as any)[flag]) {

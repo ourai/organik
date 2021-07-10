@@ -5,8 +5,9 @@ import {
   ResponseResult,
   ResponseSuccess,
   ResponseFail,
+  ModuleActions,
   ModuleContextDescriptor,
-  RepositoryExecutor,
+  ServerActionExecutor,
   ModuleContext,
 } from '../typing';
 import { ensureModuleExists, getDependencies, getComponents } from '../module';
@@ -17,20 +18,17 @@ function isResultLogicallySuccessful(result: ResponseResult): boolean {
   return result.success === true;
 }
 
-function createRepositoryExecutor<R>(
-  repository: R,
-  resultAsserter: (
-    result: ResponseResult,
-    actionName: keyof R,
-  ) => boolean = isResultLogicallySuccessful,
-): RepositoryExecutor<keyof R> {
+function createServerActionExecutor<K extends string = string>(
+  actions: ModuleActions<K>,
+  resultAsserter: (result: ResponseResult, actionName: K) => boolean = isResultLogicallySuccessful,
+): ServerActionExecutor<K> {
   return async function (
-    actionName: keyof R,
+    actionName: K,
     params?: RequestParams | ResponseSuccess,
     success?: ResponseSuccess | ResponseFail,
     fail?: ResponseFail,
   ): Promise<ResponseResult> {
-    if (!(actionName in repository)) {
+    if (!(actionName in actions)) {
       return { success: false, message: `不存在 \`${actionName}\` 这个请求资源` } as ResponseResult;
     }
 
@@ -48,7 +46,7 @@ function createRepositoryExecutor<R>(
       resolvedFailCallback = fail || noop;
     }
 
-    const result: ResponseResult = await (repository[actionName] as any)(resolvedParams);
+    const result: ResponseResult = await actions[actionName].execute(resolvedParams);
 
     if (resultAsserter(result, actionName)) {
       resolvedSuccessCallback(result.data, result.extra, result);
@@ -62,7 +60,7 @@ function createRepositoryExecutor<R>(
 
 function constructModuleContextDescriptor(moduleName: string): ModuleContextDescriptor<any> {
   const module = ensureModuleExists(moduleName);
-  const descriptor = { moduleName, repository: module.repository } as ModuleContextDescriptor<any>;
+  const descriptor = { moduleName, actions: module.actions } as ModuleContextDescriptor<any>;
 
   if (module.model) {
     descriptor.model = module.model;
@@ -71,13 +69,15 @@ function constructModuleContextDescriptor(moduleName: string): ModuleContextDesc
   return descriptor;
 }
 
-function createModuleContext<R>(descriptor: ModuleContextDescriptor<R> | string): ModuleContext<R> {
-  const { moduleName, repository, model } = isString(descriptor)
+function createModuleContext<K extends string = string>(
+  descriptor: ModuleContextDescriptor<K> | string,
+): ModuleContext<K> {
+  const { moduleName, model, actions } = isString(descriptor)
     ? constructModuleContextDescriptor(descriptor as string)
-    : (descriptor as ModuleContextDescriptor<R>);
+    : (descriptor as ModuleContextDescriptor<K>);
 
   if (moduleContextMap.has(moduleName)) {
-    return moduleContextMap.get(moduleName) as ModuleContext<R>;
+    return moduleContextMap.get(moduleName) as ModuleContext<K>;
   }
 
   const ctx = {
@@ -85,8 +85,8 @@ function createModuleContext<R>(descriptor: ModuleContextDescriptor<R> | string)
     getModel: () => model,
     getDependencies: getDependencies.bind(null, moduleName),
     getComponents: getComponents.bind(null, moduleName),
-    execute: createRepositoryExecutor(repository),
-  } as ModuleContext<R>;
+    execute: createServerActionExecutor(actions),
+  } as ModuleContext<K>;
 
   moduleContextMap.set(moduleName, ctx);
 

@@ -21,6 +21,8 @@ export {
   BuiltInActionRenderer,
   ActionRenderer,
   ActionDescriptor,
+  ServerAction,
+  ClientAction,
   TableViewConfig,
   ModuleContext,
   SearchCondition,

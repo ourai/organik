@@ -12,7 +12,7 @@ import {
 import { ComponentCtor } from '../types/component';
 import { ViewGetter } from '../types/view';
 
-type UncertainContext<R, CTT> = ModuleContext<R> | CTT;
+type UncertainContext<CTT> = ModuleContext | CTT;
 
 type UnionViewContextDescriptor<VT, CT> =
   | ListViewContextDescriptor<VT, CT>
@@ -22,8 +22,8 @@ type PartialOptions<OT> = Omit<OT, 'type' | 'render'> & {
   render?: GenericRenderer;
 };
 
-function resolveView<R, VT, CT>(
-  context: UncertainContext<R, ListViewContext<R, VT, CT> | ObjectViewContext<R, VT, CT>>,
+function resolveView<VT, CT>(
+  context: UncertainContext<ListViewContext<VT, CT> | ObjectViewContext<VT, CT>>,
   type: ViewType,
   defaultRenderer: string,
   options?: PartialOptions<UnionViewContextDescriptor<VT, CT>>,
@@ -36,46 +36,46 @@ function resolveView<R, VT, CT>(
     resolved = undefined;
   }
 
-  return createView<R, VT, CT>(context, resolved) as ComponentCtor;
+  return createView<VT, CT>(context, resolved) as ComponentCtor;
 }
 
-function createTableView<R, VT, CT>(
-  context: UncertainContext<R, ListViewContext<R, VT, CT>>,
+function createTableView<VT, CT>(
+  context: UncertainContext<ListViewContext<VT, CT>>,
   options?: PartialOptions<ListViewContextDescriptor<VT, CT>>,
 ): ComponentCtor {
-  return resolveView<R, VT, CT>(context, 'list', 'TableView', options);
+  return resolveView<VT, CT>(context, 'list', 'TableView', options);
 }
 
-function createTableViewGetter<R, VT, CT>(
-  context: UncertainContext<R, ListViewContext<R, VT, CT>>,
+function createTableViewGetter<VT, CT>(
+  context: UncertainContext<ListViewContext<VT, CT>>,
   options?: PartialOptions<ListViewContextDescriptor<VT, CT>>,
 ): ViewGetter {
   return () => createTableView(context, options);
 }
 
-function createDetailView<R, VT, CT>(
-  context: UncertainContext<R, ObjectViewContext<R, VT, CT>>,
+function createDetailView<VT, CT>(
+  context: UncertainContext<ObjectViewContext<VT, CT>>,
   options?: PartialOptions<ObjectViewContextDescriptor<VT, CT>>,
 ): ComponentCtor {
-  return resolveView<R, VT, CT>(context, 'object', 'DetailView', options);
+  return resolveView<VT, CT>(context, 'object', 'DetailView', options);
 }
 
-function createDetailViewGetter<R, VT, CT>(
-  context: UncertainContext<R, ObjectViewContext<R, VT, CT>>,
+function createDetailViewGetter<VT, CT>(
+  context: UncertainContext<ObjectViewContext<VT, CT>>,
   options?: PartialOptions<ObjectViewContextDescriptor<VT, CT>>,
 ): ViewGetter {
   return () => createDetailView(context, options);
 }
 
-function createFormView<R, VT, CT>(
-  context: UncertainContext<R, ObjectViewContext<R, VT, CT>>,
+function createFormView<VT, CT>(
+  context: UncertainContext<ObjectViewContext<VT, CT>>,
   options?: PartialOptions<ObjectViewContextDescriptor<VT, CT>>,
 ): ComponentCtor {
-  return resolveView<R, VT, CT>(context, 'object', 'FormView', options);
+  return resolveView<VT, CT>(context, 'object', 'FormView', options);
 }
 
-function createFormViewGetter<R, VT, CT>(
-  context: UncertainContext<R, ObjectViewContext<R, VT, CT>>,
+function createFormViewGetter<VT, CT>(
+  context: UncertainContext<ObjectViewContext<VT, CT>>,
   options?: PartialOptions<ObjectViewContextDescriptor<VT, CT>>,
 ): ViewGetter {
   return () => createFormView(context, options);
