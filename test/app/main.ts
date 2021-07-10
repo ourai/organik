@@ -1,5 +1,4 @@
 import Vuex from 'vuex';
-import VueRouter from 'vue-router';
 import { createApp } from 'handie-vue';
 
 import '@kokiri/themes/antd/index.scss';
@@ -12,11 +11,8 @@ import { routes, setInterceptors } from './entry';
 setInterceptors();
 
 createApp({
-  plugins: [Vuex, VueRouter],
-  creators: {
-    router: routes => new VueRouter({ mode: 'history', routes }),
-    store: moduleTree => new Vuex.Store({ modules: moduleTree }),
-  },
+  plugins: [Vuex],
+  creators: { store: moduleTree => new Vuex.Store({ modules: moduleTree }) },
   components: controls,
   metadata: { actions, modules },
   el: '#app',

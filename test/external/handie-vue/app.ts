@@ -1,5 +1,6 @@
 import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
+import VueRouter from 'vue-router';
 
 import { StoreModule, AppCreators, AppDescriptor, AppInstance } from './types';
 import { ModuleDescriptor } from './types/module';
@@ -51,7 +52,13 @@ function createApp({
 }: AppDescriptor): AppInstance {
   Vue.config.productionTip = false;
 
-  plugins.forEach(plugin => Vue.use(plugin));
+  Vue.use(VueRouter);
+
+  plugins.forEach(plugin => {
+    if (plugin !== VueRouter) {
+      Vue.use(plugin);
+    }
+  });
 
   if (creators) {
     setCreators(creators);

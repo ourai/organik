@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 import { RouteComponent, RouteConfig, ResolvedRouteConfig, RouterCreator } from '../types';
 import { createModuleContext } from './context';
 
-let routerCreator = (() => function () {} as any) as RouterCreator; // eslint-disable-line @typescript-eslint/no-empty-function
+let routerCreator = routes => new VueRouter({ mode: 'history', routes });
 
 function setRouterCreator(creator: RouterCreator): void {
   if (isFunction(creator)) {
