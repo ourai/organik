@@ -39,6 +39,7 @@
 
 <script lang="ts">
 import { Vue, Component, Inject } from 'vue-property-decorator';
+import { RouteConfig } from 'handie-vue';
 import {
   App as AppContainer,
   LayoutContainer,
@@ -46,8 +47,6 @@ import {
   LayoutMain,
   LayoutAside,
 } from '@kokiri/components';
-
-import { RouteConfig } from '@/types';
 
 import { NavMenu } from './typing';
 import { resolveAvailableNavs, canAccessCurrentRoute } from './helper';

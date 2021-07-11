@@ -1,4 +1,4 @@
-import { RouteConfig, RouteRecord } from '@/types';
+import { RouteConfig, RouteRecord } from 'handie-vue';
 
 import { RouteAccessible, NavMenu } from './typing';
 

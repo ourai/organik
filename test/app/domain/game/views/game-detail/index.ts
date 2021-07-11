@@ -1,4 +1,4 @@
-import { createDetailViewGetter } from 'handie-vue';
+import { createDetailViewGetter } from '@/utils/view';
 
 import context from '../../context';
 

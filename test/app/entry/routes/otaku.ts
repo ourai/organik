@@ -1,4 +1,4 @@
-import { RouteConfig } from '@/types';
+import { RouteConfig } from 'handie-vue';
 
 import { ComicList } from '../../domain/comic/views';
 import { NovelList } from '../../domain/novel/views';

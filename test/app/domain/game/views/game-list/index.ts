@@ -1,4 +1,4 @@
-import { createTableViewGetter } from 'handie-vue';
+import { createTableViewGetter } from '@/utils/view';
 
 import context from '../../context';
 

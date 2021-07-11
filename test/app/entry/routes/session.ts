@@ -1,4 +1,4 @@
-import { RouteConfig } from '@/types';
+import { RouteConfig } from 'handie-vue';
 
 import { NotFound } from '../../domain/session/views';
 

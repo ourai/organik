@@ -1,4 +1,4 @@
-import { RouteConfig } from '@/types';
+import { RouteConfig } from 'handie-vue';
 
 import session from './session';
 import otaku from './otaku';

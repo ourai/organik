@@ -1,4 +1,5 @@
 import {
+  ComponentCtor,
   ModuleContext,
   GenericRenderer,
   ViewType,
@@ -7,10 +8,9 @@ import {
   ListViewContext,
   ObjectViewContext,
   createView,
-} from 'organik';
+} from 'handie-vue';
 
-import { ComponentCtor } from '../types/component';
-import { ViewGetter } from '../types/view';
+type ViewGetter = () => ComponentCtor;
 
 type UncertainContext<CTT> = ModuleContext | CTT;
 
