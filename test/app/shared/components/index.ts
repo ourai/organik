@@ -1,14 +1,16 @@
-import Vue from 'vue';
-import { Loading } from 'element-ui';
+import { ComponentCtor, ComponentDescriptor } from 'handie-vue';
 
-import OlButton from './button';
-import DataTable from './data-table';
+import * as controls from './control';
+import * as widgets from './widget';
 
-Vue.use(Loading);
+function convertToDescriptors(
+  map: Record<string, ComponentCtor>,
+  type: 'control' | 'widget' = 'control',
+): ComponentDescriptor[] {
+  return Object.keys(map).map(name => ({ name, ctor: map[name], type }));
+}
 
-const controls = [
-  { name: 'OlButton', ctor: OlButton },
-  { name: 'DataTable', ctor: DataTable },
-];
-
-export { controls as default, OlButton, DataTable };
+export default ([] as ComponentDescriptor[]).concat(
+  convertToDescriptors(controls),
+  convertToDescriptors(widgets, 'widget'),
+);

@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { createApp } from 'handie-vue';
 
-import controls from '@/components';
+import components from '@/components';
 import modules from '../domain';
 import actions from './actions';
 import { setInterceptors } from './aspects';
@@ -12,7 +12,7 @@ setInterceptors();
 createApp({
   plugins: [Vuex],
   creators: { store: moduleTree => new Vuex.Store({ modules: moduleTree }) },
-  components: controls,
+  components,
   metadata: { actions, modules },
   el: '#app',
   routes,

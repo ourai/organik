@@ -1,5 +1,5 @@
 <template>
-  <div class="FormView">
+  <div class="DetailView">
     <el-form>
       <el-form-item :label="f.label" :key="f.name" v-for="f in fields">{{
         dataSource[f.name]
@@ -13,12 +13,10 @@ import { Component } from 'vue-property-decorator';
 import { Form as ElForm, FormItem as ElFormItem } from 'element-ui';
 import { ObjectViewWidget } from 'handie-vue';
 
-import { getComponents } from '../../context';
-
 @Component({
-  components: getComponents({ ElForm, ElFormItem }),
+  components: { ElForm, ElFormItem },
 })
-export default class FormView extends ObjectViewWidget {
+export default class DetailView extends ObjectViewWidget {
   private get id() {
     return this.$route.params.id || '';
   }

@@ -30,14 +30,14 @@
 import { Component } from 'vue-property-decorator';
 import { resolveViewContextInAction, ListViewWidget } from 'handie-vue';
 
-import { getComponents } from '../../context';
+import { DataTable } from '../../control';
 import SearchRenderer from '../search-renderer';
 import ActionRenderer from '../action-renderer';
 import { DataTableProps } from './typing';
 import { isActionsAuthorized, resolveAuthorizedActions, resolveTableProps } from './helper';
 
 @Component({
-  components: getComponents({ SearchRenderer, ActionRenderer }),
+  components: { DataTable, SearchRenderer, ActionRenderer },
 })
 export default class TableView extends ListViewWidget {
   private tableProps: DataTableProps = {} as any;

@@ -7,7 +7,6 @@ import {
   ActionRenderer,
   ActionDescriptor,
   ViewContext,
-  ListViewContext,
 } from 'handie-vue';
 
 const DEFAULT_ACTION_RENDER_TYPE = 'button';

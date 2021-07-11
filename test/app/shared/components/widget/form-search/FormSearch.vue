@@ -26,10 +26,8 @@ import {
 } from 'element-ui';
 import { SearchWidget } from 'handie-vue';
 
-import { getComponents } from '../../context';
-
 @Component({
-  components: getComponents({ ElForm, ElFormItem, ElInput, ElButton }),
+  components: { ElForm, ElFormItem, ElInput, ElButton },
 })
 export default class FormSearch extends SearchWidget {
   protected created(): void {

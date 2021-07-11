@@ -2,13 +2,13 @@ import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { ActionDescriptor, ViewContext } from 'handie-vue';
 
-import { getComponents } from '../../context';
+import { OlButton } from '../../control';
 import { getActionComponent, resolveVirtualNodeData } from './helper';
 
 @Component({
   // @ts-ignore
   abstract: true,
-  components: getComponents(),
+  components: { OlButton },
 })
 export default class ActionRenderer extends Vue {
   @Prop({ type: Object, default: null })
