@@ -1,4 +1,4 @@
-import { ActionDescriptor, ViewContext, ListViewContext } from 'handie-vue';
+import { ActionDescriptor, ViewContext, ListViewContext, ObjectViewContext } from 'handie-vue';
 
 export default [
   {
@@ -12,20 +12,20 @@ export default [
     name: 'gotoEditFormView',
     context: 'single',
     text: '编辑',
-    execute: (context: ListViewContext, vm) =>
+    execute: (context: ObjectViewContext, vm) =>
       vm.$router.push({
         name: `${context.getModuleContext().getModuleName()}EditForm`,
-        params: { id: context.getValue()[0].id },
+        params: { id: context.getValue().id },
       }),
   },
   {
     name: 'gotoDetailView',
     context: 'single',
     text: '查看',
-    execute: (context: ListViewContext, vm) =>
+    execute: (context: ObjectViewContext, vm) =>
       vm.$router.push({
         name: `${context.getModuleContext().getModuleName()}Detail`,
-        params: { id: context.getValue()[0].id },
+        params: { id: context.getValue().id },
       }),
   },
   {
@@ -33,8 +33,13 @@ export default [
     context: 'single',
     text: '删除',
     danger: true,
-    execute: (context: ListViewContext) =>
-      context.deleteOne && context.deleteOne(context.getValue()[0], () => context.reload()),
+    execute: (context: ObjectViewContext) => {
+      const parent = context.getParent()!;
+
+      if (parent.deleteOne) {
+        parent.deleteOne(context.getValue(), () => parent.reload());
+      }
+    },
   },
   {
     name: 'deleteList',

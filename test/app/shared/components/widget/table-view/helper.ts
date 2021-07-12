@@ -8,7 +8,6 @@ import {
   ActionDescriptor,
   TableViewConfig,
   ListViewContext,
-  resolveViewContextInAction,
 } from 'handie-vue';
 
 import ActionRenderer from '../action-renderer';
@@ -66,17 +65,14 @@ function resolveOperationColumn(
 
   const col: TableColumn = {
     label: '操作',
-    render: (h, { row }) => {
+    render: (h, { index }) => {
       return h(
         'div',
         actions.map(action =>
           h(ActionRenderer, {
             props: {
               action,
-              contextGetter: () => ({
-                ...resolveViewContextInAction(context),
-                getValue: () => [row],
-              }),
+              contextGetter: () => context.getChildren()[index],
             },
           }),
         ),

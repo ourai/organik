@@ -40,5 +40,5 @@ export { registerComponent } from './component';
 export { registerDataType } from './data-type';
 export { registerModules, getComponents, getActions, getViews } from './module';
 export { registerAction } from './action';
-export { createModuleContext, resolveViewContextInAction } from './context';
+export { createModuleContext } from './context';
 export { setViewCreator, createView } from './view';

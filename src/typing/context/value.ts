@@ -3,6 +3,7 @@ import { EventEmitter } from '../event';
 
 interface ValueContextDescriptor<ValueType extends DataValue = DataValue> {
   defaultValue: ValueType;
+  initialValue?: ValueType;
 }
 
 type ValueEvents = 'ready' | 'change' | 'submit' | 'reset';

@@ -10,7 +10,7 @@ function createValueContext<ValueType extends any = any, EventNames extends stri
   const defaultValue: ValueType = clone(options.defaultValue) as ValueType;
   const getDefaultValue = () => clone(defaultValue) as ValueType;
 
-  let value = getDefaultValue();
+  let value = options.initialValue ? clone(options.initialValue) : getDefaultValue();
   let valueInited = false;
 
   const getValue = () => clone(value) as ValueType;

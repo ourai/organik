@@ -28,7 +28,7 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import { resolveViewContextInAction, ListViewWidget } from 'handie-vue';
+import { ListViewWidget } from 'handie-vue';
 
 import { DataTable } from '../../control';
 import SearchRenderer from '../search-renderer';
@@ -61,7 +61,7 @@ export default class TableView extends ListViewWidget {
   }
 
   private get contextInActionGetter() {
-    return () => ({ ...resolveViewContextInAction(this.context) });
+    return () => this.context;
   }
 
   protected created(): void {

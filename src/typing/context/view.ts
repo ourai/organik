@@ -20,6 +20,60 @@ type ShorthandRequest<ParamsType = RequestParams> = (
   fail?: ResponseFail,
 ) => Promise<ResponseResult>;
 
+interface ViewContext<VT = any, CT = ConfigType>
+  extends Pick<ModuleContext, 'getComponents'>,
+    ValueContext<VT> {
+  getModuleContext: () => ModuleContext;
+  getView: () => ViewDescriptor<CT>;
+  getFields: () => ViewFieldDescriptor[];
+  getActions: () => ActionDescriptor[];
+  getActionsByContextType: (contextType: ActionContextType) => ActionDescriptor[];
+  getActionsAuthority: () => string | undefined;
+  getConfig: () => Record<string, any>;
+  getDataSource: () => VT;
+  setDataSource: (data: VT) => void;
+  getBusy: () => boolean;
+  setBusy: (busy: boolean) => void;
+}
+
+interface InternalListViewContext<Children, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
+  getChildren: () => Children[];
+  getSearch: () => SearchDescriptor | ComponentCtor | undefined;
+  getSearchContext: () => SearchContext | undefined;
+  getTotal: () => number;
+  getCurrentPage: () => number;
+  setCurrentPage: (current: number) => void;
+  getPageSize: () => number;
+  setPageSize: (size: number) => void;
+  load: () => Promise<any>;
+  reload: () => Promise<any>;
+  getList: ShorthandRequest;
+  deleteOne: ShorthandRequest<string | Record<string, any>>;
+  deleteList: ShorthandRequest<string[] | Record<string, any>>;
+}
+
+interface InternalObjectViewContext<Parent, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
+  getParent: () => Parent | undefined;
+  getIndexInParent: () => number;
+  getOne: ShorthandRequest<string>;
+  insert: ShorthandRequest;
+  update: ShorthandRequest;
+}
+
+interface ListViewContext<VT = any, CT = ConfigType>
+  extends InternalListViewContext<
+    InternalObjectViewContext<ListViewContext<VT, CT>, VT, CT>,
+    VT,
+    CT
+  > {}
+
+interface ObjectViewContext<VT = any, CT = ConfigType>
+  extends InternalObjectViewContext<
+    InternalListViewContext<ObjectViewContext<VT, CT>, VT, CT>,
+    VT,
+    CT
+  > {}
+
 interface ViewContextDescriptor<
   VT extends DataValue = DataValue,
   CT extends ConfigType = ConfigType
@@ -48,61 +102,10 @@ interface ObjectViewContextDescriptor<
   VT extends DataValue = DataValue,
   CT extends ConfigType = ConfigType
 > extends Omit<ViewContextDescriptor<VT, CT>, 'defaultValue'>,
-    ObjectShorthandRequest {}
-
-interface ViewContext<VT = any, CT = ConfigType>
-  extends Pick<ModuleContext, 'getComponents'>,
-    ValueContext<VT> {
-  getModuleContext: () => ModuleContext;
-  getView: () => ViewDescriptor<CT>;
-  getFields: () => ViewFieldDescriptor[];
-  getActions: () => ActionDescriptor[];
-  getActionsByContextType: (contextType: ActionContextType) => ActionDescriptor[];
-  getActionsAuthority: () => string | undefined;
-  getConfig: () => Record<string, any>;
-  getDataSource: () => VT;
-  setDataSource: (data: VT) => void;
-  getBusy: () => boolean;
-  setBusy: (busy: boolean) => void;
+    ObjectShorthandRequest {
+  parent?: ListViewContext<VT, CT>;
+  indexInParent?: number;
 }
-
-interface ListViewContext<VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
-  getSearch: () => SearchDescriptor | ComponentCtor | undefined;
-  getSearchContext: () => SearchContext | undefined;
-  getTotal: () => number;
-  getCurrentPage: () => number;
-  setCurrentPage: (current: number) => void;
-  getPageSize: () => number;
-  setPageSize: (size: number) => void;
-  load: () => Promise<any>;
-  reload: () => Promise<any>;
-  getList: ShorthandRequest;
-  deleteOne: ShorthandRequest<string | Record<string, any>>;
-  deleteList: ShorthandRequest<string[] | Record<string, any>>;
-}
-
-interface ObjectViewContext<VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
-  getOne: ShorthandRequest<string>;
-  insert: ShorthandRequest;
-  update: ShorthandRequest;
-}
-
-type KeptViewContextKeysInAction =
-  | 'getModuleContext'
-  | 'getView'
-  | 'getValue'
-  | 'execute'
-  | 'on'
-  | 'off'
-  | 'reload'
-  | 'getList'
-  | 'deleteOne'
-  | 'deleteList';
-
-type ViewContextInAction<VC = ViewContext> = Omit<
-  VC,
-  keyof Omit<ViewContext, KeptViewContextKeysInAction>
->;
 
 export {
   ViewContextDescriptor,
@@ -113,6 +116,4 @@ export {
   ViewContext,
   ListViewContext,
   ObjectViewContext,
-  KeptViewContextKeysInAction,
-  ViewContextInAction,
 };

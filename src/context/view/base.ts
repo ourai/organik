@@ -7,6 +7,7 @@ import {
   ActionDescriptor,
   ServerActionExecutor,
   ModuleContext,
+  ValueContextDescriptor,
   ViewContextDescriptor,
   ViewContext,
 } from '../../typing';
@@ -51,7 +52,9 @@ function createGenericViewContext<VT, CT>(
     actionContextGroups[contextType].push(action);
   });
 
-  const valueContext = createValueContext({ defaultValue: options.defaultValue });
+  const valueContext = createValueContext(
+    pick(options, ['defaultValue', 'initialValue']) as ValueContextDescriptor<VT>,
+  );
 
   let loading: boolean = false;
 

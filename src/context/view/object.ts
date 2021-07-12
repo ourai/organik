@@ -11,7 +11,11 @@ function createObjectViewContext<VT, CT>(
   options: ObjectViewContextDescriptor<VT, CT>,
 ): ObjectViewContext<VT, CT> {
   const ctx = {
-    ...createGenericViewContext<VT, CT>(moduleContext, { ...options, defaultValue: {} as any }),
+    ...createGenericViewContext<VT, CT>(moduleContext, {
+      ...options,
+      defaultValue: {} as any,
+      initialValue: options.initialValue || ({} as any),
+    }),
     ...resolvePartialContext<
       ObjectViewContextDescriptor<VT, CT>,
       ObjectViewContext<VT, CT>,
@@ -19,10 +23,14 @@ function createObjectViewContext<VT, CT>(
     >(moduleContext.execute, options, ['insert', 'update', 'getOne']),
   };
 
+  const indexInParent = options.indexInParent === undefined ? -1 : options.indexInParent;
+
   let dataSource: VT = {} as any;
 
   return {
     ...ctx,
+    getParent: () => options.parent,
+    getIndexInParent: () => indexInParent,
     getDataSource: () => dataSource,
     setDataSource: (data: VT) => {
       dataSource = data;

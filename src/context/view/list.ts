@@ -9,9 +9,11 @@ import {
   ListViewContextDescriptor,
   ListShorthandRequest,
   ListViewContext,
+  ObjectViewContext,
 } from '../../typing';
 import { createSearchContext } from '../search';
 import { createGenericViewContext, resolvePartialContext } from './base';
+import { createObjectViewContext } from './object';
 
 function resolveListRequestParams(
   condition: SearchCondition,
@@ -52,12 +54,20 @@ function createListViewContext<VT, CT>(
   let dataSource: VT = [] as any;
   let dataSourceInited = false;
 
-  let totalPage: number;
-  let currentPage: number;
-  let currentPageSize: number;
+  let children: ObjectViewContext[] = [];
 
   const setDataSource = (data: VT) => {
     dataSource = data;
+    children = (data as any).map(record =>
+      createObjectViewContext(ctx.getModuleContext(), {
+        name: `ObjectViewIn${options.name}`,
+        type: 'object',
+        render: '',
+        fields: ctx.getFields(),
+        initialValue: record,
+        parent: ctx as any,
+      }),
+    );
 
     if (!dataSourceInited) {
       dataSourceInited = true;
@@ -65,6 +75,10 @@ function createListViewContext<VT, CT>(
 
     ctx.emit('dataChange', data);
   };
+
+  let totalPage: number;
+  let currentPage: number;
+  let currentPageSize: number;
 
   const setTotal = (total: number) => {
     totalPage = total;
@@ -126,8 +140,8 @@ function createListViewContext<VT, CT>(
     loadData();
   };
 
-  return {
-    ...ctx,
+  const extra = {
+    getChildren: () => children,
     getDataSource: () => dataSource,
     setDataSource,
     getSearch: () => search,
@@ -139,7 +153,11 @@ function createListViewContext<VT, CT>(
     setPageSize,
     load: loadData,
     reload: loadData,
-  };
+  } as Partial<ListViewContext<VT, CT>>;
+
+  Object.keys(extra).forEach(key => (ctx[key] = extra[key]));
+
+  return ctx as ListViewContext<VT, CT>;
 }
 
 export { createListViewContext };
