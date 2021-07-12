@@ -1,43 +1,53 @@
 import { clone } from '@ntks/toolbox';
 
-import { ValueContextDescriptor, ValueEvents, ValueContext } from '../typing';
-import { createEventEmitter } from '../event';
+import {
+  DataValue,
+  ValueContextDescriptor,
+  ValueEvents,
+  ValueContext as IValueContext,
+} from '../core';
+import { EventEmitter } from '../event';
 
-function createValueContext<ValueType extends any = any, EventNames extends string = ValueEvents>(
-  options: ValueContextDescriptor<ValueType>,
-): ValueContext<ValueType, EventNames> {
-  const { on, off, emit } = createEventEmitter<EventNames>();
-  const defaultValue: ValueType = clone(options.defaultValue) as ValueType;
-  const getDefaultValue = () => clone(defaultValue) as ValueType;
+class ValueContext<ValueType extends DataValue = DataValue, EventNames extends string = ValueEvents>
+  extends EventEmitter<EventNames>
+  implements IValueContext<ValueType, EventNames> {
+  private defaultValue: ValueType;
+  private value: ValueType;
+  private valueInited: boolean = false;
 
-  let value = options.initialValue ? clone(options.initialValue) : getDefaultValue();
-  let valueInited = false;
+  constructor({ defaultValue, initialValue }: ValueContextDescriptor<ValueType>) {
+    super();
 
-  const getValue = () => clone(value) as ValueType;
+    this.defaultValue = clone(defaultValue);
+    this.value = initialValue ? clone(initialValue) : clone(defaultValue);
+  }
 
-  const setValue = (newValue: ValueType) => {
-    value = clone(newValue) as ValueType;
-    emit('change', getValue());
+  public getDefaultValue(): ValueType {
+    return clone(this.defaultValue);
+  }
 
-    if (!valueInited) {
-      valueInited = true;
-      emit('ready');
+  public getValue(): ValueType {
+    return clone(this.value);
+  }
+
+  public setValue(value: ValueType): void {
+    this.value = clone(value);
+    this.emit('change', this.getValue());
+
+    if (!this.valueInited) {
+      this.valueInited = true;
+      this.emit('ready');
     }
-  };
+  }
 
-  return {
-    getDefaultValue,
-    getValue,
-    setValue,
-    submit: () => emit('submit'),
-    reset: () => {
-      setValue(getDefaultValue());
-      emit('reset', value);
-    },
-    on,
-    off,
-    emit,
-  };
+  public submit(): void {
+    this.emit('submit');
+  }
+
+  public reset(): void {
+    this.setValue(this.getDefaultValue());
+    this.emit('reset', this.getValue());
+  }
 }
 
-export { createValueContext };
+export { ValueContext };
