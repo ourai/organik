@@ -61,7 +61,7 @@ function createListViewContext<VT, CT>(
     children = (data as any).map(record =>
       createObjectViewContext(ctx.getModuleContext(), {
         name: `ObjectViewIn${options.name}`,
-        type: 'object',
+        category: 'object',
         render: '',
         fields: ctx.getFields(),
         initialValue: record,

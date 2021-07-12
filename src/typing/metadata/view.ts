@@ -4,31 +4,15 @@ import { FieldDescriptor } from './model';
 import { ActionDescriptor } from './action';
 import { SearchDescriptor } from './search';
 
-type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
-
-type CellRenderer<Column> = (h: (...args: any[]) => any, data: ColumnContext<Column>) => any; // eslint-disable-line @typescript-eslint/ban-types
-
-interface TableColumn {
-  width?: string | number;
-  align?: string;
-  render?: CellRenderer<TableColumn>;
-  isValid?: () => boolean;
-  [key: string]: any;
-}
-
-type FieldRenderer = GenericRenderer | CellRenderer<TableColumn>;
-
-type FieldConfig = Omit<TableColumn, 'prop' | 'label' | 'render' | 'isValid'>;
-
-interface ViewFieldDescriptor
+interface ViewFieldDescriptor<RT extends any = GenericRenderer, CT extends ConfigType = ConfigType>
   extends Omit<FieldDescriptor, 'dataType'>,
-    InputDescriptor<FieldRenderer, FieldConfig> {}
+    InputDescriptor<RT, CT> {}
 
-type ViewType = 'list' | 'object';
+type ViewCategory = 'list' | 'object';
 
 interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   name: string;
-  type?: ViewType;
+  category?: ViewCategory;
   render: GenericRenderer;
   fields: ViewFieldDescriptor[];
   actions?: (ActionDescriptor | string)[];
@@ -37,25 +21,9 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   config?: CT;
 }
 
-interface TableViewConfig {
-  checkable?: boolean;
-  operationColumnWidth?: number | string;
-  hidePagination?: boolean;
-}
-
 type ViewRenderer<CT extends ConfigType = ConfigType> =
   | ViewDescriptor<CT>
   | ComponentCtor
   | ComponentGetter;
 
-export {
-  ColumnContext,
-  CellRenderer,
-  TableColumn,
-  FieldRenderer,
-  ViewFieldDescriptor,
-  ViewType,
-  ViewDescriptor,
-  TableViewConfig,
-  ViewRenderer,
-};
+export { ViewFieldDescriptor, ViewCategory, ViewDescriptor, ViewRenderer };
