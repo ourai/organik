@@ -22,6 +22,7 @@ type ShorthandRequest<ParamsType = RequestParams> = (
 interface ViewContext<VT = any, CT = ConfigType>
   extends Pick<ModuleContext, 'getComponents'>,
     ValueContext<VT> {
+  getId(): string;
   getModuleContext: () => ModuleContext;
   getView: () => ViewDescriptor<CT>;
   getFields: () => ViewFieldDescriptor[];

@@ -1,7 +1,30 @@
 import { mixin } from '@ntks/toolbox';
 
-import { ModelDescriptor, ViewFieldDescriptor } from '../../typing';
+import {
+  ModelDescriptor,
+  ViewFieldDescriptor,
+  ListViewContext,
+  ObjectViewContext,
+} from '../../typing';
 import { resolveFieldMap } from '../../model';
+
+type MixedViewContext = ListViewContext | ObjectViewContext;
+
+const viewContextMap = new Map<string, MixedViewContext>();
+
+function getViewContext(id: string): MixedViewContext | undefined {
+  return viewContextMap.get(id);
+}
+
+function setViewContext(viewContext: MixedViewContext): void {
+  const id = viewContext.getId();
+
+  if (viewContextMap.has(id)) {
+    return;
+  }
+
+  viewContextMap.set(id, viewContext);
+}
 
 function resolveFields(
   fields: ViewFieldDescriptor[],
@@ -20,4 +43,4 @@ function resolveFields(
   );
 }
 
-export { resolveFields };
+export { resolveFields, getViewContext, setViewContext };

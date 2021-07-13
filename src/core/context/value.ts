@@ -1,7 +1,7 @@
 import { clone } from '@ntks/toolbox';
 
 import { ValueContextDescriptor, ValueEvents, ValueContext } from '../typing';
-import { createEventEmitter } from '../event';
+import { createEventEmitter } from './event';
 
 function createValueContext<ValueType extends any = any, EventNames extends string = ValueEvents>(
   options: ValueContextDescriptor<ValueType>,

@@ -1,5 +1,5 @@
 import { DataValue } from '../value';
-import { EventEmitter } from '../event';
+import { EventEmitter } from './event';
 
 interface ValueContextDescriptor<ValueType extends DataValue = DataValue> {
   defaultValue: ValueType;

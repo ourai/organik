@@ -1,4 +1,4 @@
-import { clone, pick } from '@ntks/toolbox';
+import { generateRandomId, clone, pick } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
@@ -14,6 +14,7 @@ import {
   ViewContextDescriptor,
   ViewContext as IViewContext,
   resolveAction,
+  setViewContext,
   resolveFields,
 } from '../../core';
 import { ValueContext } from '../value';
@@ -21,6 +22,8 @@ import { ValueContext } from '../value';
 class ViewContext<ValueType extends DataValue = DataValue, Config extends ConfigType = ConfigType>
   extends ValueContext<ValueType>
   implements IViewContext<ValueType, Config> {
+  private readonly id: string;
+
   private readonly moduleContext: ModuleContext;
 
   private readonly options: ViewContextDescriptor<ValueType, Config>;
@@ -38,6 +41,7 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
   constructor(moduleContext: ModuleContext, options: ViewContextDescriptor<ValueType, Config>) {
     super(pick(options, ['defaultValue', 'initialValue']) as ValueContextDescriptor<ValueType>);
 
+    this.id = generateRandomId('OrganikViewContext');
     this.moduleContext = moduleContext;
     this.options = options;
     this.fields = resolveFields(options.fields, moduleContext.getModel());
@@ -61,6 +65,12 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
     this.actionContextGroups = actionContextGroups;
 
     this.dataSource = clone(options.initialValue || options.defaultValue);
+
+    setViewContext(this as any);
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public getModuleContext(): ModuleContext {

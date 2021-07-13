@@ -6,7 +6,7 @@ import {
   EventHandlers,
   EventListeners,
   EventEmitter,
-} from './typing';
+} from '../typing';
 
 function getEventParts(event: EventWithNamespace): string[] {
   return event.split('.');
