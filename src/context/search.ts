@@ -12,11 +12,11 @@ import {
 import { ValueContext } from './value';
 
 class SearchContext extends ValueContext<SearchCondition, SearchEvents> implements ISearchContext {
+  private readonly filters: FilterDescriptor[];
+
+  private readonly filterMap: { [key: string]: FilterDescriptor };
+
   private condition: SearchCondition;
-
-  private filters: FilterDescriptor[];
-
-  private filterMap: { [key: string]: FilterDescriptor };
 
   constructor({ filters, defaultValue }: SearchContextDescriptor) {
     super({ defaultValue });
@@ -52,7 +52,7 @@ class SearchContext extends ValueContext<SearchCondition, SearchEvents> implemen
     }
 
     super.setValue({ ...this.condition, [name]: value });
-    super.emit('filterChange', { name, value });
+    this.emit('filterChange', { name, value });
   }
 }
 

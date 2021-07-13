@@ -1,4 +1,3 @@
-import { ComponentCtor } from '../component';
 import { DataValue } from '../value';
 import { RequestParams, ResponseResult, ResponseSuccess, ResponseFail } from '../http';
 import {
@@ -6,7 +5,7 @@ import {
   ViewFieldDescriptor,
   ActionContextType,
   ActionDescriptor,
-  SearchDescriptor,
+  SearchRenderer,
   ViewDescriptor,
 } from '../metadata';
 
@@ -29,16 +28,16 @@ interface ViewContext<VT = any, CT = ConfigType>
   getActions: () => ActionDescriptor[];
   getActionsByContextType: (contextType: ActionContextType) => ActionDescriptor[];
   getActionsAuthority: () => string | undefined;
-  getConfig: () => Record<string, any>;
+  getConfig: () => CT;
   getDataSource: () => VT;
   setDataSource: (data: VT) => void;
   getBusy: () => boolean;
   setBusy: (busy: boolean) => void;
 }
 
-interface InternalListViewContext<Children, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
-  getChildren: () => Children[];
-  getSearch: () => SearchDescriptor | ComponentCtor | undefined;
+interface InternalListViewContext<Child, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
+  getChildren: () => Child[];
+  getSearch: () => SearchRenderer | undefined;
   getSearchContext: () => SearchContext | undefined;
   getTotal: () => number;
   getCurrentPage: () => number;

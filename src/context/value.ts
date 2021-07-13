@@ -6,13 +6,15 @@ import {
   ValueEvents,
   ValueContext as IValueContext,
 } from '../core';
-import { EventEmitter } from '../event';
+import { EventEmitter } from './event';
 
 class ValueContext<ValueType extends DataValue = DataValue, EventNames extends string = ValueEvents>
   extends EventEmitter<EventNames>
   implements IValueContext<ValueType, EventNames> {
-  private defaultValue: ValueType;
+  private readonly defaultValue: ValueType;
+
   private value: ValueType;
+
   private valueInited: boolean = false;
 
   constructor({ defaultValue, initialValue }: ValueContextDescriptor<ValueType>) {

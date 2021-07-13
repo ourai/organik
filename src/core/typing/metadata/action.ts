@@ -33,6 +33,8 @@ interface ClientAction extends ActionDescriptor {
   type: 'client';
 }
 
+type ActionGroupByContext = Record<ActionContextType, ActionDescriptor[]>;
+
 export {
   ActionType,
   ActionContextType,
@@ -41,4 +43,5 @@ export {
   ActionDescriptor,
   ServerAction,
   ClientAction,
+  ActionGroupByContext,
 };

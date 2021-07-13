@@ -1,4 +1,4 @@
-import { isFunction, mixin, pick } from '@ntks/toolbox';
+import { mixin, pick } from '@ntks/toolbox';
 
 import {
   ModelDescriptor,
@@ -8,18 +8,13 @@ import {
   SearchContextDescriptor,
   SearchContext,
 } from '../typing';
+import { createCreator } from '../creator';
 import { getDefaultValue } from '../input';
 import { resolveFieldMap } from '../model';
 
-type SearchContextCreator = (descriptor: SearchContextDescriptor) => SearchContext;
-
-let searchContextCreator: SearchContextCreator = (() => ({})) as any;
-
-function setSearchContextCreator(creator: SearchContextCreator): void {
-  if (isFunction(creator)) {
-    searchContextCreator = creator;
-  }
-}
+const [getSearchContextCreator, setSearchContextCreator] = createCreator(
+  (descriptor: SearchContextDescriptor) => ({} as SearchContext), // eslint-disable-line @typescript-eslint/no-unused-vars
+);
 
 function resolveFilters(filters: FilterDescriptor[], model?: ModelDescriptor): FilterDescriptor[] {
   if (!model) {
@@ -49,7 +44,7 @@ function resolveCondition(filters: FilterDescriptor[]): SearchCondition {
 function createSearchContext(descriptor: SearchDescriptor, model?: ModelDescriptor): SearchContext {
   const mergedFilters = resolveFilters(descriptor.filters, model);
 
-  return searchContextCreator({
+  return getSearchContextCreator()({
     filters: mergedFilters,
     defaultValue: resolveCondition(mergedFilters),
   });

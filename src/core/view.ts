@@ -2,6 +2,8 @@ import { isFunction } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
+  DataValue,
+  ConfigType,
   ModuleContext,
   GenericRenderer,
   ListViewContextDescriptor,
@@ -9,6 +11,7 @@ import {
   ListViewContext,
   ObjectViewContext,
 } from './typing';
+import { createCreator } from './creator';
 import { getWidget } from './component';
 import { createViewContext } from './context';
 
@@ -16,19 +19,13 @@ type MixedViewContext<VT, CT> = ListViewContext<VT, CT> | ObjectViewContext<VT, 
 
 type ViewProvider = { [key: string]: any };
 
-type ViewCreator<VT = any, CT = any> = (
-  context: MixedViewContext<VT, CT>,
-  provider: ViewProvider,
-  renderer: GenericRenderer,
-) => ComponentCtor;
-
-let viewCreator = (() => function () {} as ComponentCtor) as ViewCreator; // eslint-disable-line @typescript-eslint/no-empty-function
-
-function setViewCreator<VT, CT>(creator: ViewCreator<VT, CT>): void {
-  if (isFunction(creator)) {
-    viewCreator = creator;
-  }
-}
+const [getViewCreator, setViewCreator] = createCreator(
+  (
+    context: MixedViewContext<DataValue, ConfigType>, // eslint-disable-line @typescript-eslint/no-unused-vars
+    provider: ViewProvider, // eslint-disable-line @typescript-eslint/no-unused-vars
+    renderer: GenericRenderer, // eslint-disable-line @typescript-eslint/no-unused-vars
+  ) => function () {} as ComponentCtor, // eslint-disable-line @typescript-eslint/no-empty-function
+);
 
 function createView<VT, CT>(
   context: ModuleContext | MixedViewContext<VT, CT>,
@@ -58,7 +55,7 @@ function createView<VT, CT>(
     renderer = getWidget(view.render as string) || view.render;
   }
 
-  return viewCreator(resolved, provider, renderer);
+  return getViewCreator()(resolved, provider, renderer);
 }
 
 export { setViewCreator, createView };

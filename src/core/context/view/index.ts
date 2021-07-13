@@ -5,14 +5,15 @@ import {
   ObjectViewContextDescriptor,
   ObjectViewContext,
 } from '../../typing';
-import { createListViewContext } from './list';
-import { createObjectViewContext } from './object';
+import { resolveFields } from './base';
+import { setListViewContextCreator, resolveListRequestParams, createListViewContext } from './list';
+import { setObjectViewContextCreator, createObjectViewContext } from './object';
 
 function createViewContext<VT, CT>(
   moduleContext: ModuleContext,
   options: ListViewContextDescriptor<VT, CT> | ObjectViewContextDescriptor<VT, CT>,
 ): ListViewContext<VT, CT> | ObjectViewContext<VT, CT> {
-  return options.type === 'object'
+  return options.category === 'object'
     ? (createObjectViewContext<VT, CT>(
         moduleContext,
         options as ObjectViewContextDescriptor<VT, CT>,
@@ -23,4 +24,10 @@ function createViewContext<VT, CT>(
       ) as ListViewContext<VT, CT>);
 }
 
-export { createViewContext };
+export {
+  resolveFields,
+  setListViewContextCreator,
+  resolveListRequestParams,
+  setObjectViewContextCreator,
+  createViewContext,
+};

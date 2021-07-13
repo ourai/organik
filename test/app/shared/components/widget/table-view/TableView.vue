@@ -19,9 +19,9 @@
       :total="total"
       v-bind="tableProps"
       v-loading="loading"
-      @selection-change="context.setValue"
-      @current-change="context.setCurrentPage"
-      @size-change="context.setPageSize"
+      @selection-change="context.setValue($event)"
+      @current-change="context.setCurrentPage($event)"
+      @size-change="context.setPageSize($event)"
     />
   </div>
 </template>

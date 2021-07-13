@@ -8,7 +8,7 @@ import {
   bindEvent,
   unbindEvent,
   triggerEvent,
-} from './core';
+} from '../core';
 
 class EventEmitter<EventNames extends string = string> implements IEventEmitter<EventNames> {
   private listeners: EventListeners<EventNames> = {} as any;

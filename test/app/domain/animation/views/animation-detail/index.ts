@@ -2,7 +2,7 @@ import { ViewDescriptor } from 'handie-vue';
 
 export default {
   name: 'AnimationDetailView',
-  type: 'object',
+  category: 'object',
   render: 'DetailView',
   fields: [
     { name: 'title', label: '标题' },

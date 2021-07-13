@@ -2,7 +2,7 @@ import {
   ComponentCtor,
   ModuleContext,
   GenericRenderer,
-  ViewType,
+  ViewCategory,
   ListViewContextDescriptor,
   ObjectViewContextDescriptor,
   ListViewContext,
@@ -24,14 +24,14 @@ type PartialOptions<OT> = Omit<OT, 'type' | 'render'> & {
 
 function resolveView<VT, CT>(
   context: UncertainContext<ListViewContext<VT, CT> | ObjectViewContext<VT, CT>>,
-  type: ViewType,
+  category: ViewCategory,
   defaultRenderer: string,
   options?: PartialOptions<UnionViewContextDescriptor<VT, CT>>,
 ): ComponentCtor {
   let resolved: UnionViewContextDescriptor<VT, CT> | undefined;
 
   if (options) {
-    resolved = { render: defaultRenderer, ...options, type };
+    resolved = { render: defaultRenderer, ...options, category };
   } else {
     resolved = undefined;
   }

@@ -2,7 +2,7 @@ import { ViewDescriptor } from 'handie-vue';
 
 export default {
   name: 'AnimationFormView',
-  type: 'object',
+  category: 'object',
   render: 'FormView',
   fields: [
     { name: 'title', label: '标题' },
