@@ -3,5 +3,6 @@ export {
   ListViewWidget,
   ObjectViewWidget,
   SearchWidget,
+  FieldWidget,
   TableFieldWidget,
 } from 'handie-vue';

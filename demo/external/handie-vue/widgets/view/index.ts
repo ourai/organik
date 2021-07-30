@@ -1,5 +1,3 @@
-import ViewWidget from './View';
-import ObjectViewWidget from './ObjectView';
-import ListViewWidget from './ListView';
-
-export { ViewWidget, ObjectViewWidget, ListViewWidget };
+export { default as ViewWidget } from './View';
+export { default as ObjectViewWidget } from './ObjectView';
+export { default as ListViewWidget } from './ListView';

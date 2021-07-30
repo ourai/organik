@@ -1,3 +1,2 @@
-import TableFieldWidget from './TableField';
-
-export { TableFieldWidget };
+export { default as FieldWidget } from './Field';
+export { default as TableFieldWidget } from './TableField';

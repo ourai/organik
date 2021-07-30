@@ -24,8 +24,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/ourai/organik.git"
   },
+  "homepage": "https://github.com/ourai/organik#readme",
   "scripts": {
     "start": "vue-cli-service serve",
     "prebuild": "rimraf dist && mv tsconfig.json tsconfig-tmp.json && node build",
