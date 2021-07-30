@@ -55,6 +55,8 @@ interface InternalListViewContext<Child, VT = any, CT = ConfigType> extends View
 interface InternalObjectViewContext<Parent, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
   getParent: () => Parent | undefined;
   getIndexInParent: () => number;
+  getFieldValue: <FV>(name: string) => FV | undefined;
+  setFieldValue: <FV>(name: string, value: FV) => void;
   getOne: ShorthandRequest<string>;
   insert: ShorthandRequest;
   update: ShorthandRequest;

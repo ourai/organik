@@ -7,11 +7,13 @@ import {
   ResponseSuccess,
   ResponseFail,
   ConfigType,
+  ViewFieldDescriptor,
   ModuleContext,
   ListViewContext as IListViewContext,
   ObjectShorthandRequest,
   ObjectViewContextDescriptor,
   ObjectViewContext as IObjectViewContext,
+  isDataValueValid,
 } from '../../core';
 import { ViewContext } from './base';
 
@@ -24,6 +26,8 @@ class ObjectViewContext<
   private readonly parent: IListViewContext | undefined;
 
   private readonly indexInParent: number;
+
+  private readonly fieldMap: { [key: string]: ViewFieldDescriptor };
 
   private readonly shorthandNames: ObjectShorthandRequest;
 
@@ -39,6 +43,10 @@ class ObjectViewContext<
 
     this.parent = options.parent;
     this.indexInParent = options.indexInParent === undefined ? -1 : options.indexInParent;
+    this.fieldMap = this.getFields().reduce(
+      (prev, field) => ({ ...prev, [field.name]: field }),
+      {},
+    );
     this.shorthandNames = pick(options, ['getOne', 'insert', 'update']);
   }
 
@@ -56,6 +64,21 @@ class ObjectViewContext<
     super.setDataSource(copy);
 
     this.emit('dataChange', data);
+  }
+
+  public getFieldValue<FV extends DataValue = DataValue>(name: string): FV | undefined {
+    return this.getValue()[name];
+  }
+
+  public setFieldValue<FV>(name: string, value: FV): void {
+    const field = this.fieldMap[name];
+
+    if (field === undefined || !isDataValueValid(field.dataType!, value)) {
+      return;
+    }
+
+    this.setValue({ ...(this.getValue() as any), [name]: value });
+    this.emit('fieldChange', { name, value });
   }
 
   public getOne(

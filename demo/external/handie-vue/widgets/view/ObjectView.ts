@@ -14,7 +14,7 @@ export default class ObjectViewWidget extends ViewWidget<ObjectViewContext> {
   }
 
   protected onFieldValueChange(fieldName: string, value: any): void {
-    this.context.setValue({ ...this.context.getValue(), [fieldName]: value });
+    this.context.setFieldValue(fieldName, value);
   }
 
   protected created(): void {
