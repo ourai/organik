@@ -1,21 +1,17 @@
 <template>
   <div class="DetailView">
-    <el-form>
-      <el-form-item :label="f.label" :key="f.name" v-for="f in fields">{{
-        dataSource[f.name]
-      }}</el-form-item>
-    </el-form>
+    <form-renderer :fields="fields" :value="value" readonly />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 
-import ElForm, { FormItem as ElFormItem } from '../../../control/form';
+import FormRenderer from '../../../renderer/form-renderer';
 import { ObjectViewWidget } from '../../base';
 
 @Component({
-  components: { ElForm, ElFormItem },
+  components: { FormRenderer },
 })
 export default class DetailView extends ObjectViewWidget {
   private get id() {
@@ -26,7 +22,10 @@ export default class DetailView extends ObjectViewWidget {
     const ctx = this.context;
 
     if (this.id && ctx.getOne) {
-      ctx.getOne(this.id, data => (this.dataSource = data));
+      ctx.getOne(this.id, data => {
+        this.dataSource = data;
+        this.context.setValue(data);
+      });
     }
   }
 }

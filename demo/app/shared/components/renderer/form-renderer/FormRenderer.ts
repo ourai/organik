@@ -16,6 +16,9 @@ export default class FormRenderer extends Vue {
   @Prop({ type: Object, default: () => ({}) })
   private readonly value!: Record<string, any>;
 
+  @Prop({ type: Boolean, default: false })
+  private readonly readonly!: boolean;
+
   private render(h: CreateElement): VNode {
     const children: VNode[] = [];
 
@@ -24,7 +27,14 @@ export default class FormRenderer extends Vue {
 
       children.push(
         h(FormItem, { attrs: { label, prop: name } }, [
-          h(FieldRenderer, { props: { field, value: this.value[name] }, on: this.$listeners }),
+          h(FieldRenderer, {
+            props: {
+              field,
+              value: this.value[name],
+              readonly: this.readonly,
+            },
+            on: this.$listeners,
+          }),
         ]),
       );
     });

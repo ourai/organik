@@ -1,6 +1,6 @@
 <template>
   <div class="FormView">
-    <form-renderer :fields="fields" :value="value" @change="handleFieldValueChange" />
+    <form-renderer :fields="fields" :value="value" @change="onFieldValueChange" />
   </div>
 </template>
 
@@ -14,14 +14,8 @@ import { ObjectViewWidget } from '../../base';
   components: { FormRenderer },
 })
 export default class FormView extends ObjectViewWidget {
-  private value: Record<string, any> = {};
-
   private get id() {
     return this.$route.params.id || '';
-  }
-
-  private handleFieldValueChange(fieldName: string, value: any): void {
-    this.context.setValue({ ...this.context.getValue(), [fieldName]: value });
   }
 
   protected created(): void {
@@ -33,8 +27,6 @@ export default class FormView extends ObjectViewWidget {
         this.context.setValue(data);
       });
     }
-
-    this.on('change', value => (this.value = value));
   }
 }
 </script>

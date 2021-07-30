@@ -17,10 +17,17 @@ export default class FieldRenderer extends Vue {
   @Prop()
   private readonly value!: any;
 
+  @Prop({ type: Boolean, default: false })
+  private readonly readonly!: boolean;
+
   private render(h: CreateElement): VNode | null {
     const dataType = this.field.dataType || '';
     const widgetCtor =
-      fieldWidgets[`${capitalize(getRenderType(dataType))}Edit${capitalize(dataType)}Field`];
+      fieldWidgets[
+        `${capitalize(getRenderType(dataType))}${
+          this.readonly || this.field.readonly ? 'Read' : 'Edit'
+        }${capitalize(dataType)}Field`
+      ];
 
     return widgetCtor
       ? h(widgetCtor, {
