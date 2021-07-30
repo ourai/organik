@@ -18,7 +18,7 @@ export default class FieldRenderer extends Vue {
   private readonly value!: any;
 
   private render(h: CreateElement): VNode | null {
-    const dataType = this.field.dataType!;
+    const dataType = this.field.dataType || '';
     const widgetCtor =
       fieldWidgets[`${capitalize(getRenderType(dataType))}Edit${capitalize(dataType)}Field`];
 

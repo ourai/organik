@@ -7,6 +7,6 @@ export default {
   fields: [
     { name: 'id', label: 'ID', dataType: 'string', required: true },
     { name: 'title', label: '标题', dataType: 'string', required: true },
-    { name: 'description', label: '简介', dataType: 'string' },
+    { name: 'description', label: '简介', dataType: 'text' },
   ],
 } as ModelDescriptor;

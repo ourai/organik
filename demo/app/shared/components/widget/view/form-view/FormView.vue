@@ -1,33 +1,40 @@
 <template>
   <div class="FormView">
-    <el-form>
-      <el-form-item :label="f.label" :key="f.name" v-for="f in fields">{{
-        dataSource[f.name]
-      }}</el-form-item>
-    </el-form>
+    <form-renderer :fields="fields" :value="value" @change="handleFieldValueChange" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 
-import ElForm, { FormItem as ElFormItem } from '../../../control/form';
+import FormRenderer from '../../../renderer/form-renderer';
 import { ObjectViewWidget } from '../../base';
 
 @Component({
-  components: { ElForm, ElFormItem },
+  components: { FormRenderer },
 })
 export default class FormView extends ObjectViewWidget {
+  private value: Record<string, any> = {};
+
   private get id() {
     return this.$route.params.id || '';
+  }
+
+  private handleFieldValueChange(fieldName: string, value: any): void {
+    this.context.setValue({ ...this.context.getValue(), [fieldName]: value });
   }
 
   protected created(): void {
     const ctx = this.context;
 
     if (this.id && ctx.getOne) {
-      ctx.getOne(this.id, data => (this.dataSource = data));
+      ctx.getOne(this.id, data => {
+        this.dataSource = data;
+        this.context.setValue(data);
+      });
     }
+
+    this.on('change', value => (this.value = value));
   }
 }
 </script>

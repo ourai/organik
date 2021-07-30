@@ -19,16 +19,16 @@ export default {
       meta: { text: '动画', auth: 'animation:read' },
     },
     {
-      name: 'animationDetail',
-      path: 'animations/:id',
-      component: 'animation.views.AnimationDetail',
-      meta: { text: '动画详情', auth: 'animation:read', show: false },
-    },
-    {
       name: 'animationNewForm',
       path: 'animations/new',
       component: 'animation.views.AnimationForm',
       meta: { text: '新建动画', auth: 'animation:edit', show: false },
+    },
+    {
+      name: 'animationDetail',
+      path: 'animations/:id',
+      component: 'animation.views.AnimationDetail',
+      meta: { text: '动画详情', auth: 'animation:read', show: false },
     },
     {
       name: 'animationEditForm',
