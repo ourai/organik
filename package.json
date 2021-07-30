@@ -39,7 +39,6 @@
   },
   "devDependencies": {
     "@ntks/stylelint-config": "0.0.5",
-    "@types/lodash": "^4.14.149",
     "@types/node": "^13.11.1",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.16.1",
@@ -57,8 +56,7 @@
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-vue": "^7.7.0",
     "fibers": "^5.0.0",
-    "handie": "^1.0.14",
-    "lodash": "^4.17.15",
+    "kokiri": "0.0.1",
     "mocker-api": "^2.9.0",
     "node-sass": "^5.0.0",
     "prettier": "^2.2.1",

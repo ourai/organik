@@ -1,3 +1,0 @@
-interface ISpacerComponent {}
-
-export { ISpacerComponent };

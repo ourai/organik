@@ -1,5 +1,0 @@
-@include component-rules($petals--view-stack-component-name) {
-  &-view:not(.is-active) {
-    display: none;
-  }
-}

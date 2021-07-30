@@ -18,8 +18,6 @@
     "baseUrl": ".",
     "paths": {
       "organik": ["src/index.ts"],
-      "@petals/*": ["test/external/petals/*"],
-      "@kokiri/*": ["test/external/kokiri/*"],
       "handie-vue": ["test/external/handie-vue/index.ts"],
       "@/*": ["test/app/shared/*"]
     }

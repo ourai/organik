@@ -46,7 +46,7 @@ import {
   LayoutHeader,
   LayoutMain,
   LayoutAside,
-} from '@kokiri/components';
+} from 'kokiri';
 
 import { NavMenu } from './typing';
 import { resolveAvailableNavs, canAccessCurrentRoute } from './helper';

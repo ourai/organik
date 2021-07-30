@@ -1,3 +1,3 @@
-import { Button } from '@kokiri/components/button';
+import { Button } from 'kokiri/dist/components/button';
 
 export default Button;

@@ -1,9 +1,0 @@
-@include component-rules($petals--toolbar-component-name) {
-  &-content {
-    flex-grow: 1;
-  }
-
-  &-extra {
-    flex-shrink: 0;
-  }
-}
