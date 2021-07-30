@@ -2,7 +2,7 @@ import { ConfigType, GenericRenderer } from './base';
 
 type ActionConfig = ConfigType;
 
-type ActionType = 'server' | 'client';
+type ActionCategory = 'server' | 'client';
 
 type ActionContextType = 'free' | 'single' | 'batch' | 'both';
 
@@ -12,7 +12,8 @@ type ActionRenderer = GenericRenderer<BuiltInActionRenderer>;
 
 interface ActionDescriptor {
   name?: string;
-  type?: ActionType;
+  category?: ActionCategory;
+  type?: string;
   context?: ActionContextType;
   authority?: string;
   text?: string;
@@ -25,18 +26,18 @@ interface ActionDescriptor {
 }
 
 interface ServerAction extends ActionDescriptor {
-  type: 'server';
+  category: 'server';
   execute: <RT, PT>(params?: PT) => Promise<RT>;
 }
 
 interface ClientAction extends ActionDescriptor {
-  type: 'client';
+  category: 'client';
 }
 
 type ActionGroupByContext = Record<ActionContextType, ActionDescriptor[]>;
 
 export {
-  ActionType,
+  ActionCategory,
   ActionContextType,
   BuiltInActionRenderer,
   ActionRenderer,
