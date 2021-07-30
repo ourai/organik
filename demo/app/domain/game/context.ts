@@ -1,4 +1,4 @@
-import { convertRepositoryToServerActionMap, createModuleContext } from 'handie-vue';
+import { convertRepositoryToServerActionMap, createModuleContext } from '@/utils';
 
 import { MODULE_NAME } from './helper';
 import * as repo from './repository';

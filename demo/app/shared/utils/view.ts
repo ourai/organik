@@ -1,3 +1,5 @@
+import { createView } from 'handie-vue';
+
 import {
   ComponentCtor,
   ModuleContext,
@@ -7,8 +9,7 @@ import {
   ObjectViewContextDescriptor,
   ListViewContext,
   ObjectViewContext,
-  createView,
-} from 'handie-vue';
+} from '../types';
 
 type ViewGetter = () => ComponentCtor;
 

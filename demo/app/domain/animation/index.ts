@@ -1,4 +1,5 @@
-import { ModuleDescriptor, convertRepositoryToServerActionMap } from 'handie-vue';
+import { ModuleDescriptor } from '@/types';
+import { convertRepositoryToServerActionMap } from '@/utils';
 
 import { MODULE_NAME, testUtil } from './helper';
 import model from './model';
@@ -16,6 +17,6 @@ export default {
     widgets: { test: TestWidget },
   },
   components: {
-    OlButton: true,
+    OlButton: 'Button',
   },
 } as ModuleDescriptor;

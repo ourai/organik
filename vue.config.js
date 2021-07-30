@@ -35,7 +35,7 @@ module.exports = {
         sassOptions: {
           fiber: require('fibers'),
         },
-        additionalData: `@import "~kokiri/dist/themes/antd/helper";`,
+        additionalData: `@import "@/styles/helper";`,
       },
     },
   },

@@ -1,18 +1,19 @@
-import { isString, noop } from '@ntks/toolbox';
 import Vue, { VNodeData, VueConstructor } from 'vue';
 import { MessageBox } from 'element-ui';
+
 import {
   GenericRenderer,
   BuiltInActionRenderer,
   ActionRenderer,
   ActionDescriptor,
   ViewContext,
-} from 'handie-vue';
+} from '../../../types';
+import { isString, noop } from '../../../utils';
 
 const DEFAULT_ACTION_RENDER_TYPE = 'button';
 
 function resolveActionComponent(renderer: BuiltInActionRenderer): string {
-  return renderer === 'button' ? 'OlButton' : 'OlLink';
+  return renderer === 'button' ? 'Button' : 'OlLink';
 }
 
 function getDefaultActionComponent(): string {

@@ -28,11 +28,11 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import { ListViewWidget } from 'handie-vue';
 
-import { DataTable } from '../../control';
-import SearchRenderer from '../search-renderer';
-import ActionRenderer from '../action-renderer';
+import DataTable from '../../../control/data-table';
+import SearchRenderer from '../../../renderer/search-renderer';
+import ActionRenderer from '../../../renderer/action-renderer';
+import { ListViewWidget } from '../../base';
 import { DataTableProps } from './typing';
 import { isActionsAuthorized, resolveAuthorizedActions, resolveTableProps } from './helper';
 

@@ -44,7 +44,7 @@ export default {
   name: MODULE_NAME,
   exports: { widgets },
   components: {
-    OlButton: true,
+    Button: true,
     DataTable: true,
   },
 } as ModuleDescriptor;

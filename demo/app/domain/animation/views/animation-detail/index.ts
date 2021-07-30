@@ -1,4 +1,4 @@
-import { ViewDescriptor } from 'handie-vue';
+import { ViewDescriptor } from '@/types';
 
 export default {
   name: 'AnimationDetailView',

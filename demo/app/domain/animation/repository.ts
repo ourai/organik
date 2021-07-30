@@ -1,5 +1,4 @@
-import { Pagination, ResponseResult } from 'handie-vue';
-
+import { Pagination, ResponseResult } from '@/types';
 import httpClient from '@/utils/http';
 
 import { AnimationEntity } from './typing';

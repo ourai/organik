@@ -1,9 +1,9 @@
-import { isFunction } from '@ntks/toolbox';
 import { VueConstructor, CreateElement, VNode } from 'vue';
 import { Vue, Component, Inject } from 'vue-property-decorator';
-import { ListViewContext } from 'handie-vue';
 
-import FormSearch from '../form-search';
+import { ListViewContext } from '../../../types';
+import { isFunction } from '../../../utils';
+import FormSearch from '../../widget/form-search';
 
 @Component({
   // @ts-ignore

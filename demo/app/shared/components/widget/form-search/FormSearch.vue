@@ -9,8 +9,8 @@
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submit">查询</el-button>
-        <el-button @click="reset">重置</el-button>
+        <kokiri-button type="primary" @click="submit">查询</kokiri-button>
+        <kokiri-button @click="reset">重置</kokiri-button>
       </el-form-item>
     </el-form>
   </div>
@@ -18,16 +18,14 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import {
-  Form as ElForm,
-  FormItem as ElFormItem,
-  Input as ElInput,
-  Button as ElButton,
-} from 'element-ui';
-import { SearchWidget } from 'handie-vue';
+
+import KokiriButton from '../../control/button';
+import ElInput from '../../control/input';
+import ElForm, { FormItem as ElFormItem } from '../../control/form';
+import { SearchWidget } from '../base';
 
 @Component({
-  components: { ElForm, ElFormItem, ElInput, ElButton },
+  components: { KokiriButton, ElInput, ElForm, ElFormItem },
 })
 export default class FormSearch extends SearchWidget {
   protected created(): void {

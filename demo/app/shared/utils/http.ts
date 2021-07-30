@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { ResponseExtra, ResponseResult } from 'handie-vue';
+import { ResponseExtra, ResponseResult } from '../types';
 
 function normalizeResponse<DataType = any>(res: AxiosResponse): ResponseResult<DataType> {
   return res.status === 200

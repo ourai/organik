@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import { Component, Prop } from 'vue-property-decorator';
-import { TableFieldWidget } from 'handie-vue';
+
+import { TableFieldWidget } from '@/components/widget/base';
 
 import { GameEntity } from '../../typing';
 

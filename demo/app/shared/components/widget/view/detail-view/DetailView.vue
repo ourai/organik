@@ -10,8 +10,9 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
-import { Form as ElForm, FormItem as ElFormItem } from 'element-ui';
-import { ObjectViewWidget } from 'handie-vue';
+
+import ElForm, { FormItem as ElFormItem } from '../../../control/form';
+import { ObjectViewWidget } from '../../base';
 
 @Component({
   components: { ElForm, ElFormItem },

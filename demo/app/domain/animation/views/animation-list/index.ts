@@ -1,4 +1,4 @@
-import { ViewDescriptor } from 'handie-vue';
+import { ViewDescriptor } from '@/types';
 
 import TitleField from './TitleField.vue';
 import EpisodesField from './EpisodesField.vue';

@@ -39,7 +39,8 @@ import {
   TableColumn as ElTableColumn,
   Pagination as ElPagination,
 } from 'element-ui';
-import { TableColumn } from 'handie-vue';
+
+import { TableColumn } from '../../../types';
 
 import { DEFAULT_PAGE_SIZE, DEFAULT_PAGE_NUMBER } from './helper';
 import Expand from './Expand';

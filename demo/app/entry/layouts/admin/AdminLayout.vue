@@ -39,14 +39,15 @@
 
 <script lang="ts">
 import { Vue, Component, Inject } from 'vue-property-decorator';
-import { RouteConfig } from 'handie-vue';
+
+import { RouteConfig } from '@/types';
+import AppContainer from '@/components/control/app';
 import {
-  App as AppContainer,
   LayoutContainer,
   LayoutHeader,
   LayoutMain,
   LayoutAside,
-} from 'kokiri';
+} from '@/components/control/layout';
 
 import { NavMenu } from './typing';
 import { resolveAvailableNavs, canAccessCurrentRoute } from './helper';

@@ -1,4 +1,4 @@
-import { ActionDescriptor, ViewContext, ListViewContext, ObjectViewContext } from 'handie-vue';
+import { ActionDescriptor, ViewContext, ListViewContext, ObjectViewContext } from '@/types';
 
 export default [
   {

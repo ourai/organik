@@ -1,4 +1,4 @@
-import { ModuleDescriptor } from 'handie-vue';
+import { ModuleDescriptor } from '@/types';
 
 import { MODULE_NAME } from './helper';
 

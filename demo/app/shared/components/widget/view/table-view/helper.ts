@@ -1,5 +1,5 @@
-import { isBoolean, isNumber, isFunction, omit } from '@ntks/toolbox';
 import { VueConstructor, CreateElement } from 'vue';
+
 import {
   ColumnContext,
   CellRenderer,
@@ -8,9 +8,9 @@ import {
   ActionDescriptor,
   TableViewConfig,
   ListViewContext,
-} from 'handie-vue';
-
-import ActionRenderer from '../action-renderer';
+} from '../../../../types';
+import { isBoolean, isNumber, isFunction, omit } from '../../../../utils';
+import ActionRenderer from '../../../renderer/action-renderer';
 import { DataTableProps } from './typing';
 
 function resolveCellRenderer(renderer: FieldRenderer): CellRenderer<TableColumn> {

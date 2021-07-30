@@ -1,4 +1,4 @@
-import { ComponentCtor, ComponentDescriptor } from 'handie-vue';
+import { ComponentCtor, ComponentDescriptor } from '../types';
 
 import * as controls from './control';
 import * as widgets from './widget';
