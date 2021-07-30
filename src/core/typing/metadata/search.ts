@@ -4,7 +4,7 @@ import { InputDescriptor } from './base';
 interface FilterDescriptor extends InputDescriptor {}
 
 interface SearchDescriptor {
-  filters: FilterDescriptor[];
+  filters: (FilterDescriptor | string)[];
 }
 
 type SearchRenderer = SearchDescriptor | ComponentCtor;

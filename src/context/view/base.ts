@@ -17,6 +17,7 @@ import {
   setViewContext,
   resolveFields,
 } from '../../core';
+import { resolveInput } from '../../core/input';
 import { ValueContext } from '../value';
 
 class ViewContext<ValueType extends DataValue = DataValue, Config extends ConfigType = ConfigType>
@@ -44,7 +45,10 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
     this.id = generateRandomId('OrganikViewContext');
     this.moduleContext = moduleContext;
     this.options = options;
-    this.fields = resolveFields(options.fields, moduleContext.getModel());
+    this.fields = resolveFields(
+      (options.fields || []).map(field => resolveInput(field)),
+      moduleContext.getModel(),
+    );
 
     const actions = (options.actions || [])
       .map(resolveAction)
@@ -94,7 +98,7 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
   }
 
   public getActionsByContextType(contextType: ActionContextType): ActionDescriptor[] {
-    return this.actionContextGroups[contextType];
+    return this.actionContextGroups[contextType] || [];
   }
 
   public getActionsAuthority(): string | undefined {

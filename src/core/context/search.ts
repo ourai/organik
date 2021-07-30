@@ -9,7 +9,7 @@ import {
   SearchContext,
 } from '../typing';
 import { createCreator } from '../creator';
-import { getDefaultValue } from '../input';
+import { resolveInput, getDefaultValue } from '../input';
 import { resolveFieldMap } from '../model';
 
 const [getSearchContextCreator, setSearchContextCreator] = createCreator(
@@ -42,7 +42,10 @@ function resolveCondition(filters: FilterDescriptor[]): SearchCondition {
 }
 
 function createSearchContext(descriptor: SearchDescriptor, model?: ModelDescriptor): SearchContext {
-  const mergedFilters = resolveFilters(descriptor.filters, model);
+  const mergedFilters = resolveFilters(
+    (descriptor.filters || []).map(filter => resolveInput(filter)),
+    model,
+  );
 
   return getSearchContextCreator()({
     filters: mergedFilters,

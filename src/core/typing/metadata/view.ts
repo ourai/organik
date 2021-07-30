@@ -14,7 +14,7 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   name: string;
   category?: ViewCategory;
   render: GenericRenderer;
-  fields: ViewFieldDescriptor[];
+  fields: (ViewFieldDescriptor | string)[];
   actions?: (ActionDescriptor | string)[];
   actionsAuthority?: string;
   search?: SearchDescriptor | ComponentCtor;

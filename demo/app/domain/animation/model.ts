@@ -5,8 +5,8 @@ import { MODULE_NAME } from './helper';
 export default {
   name: MODULE_NAME,
   fields: [
-    { name: 'id', dataType: 'string', required: true },
-    { name: 'title', dataType: 'string', required: true },
-    { name: 'description', dataType: 'string' },
+    { name: 'id', label: 'ID', dataType: 'string', required: true },
+    { name: 'title', label: '标题', dataType: 'string', required: true },
+    { name: 'description', label: '简介', dataType: 'string' },
   ],
 } as ModelDescriptor;

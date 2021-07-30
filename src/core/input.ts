@@ -1,5 +1,13 @@
+import { isString } from '@ntks/toolbox';
+
 import { InputDescriptor } from './typing';
 import { getDataType, isDataTypeValid, isDataValueValid } from './data-type';
+
+function resolveInput(refOrDescriptor: string | InputDescriptor): InputDescriptor {
+  return isString(refOrDescriptor)
+    ? { name: refOrDescriptor as string }
+    : (refOrDescriptor as InputDescriptor);
+}
 
 function getDefaultValue({ dataType }: InputDescriptor): any {
   if (!dataType) {
@@ -22,4 +30,4 @@ function createValueChecker<VT>(
   };
 }
 
-export { getDefaultValue, createValueChecker };
+export { resolveInput, getDefaultValue, createValueChecker };

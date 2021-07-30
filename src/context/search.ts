@@ -9,6 +9,7 @@ import {
   SearchContextDescriptor,
   SearchContext as ISearchContext,
 } from '../core';
+import { resolveInput } from '../core/input';
 import { ValueContext } from './value';
 
 class SearchContext extends ValueContext<SearchCondition, SearchEvents> implements ISearchContext {
@@ -22,8 +23,14 @@ class SearchContext extends ValueContext<SearchCondition, SearchEvents> implemen
     super({ defaultValue });
 
     this.condition = defaultValue;
-    this.filters = filters;
-    this.filterMap = filters.reduce((prev, filter) => ({ ...prev, [filter.name]: filter }), {});
+
+    const resolvedFilters = filters.map(filter => resolveInput(filter));
+
+    this.filters = resolvedFilters;
+    this.filterMap = resolvedFilters.reduce(
+      (prev, filter) => ({ ...prev, [filter.name]: filter }),
+      {},
+    );
 
     super.on('change', value => (this.condition = value));
   }
