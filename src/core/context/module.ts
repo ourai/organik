@@ -10,7 +10,12 @@ import {
   ServerActionExecutor,
   ModuleContext,
 } from '../typing';
-import { ensureModuleExists, getDependencies, getComponents } from '../module';
+import {
+  convertAsyncFunctionMapToServerActionMap,
+  ensureModuleExists,
+  getDependencies,
+  getComponents,
+} from '../module';
 
 const moduleContextMap = new Map<string, ModuleContext<any>>();
 
@@ -85,7 +90,7 @@ function createModuleContext<K extends string = string>(
     getModel: () => model,
     getDependencies: getDependencies.bind(null, moduleName),
     getComponents: getComponents.bind(null, moduleName),
-    execute: createServerActionExecutor(actions),
+    execute: createServerActionExecutor(convertAsyncFunctionMapToServerActionMap(actions)),
   } as ModuleContext<K>;
 
   moduleContextMap.set(moduleName, ctx);

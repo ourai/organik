@@ -1,9 +1,9 @@
-import { convertRepositoryToServerActionMap, createModuleContext } from '@/utils';
+import { createModuleContext } from '@/utils';
 
 import { MODULE_NAME } from './helper';
 import * as repo from './repository';
 
 export default createModuleContext({
   moduleName: MODULE_NAME,
-  actions: convertRepositoryToServerActionMap(repo),
+  actions: repo,
 });

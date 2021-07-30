@@ -1,7 +1,8 @@
-import { isBoolean, isString } from '@ntks/toolbox';
+import { isBoolean, isString, isFunction } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
+  ServerAction,
   ModuleResources,
   ModuleDependencies,
   ModuleActions,
@@ -13,6 +14,24 @@ import {
 import { getControl } from './component';
 
 const moduleMap = new Map<string, ResolvedModule>();
+
+function convertAsyncFunctionMapToServerActionMap<R>(funcMap: R): Record<keyof R, ServerAction> {
+  const actionMap = {} as Record<keyof R, ServerAction>;
+
+  Object.keys(funcMap).forEach(funcName => {
+    const funcOrAction = funcMap[funcName];
+
+    actionMap[funcName] = isFunction(funcOrAction)
+      ? ({
+          name: funcName,
+          type: 'server',
+          execute: funcOrAction,
+        } as ServerAction)
+      : (funcOrAction as ServerAction);
+  });
+
+  return actionMap;
+}
 
 function ensureModuleExists(name: string): ResolvedModule {
   if (!moduleMap.has(name)) {
@@ -42,7 +61,7 @@ function registerModule({
 }: ModuleDescriptor): void {
   moduleMap.set(name, {
     model,
-    actions,
+    actions: convertAsyncFunctionMapToServerActionMap(actions),
     views,
     imports,
     exports,
@@ -165,6 +184,7 @@ function getComponents(
 }
 
 export {
+  convertAsyncFunctionMapToServerActionMap,
   ensureModuleExists,
   registerModules,
   getActions,

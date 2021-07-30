@@ -1,5 +1,4 @@
 import { ModuleDescriptor } from '@/types';
-import { convertRepositoryToServerActionMap } from '@/utils';
 
 import { MODULE_NAME, testUtil } from './helper';
 import model from './model';
@@ -10,7 +9,7 @@ import TestWidget from './widgets/test-widget';
 export default {
   name: MODULE_NAME,
   model,
-  actions: convertRepositoryToServerActionMap(repo),
+  actions: repo,
   views,
   exports: {
     utils: { test: testUtil },

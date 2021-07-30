@@ -1,11 +1,16 @@
 import { ComponentCtor } from '../component';
 import { DataValue } from '../value';
 import { RequestParams, ResponseResult, ResponseSuccess, ResponseFail } from '../http';
-import { ModelDescriptor, ModuleResources, ModuleDependencies, ModuleActions } from '../metadata';
+import {
+  ModelDescriptor,
+  ModuleResources,
+  ModuleDependencies,
+  UnsureModuleActions,
+} from '../metadata';
 
 interface ModuleContextDescriptor<K extends string = string> {
   moduleName: string;
-  actions: ModuleActions<K>;
+  actions: UnsureModuleActions<K>;
   model?: ModelDescriptor;
 }
 
