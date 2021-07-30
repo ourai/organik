@@ -5,7 +5,7 @@ function resolve(dir) {
   return joinPath(__dirname, dir);
 }
 
-const APP_SRC = './test/app';
+const APP_SRC = './demo/app';
 
 module.exports = {
   publicPath: '/',
@@ -16,14 +16,14 @@ module.exports = {
     resolve: {
       alias: {
         organik: resolve('./src'),
-        'handie-vue': resolve('./test/external/handie-vue'),
+        'handie-vue': resolve('./demo/external/handie-vue'),
         '@': resolve(`${APP_SRC}/shared`),
       },
     },
   },
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].template = resolve('./test/public/index.html');
+      args[0].template = resolve('./demo/public/index.html');
 
       return args;
     });
@@ -41,6 +41,6 @@ module.exports = {
   },
   devServer: {
     disableHostCheck: true,
-    before: app => mock(app, resolvePath('./test/mock/index.js')),
+    before: app => mock(app, resolvePath('./demo/mock/index.js')),
   },
 };

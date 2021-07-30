@@ -18,9 +18,9 @@
     "baseUrl": ".",
     "paths": {
       "organik": ["src/index.ts"],
-      "handie-vue": ["test/external/handie-vue/index.ts"],
-      "@/*": ["test/app/shared/*"]
+      "handie-vue": ["demo/external/handie-vue/index.ts"],
+      "@/*": ["demo/app/shared/*"]
     }
   },
-  "include": ["src", "test/app", "test/external"]
+  "include": ["src", "demo/app", "demo/external"]
 }
