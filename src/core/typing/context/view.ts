@@ -1,4 +1,5 @@
 import { DataValue } from '../value';
+import { ValueChecker } from '../validator';
 import { RequestParams, ResponseResult, ResponseSuccess, ResponseFail } from '../http';
 import {
   ConfigType,
@@ -57,6 +58,8 @@ interface InternalObjectViewContext<Parent, VT = any, CT = ConfigType> extends V
   getIndexInParent: () => number;
   getFieldValue: <FV>(name: string) => FV | undefined;
   setFieldValue: <FV>(name: string, value: FV) => void;
+  setFieldChecker: (name: string, checker: ValueChecker) => void;
+  isModified: () => boolean;
   getOne: ShorthandRequest<string>;
   insert: ShorthandRequest;
   update: ShorthandRequest;

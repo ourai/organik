@@ -1,4 +1,5 @@
 import { DataValue } from './value';
+import { Result } from './feedback';
 
 type RequestParams = DataValue;
 
@@ -12,13 +13,11 @@ type ResponseExtra = Pagination & {
   [key: string]: any;
 };
 
-type ResponseResult<VT extends DataValue = DataValue> = {
-  success: boolean;
-  message: string;
+interface ResponseResult<VT extends DataValue = DataValue> extends Required<Result> {
   code: string;
   data: VT;
   extra: ResponseExtra;
-};
+}
 
 type ResponseSuccess<T = any> = (data: T, extra: ResponseExtra, result: ResponseResult<T>) => any;
 type ResponseFail<T = any> = (message: string, result: ResponseResult<T>) => any;

@@ -24,14 +24,14 @@ export default class FieldRenderer extends Vue {
     const dataType = this.field.dataType || '';
     const widgetCtor =
       fieldWidgets[
-        `${capitalize(getRenderType(dataType))}${
-          this.readonly || this.field.readonly ? 'Read' : 'Edit'
-        }${capitalize(dataType)}Field`
+        `${capitalize(getRenderType(dataType))}${this.readonly ? 'Read' : 'Edit'}${capitalize(
+          dataType,
+        )}Field`
       ];
 
     return widgetCtor
       ? h(widgetCtor, {
-          props: { value: this.value },
+          props: { name: this.field.name, value: this.value },
           on: { change: changed => this.$emit('change', this.field.name, changed) },
         })
       : null;

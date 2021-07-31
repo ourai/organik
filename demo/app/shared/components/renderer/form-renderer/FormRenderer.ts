@@ -1,7 +1,7 @@
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { ViewFieldDescriptor } from '../../../types';
+import { ValidationResult, ViewFieldDescriptor } from '../../../types';
 import Form, { FormItem } from '../../control/form';
 import FieldRenderer from '../field-renderer';
 
@@ -19,23 +19,38 @@ export default class FormRenderer extends Vue {
   @Prop({ type: Boolean, default: false })
   private readonly readonly!: boolean;
 
+  @Prop({ type: Object, default: () => ({}) })
+  private readonly validation!: Record<string, ValidationResult>;
+
   private render(h: CreateElement): VNode {
     const children: VNode[] = [];
 
     this.fields.forEach(field => {
       const { name, label } = field;
+      const fieldValidation = this.validation[name] || { success: true };
+      const readonly = this.readonly || field.readonly;
 
       children.push(
-        h(FormItem, { attrs: { label, prop: name } }, [
-          h(FieldRenderer, {
-            props: {
-              field,
-              value: this.value[name],
-              readonly: this.readonly,
+        h(
+          FormItem,
+          {
+            attrs: {
+              label,
+              required: readonly ? false : field.required,
+              error: fieldValidation.success ? '' : fieldValidation.message,
             },
-            on: this.$listeners,
-          }),
-        ]),
+          },
+          [
+            h(FieldRenderer, {
+              props: {
+                field,
+                value: this.value[name],
+                readonly,
+              },
+              on: this.$listeners,
+            }),
+          ],
+        ),
       );
     });
 

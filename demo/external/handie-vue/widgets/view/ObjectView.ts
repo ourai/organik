@@ -1,4 +1,4 @@
-import { ViewFieldDescriptor, ObjectViewContext } from 'organik';
+import { ValidationResult, ViewFieldDescriptor, ObjectViewContext } from 'organik';
 import { Component } from 'vue-property-decorator';
 
 import ViewWidget from './View';
@@ -8,6 +8,8 @@ export default class ObjectViewWidget extends ViewWidget<ObjectViewContext> {
   protected dataSource: Record<string, any> = {};
 
   protected value: Record<string, any> = {};
+
+  protected validation: Record<string, ValidationResult> = {};
 
   protected get fields(): ViewFieldDescriptor[] {
     return this.context.getFields();
@@ -23,6 +25,8 @@ export default class ObjectViewWidget extends ViewWidget<ObjectViewContext> {
         this.dataSource = dataSource;
         this.context.setValue(dataSource);
       },
+      fieldValidate: ({ name, result }) =>
+        (this.validation = { ...this.validation, [name]: result }),
       change: value => (this.value = value),
     });
   }

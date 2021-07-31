@@ -7,13 +7,14 @@ import {
   ResponseSuccess,
   ResponseFail,
   ConfigType,
-  ViewFieldDescriptor,
+  Validator,
+  ValueChecker,
   ModuleContext,
   ListViewContext as IListViewContext,
   ObjectShorthandRequest,
   ObjectViewContextDescriptor,
   ObjectViewContext as IObjectViewContext,
-  isDataValueValid,
+  createInputValidator,
 } from '../../core';
 import { ViewContext } from './base';
 
@@ -27,9 +28,13 @@ class ObjectViewContext<
 
   private readonly indexInParent: number;
 
-  private readonly fieldMap: { [key: string]: ViewFieldDescriptor };
-
   private readonly shorthandNames: ObjectShorthandRequest;
+
+  private readonly validatorMap: { [key: string]: Validator };
+
+  private invalidFieldMap: { [key: string]: boolean } = {};
+
+  private modified: boolean = false;
 
   constructor(
     moduleContext: ModuleContext,
@@ -43,11 +48,12 @@ class ObjectViewContext<
 
     this.parent = options.parent;
     this.indexInParent = options.indexInParent === undefined ? -1 : options.indexInParent;
-    this.fieldMap = this.getFields().reduce(
-      (prev, field) => ({ ...prev, [field.name]: field }),
+    this.shorthandNames = pick(options, ['getOne', 'insert', 'update']);
+
+    this.validatorMap = this.getFields().reduce(
+      (prev, field) => ({ ...prev, [field.name]: createInputValidator(field) }),
       {},
     );
-    this.shorthandNames = pick(options, ['getOne', 'insert', 'update']);
   }
 
   public getParent(): any {
@@ -59,6 +65,8 @@ class ObjectViewContext<
   }
 
   public setDataSource(data: ValueType): void {
+    this.modified = false;
+
     const copy = clone(data);
 
     super.setDataSource(copy);
@@ -66,19 +74,63 @@ class ObjectViewContext<
     this.emit('dataChange', data);
   }
 
+  public setValue(value: ValueType): void {
+    this.modified = true;
+
+    super.setValue(value);
+  }
+
   public getFieldValue<FV extends DataValue = DataValue>(name: string): FV | undefined {
     return this.getValue()[name];
   }
 
   public setFieldValue<FV>(name: string, value: FV): void {
-    const field = this.fieldMap[name];
+    const validator = this.validatorMap[name];
 
-    if (field === undefined || !isDataValueValid(field.dataType!, value)) {
+    if (validator === undefined) {
       return;
     }
 
+    const validationResult = validator.validate(value);
+
+    if (validationResult.success) {
+      delete this.invalidFieldMap[name];
+    } else {
+      this.invalidFieldMap[name] = true;
+    }
+
+    this.emit('fieldValidate', { name, result: validationResult });
     this.setValue({ ...(this.getValue() as any), [name]: value });
     this.emit('fieldChange', { name, value });
+  }
+
+  public setFieldChecker(name: string, checker: ValueChecker): void {
+    if (!this.validatorMap[name]) {
+      return;
+    }
+
+    this.validatorMap[name].addChecker(checker);
+  }
+
+  public isModified(): boolean {
+    return this.modified;
+  }
+
+  public submit(): void {
+    if (Object.keys(this.invalidFieldMap).length > 0) {
+      return;
+    }
+
+    this.modified = false;
+
+    super.submit();
+  }
+
+  public reset(): void {
+    this.invalidFieldMap = {};
+    this.modified = false;
+
+    super.reset();
   }
 
   public getOne(

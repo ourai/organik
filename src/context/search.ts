@@ -7,7 +7,6 @@ import {
   SearchEvents,
   SearchContextDescriptor,
   SearchContext as ISearchContext,
-  isDataValueValid,
 } from '../core';
 import { resolveInput } from '../core/input';
 import { ValueContext } from './value';
@@ -52,9 +51,7 @@ class SearchContext extends ValueContext<SearchCondition, SearchEvents> implemen
   }
 
   public setFilterValue<FV>(name: string, value: FV): void {
-    const filter = this.filterMap[name];
-
-    if (filter === undefined || !isDataValueValid(filter.dataType!, value)) {
+    if (this.filterMap[name] === undefined) {
       return;
     }
 

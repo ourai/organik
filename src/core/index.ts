@@ -1,8 +1,9 @@
 export * from './typing';
 export { registerComponent } from './component';
-export { registerDataType, isDataValueValid } from './data-type';
+export { registerDataType } from './data-type';
 export { registerModules, getComponents, getActions, getViews } from './module';
 export { registerAction, resolveAction } from './action';
+export { registerInputPropCheckers, createInputValidator } from './input';
 export {
   bindEvent,
   unbindEvent,

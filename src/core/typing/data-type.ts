@@ -1,7 +1,7 @@
 type DataType = string;
 
 interface DataTypeDescriptor {
-  name: string;
+  name: DataType;
   validator: (value: any) => boolean;
   defaultValueGetter: () => any;
 }

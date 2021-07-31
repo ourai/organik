@@ -9,6 +9,7 @@ interface InputDescriptor<RT extends any = GenericRenderer, CT extends ConfigTyp
   name: string;
   dataType?: DataType;
   label?: string;
+  required?: boolean;
   render?: RT;
   config?: CT;
 }

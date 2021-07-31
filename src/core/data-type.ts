@@ -1,20 +1,20 @@
-import { DataTypeDescriptor, ResolvedDataType } from './typing';
+import { DataType, DataTypeDescriptor, ResolvedDataType } from './typing';
 
-const typeMap = new Map<string, ResolvedDataType>();
+const typeMap = new Map<DataType, ResolvedDataType>();
 
 function registerDataType({ name, ...others }: DataTypeDescriptor): void {
   typeMap.set(name, others);
 }
 
-function getDataType(name: string): ResolvedDataType | undefined {
+function getDataType(name: DataType): ResolvedDataType | undefined {
   return typeMap.get(name);
 }
 
-function isDataTypeValid(name: string): boolean {
+function isDataTypeValid(name: DataType): boolean {
   return typeMap.has(name);
 }
 
-function isDataValueValid(name: string, value: any): boolean {
+function isDataValueValid(name: DataType, value: any): boolean {
   return isDataTypeValid(name) ? getDataType(name)!.validator(value) : false;
 }
 

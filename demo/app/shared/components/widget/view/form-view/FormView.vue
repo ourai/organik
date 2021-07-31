@@ -1,6 +1,11 @@
 <template>
   <div class="FormView">
-    <form-renderer :fields="fields" :value="value" @change="onFieldValueChange" />
+    <form-renderer
+      :fields="fields"
+      :value="value"
+      :validation="validation"
+      @change="onFieldValueChange"
+    />
   </div>
 </template>
 
