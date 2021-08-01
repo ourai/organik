@@ -1,7 +1,7 @@
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { ViewFieldDescriptor } from '../../../types';
+import { ComponentCtor, ViewFieldDescriptor } from '../../../types';
 import { capitalize } from '../../../utils';
 import * as fieldWidgets from '../../widget/field';
 import { getRenderType } from './helper';
@@ -21,13 +21,20 @@ export default class FieldRenderer extends Vue {
   private readonly readonly!: boolean;
 
   private render(h: CreateElement): VNode | null {
-    const dataType = this.field.dataType || '';
-    const widgetCtor =
-      fieldWidgets[
-        `${capitalize(getRenderType(dataType))}${this.readonly ? 'Read' : 'Edit'}${capitalize(
-          dataType,
-        )}Field`
-      ];
+    let widgetCtor: ComponentCtor;
+
+    if (this.field.render) {
+      widgetCtor = this.field.render as ComponentCtor;
+    } else {
+      const dataType = this.field.dataType || '';
+
+      widgetCtor =
+        fieldWidgets[
+          `${capitalize(getRenderType(dataType))}${this.readonly ? 'Read' : 'Edit'}${capitalize(
+            dataType,
+          )}Field`
+        ];
+    }
 
     return widgetCtor
       ? h(widgetCtor, {

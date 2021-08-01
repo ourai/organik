@@ -5,5 +5,6 @@ export {
   SearchWidget,
   FieldWidget,
   EnumFieldWidget,
+  RelationFieldWidget,
   TableFieldWidget,
 } from 'handie-vue';

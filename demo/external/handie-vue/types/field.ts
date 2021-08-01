@@ -1,5 +1,6 @@
 import {
-  AsyncFunction,
+  RequestParams,
+  ResponseResult,
   FieldDescriptor as UnsureTypeField,
   ViewFieldDescriptor as UnsureTypeViewField,
 } from 'organik';
@@ -42,7 +43,7 @@ interface StaticRelationField extends UnknownField {
 interface DynamicRelationField extends UnknownField {
   dataType: RelationFieldType;
   dynamic: true;
-  referenceValueGetter: AsyncFunction;
+  referenceValueGetter: (params: RequestParams) => Promise<ResponseResult>;
   referencePrimaryKey: string;
   referenceLabelKey?: string;
 }
@@ -74,4 +75,4 @@ type ViewFieldDescriptor =
   | EnumViewField
   | RelationViewField;
 
-export { EnumFieldOption, EnumField, FieldDescriptor, ViewFieldDescriptor };
+export { EnumFieldOption, EnumField, DynamicRelationField, FieldDescriptor, ViewFieldDescriptor };

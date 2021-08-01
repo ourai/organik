@@ -2,6 +2,8 @@ export {
   ComponentCtor,
   ComponentDescriptor,
   ValidationResult,
+  ObjectValue,
+  ListValue,
   Pagination,
   ResponseExtra,
   ResponseResult,

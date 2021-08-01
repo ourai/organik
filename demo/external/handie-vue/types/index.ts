@@ -1,3 +1,4 @@
+export * from './value';
 export {
   ColumnContext,
   CellRenderer,
