@@ -1,4 +1,4 @@
-import { isBoolean, isNumber, isString } from '@ntks/toolbox';
+import { isBoolean, isNumber, isString, isArray, isPlainObject } from '@ntks/toolbox';
 import { DataTypeDescriptor, registerDataType } from 'organik';
 
 type PartialDataTypeDescriptor = Omit<DataTypeDescriptor, 'name'>;
@@ -13,6 +13,16 @@ const stringDescriptor: PartialDataTypeDescriptor = {
   defaultValueGetter: () => '',
 };
 
+const listDescriptor: PartialDataTypeDescriptor = {
+  validator: isArray,
+  defaultValueGetter: () => [],
+};
+
+const objectDescriptor: PartialDataTypeDescriptor = {
+  validator: isPlainObject,
+  defaultValueGetter: () => ({}),
+};
+
 ([
   { name: 'boolean', validator: isBoolean, defaultValueGetter: () => false },
   { name: 'int', ...numberDescriptor },
@@ -24,4 +34,8 @@ const stringDescriptor: PartialDataTypeDescriptor = {
     validator: value => isNumber(value) || isString(value),
     defaultValueGetter: () => '',
   },
+  { name: 'o2o', ...objectDescriptor },
+  { name: 'o2m', ...listDescriptor },
+  { name: 'm2m', ...listDescriptor },
+  { name: 'm2o', ...objectDescriptor },
 ] as DataTypeDescriptor[]).forEach(registerDataType);

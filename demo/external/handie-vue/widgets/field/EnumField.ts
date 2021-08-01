@@ -1,6 +1,6 @@
 import { Component, Prop, Watch } from 'vue-property-decorator';
 
-import { EnumFieldOption, EnumField } from '../../types/view';
+import { EnumFieldOption, EnumField } from '../../types/field';
 import FieldWidget from './Field';
 
 @Component

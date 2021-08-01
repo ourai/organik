@@ -1,12 +1,11 @@
 import {
   ConfigType,
   GenericRenderer,
-  FieldDescriptor as UnsureTypeField,
   ModelDescriptor as _ModelDescriptor,
-  ViewFieldDescriptor as UnsureTypeViewField,
   ViewDescriptor as _ViewDescriptor,
 } from 'organik';
-import { type } from 'os';
+
+import { FieldDescriptor, ViewFieldDescriptor } from './field';
 
 type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
 
@@ -30,41 +29,9 @@ interface TableViewConfig {
   hidePagination?: boolean;
 }
 
-interface NumberField extends UnsureTypeField {
-  dataType: 'int' | 'float';
-  max?: number;
-  min?: number;
-}
-
-interface StringField extends UnsureTypeField {
-  dataType: 'string' | 'text';
-  max?: number;
-  min?: number;
-  pattern?: RegExp;
-}
-
-interface EnumFieldOption {
-  name: string;
-  label: string;
-  value: number | string;
-}
-
-interface EnumField extends UnsureTypeField {
-  dataType: 'enum';
-  options: EnumFieldOption[];
-}
-
-type FieldDescriptor = UnsureTypeField | NumberField | StringField | EnumField;
-
 interface ModelDescriptor extends Omit<_ModelDescriptor, 'fields'> {
   fields: FieldDescriptor[];
 }
-
-type NumberViewField = UnsureTypeViewField & NumberField;
-
-type StringViewField = UnsureTypeViewField & StringField;
-
-type ViewFieldDescriptor = UnsureTypeViewField | NumberViewField | StringViewField;
 
 interface ViewDescriptor<CT extends ConfigType = ConfigType>
   extends Omit<_ViewDescriptor<CT>, 'fields'> {
@@ -78,10 +45,6 @@ export {
   FieldRenderer,
   FieldConfig,
   TableViewConfig,
-  EnumFieldOption,
-  EnumField,
-  FieldDescriptor,
   ModelDescriptor,
-  ViewFieldDescriptor,
   ViewDescriptor,
 };

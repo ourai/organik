@@ -4,5 +4,5 @@ export default {
   name: 'AnimationFormView',
   category: 'object',
   render: 'FormView',
-  fields: ['title', 'description', 'form', { name: 'episodes', label: '剧集' }],
+  fields: ['title', 'description', 'form', 'episodes'],
 } as ViewDescriptor;

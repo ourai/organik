@@ -19,5 +19,6 @@ export default {
       required: true,
     },
     { name: 'description', label: '简介', dataType: 'text' },
+    { name: 'episodes', label: '剧集', dataType: 'o2m' },
   ],
 } as ModelDescriptor;

@@ -2,7 +2,7 @@ import { ValueChecker, ObjectViewContext } from 'organik';
 import Vue from 'vue';
 import { Component, Prop, Inject } from 'vue-property-decorator';
 
-import { ViewFieldDescriptor } from '../../types/view';
+import { ViewFieldDescriptor } from '../../types/field';
 
 @Component
 export default class FieldWidget<ValueType = any> extends Vue {

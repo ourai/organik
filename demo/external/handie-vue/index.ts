@@ -1,12 +1,8 @@
 import './presets';
 
 import { ComponentCtor, ComponentDescriptor } from './types/component';
-import {
-  FieldDescriptor,
-  ModelDescriptor,
-  ViewFieldDescriptor,
-  ViewDescriptor,
-} from './types/view';
+import { FieldDescriptor, ViewFieldDescriptor } from './types/field';
+import { ModelDescriptor, ViewDescriptor } from './types/view';
 import { ModuleDescriptor, ModuleContext } from './types/module';
 import { createModuleContext } from './adapters/context';
 
