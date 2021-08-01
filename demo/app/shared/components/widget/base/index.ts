@@ -4,5 +4,6 @@ export {
   ObjectViewWidget,
   SearchWidget,
   FieldWidget,
+  EnumFieldWidget,
   TableFieldWidget,
 } from 'handie-vue';

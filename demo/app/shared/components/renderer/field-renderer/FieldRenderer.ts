@@ -31,7 +31,7 @@ export default class FieldRenderer extends Vue {
 
     return widgetCtor
       ? h(widgetCtor, {
-          props: { name: this.field.name, value: this.value },
+          props: { field: this.field, value: this.value },
           on: { change: changed => this.$emit('change', this.field.name, changed) },
         })
       : null;

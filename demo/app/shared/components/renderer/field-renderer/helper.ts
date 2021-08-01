@@ -7,6 +7,10 @@ function getRenderType(dataType: string): string {
     return 'textarea';
   }
 
+  if (dataType === 'enum') {
+    return 'select';
+  }
+
   return '';
 }
 

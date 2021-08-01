@@ -78,6 +78,8 @@ export {
   FieldRenderer,
   FieldConfig,
   TableViewConfig,
+  EnumFieldOption,
+  EnumField,
   FieldDescriptor,
   ModelDescriptor,
   ViewFieldDescriptor,
