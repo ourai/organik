@@ -43,7 +43,18 @@ interface StringField extends UnsureTypeField {
   pattern?: RegExp;
 }
 
-type FieldDescriptor = UnsureTypeField | NumberField | StringField;
+interface EnumFieldOption {
+  name: string;
+  label: string;
+  value: number | string;
+}
+
+interface EnumField extends UnsureTypeField {
+  dataType: 'enum';
+  options: EnumFieldOption[];
+}
+
+type FieldDescriptor = UnsureTypeField | NumberField | StringField | EnumField;
 
 interface ModelDescriptor extends Omit<_ModelDescriptor, 'fields'> {
   fields: FieldDescriptor[];

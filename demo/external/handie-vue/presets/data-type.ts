@@ -19,4 +19,9 @@ const stringDescriptor: PartialDataTypeDescriptor = {
   { name: 'float', ...numberDescriptor },
   { name: 'string', ...stringDescriptor },
   { name: 'text', ...stringDescriptor },
+  {
+    name: 'enum',
+    validator: value => isNumber(value) || isString(value),
+    defaultValueGetter: () => '',
+  },
 ] as DataTypeDescriptor[]).forEach(registerDataType);
