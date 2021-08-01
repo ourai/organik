@@ -1,4 +1,12 @@
-import { GenericRenderer } from 'organik';
+import {
+  ConfigType,
+  GenericRenderer,
+  FieldDescriptor as UnsureTypeField,
+  ModelDescriptor as _ModelDescriptor,
+  ViewFieldDescriptor as UnsureTypeViewField,
+  ViewDescriptor as _ViewDescriptor,
+} from 'organik';
+import { type } from 'os';
 
 type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
 
@@ -22,4 +30,45 @@ interface TableViewConfig {
   hidePagination?: boolean;
 }
 
-export { ColumnContext, CellRenderer, TableColumn, FieldRenderer, FieldConfig, TableViewConfig };
+interface NumberField extends UnsureTypeField {
+  dataType: 'int' | 'float';
+  max?: number;
+  min?: number;
+}
+
+interface StringField extends UnsureTypeField {
+  dataType: 'string' | 'text';
+  max?: number;
+  min?: number;
+  pattern?: RegExp;
+}
+
+type FieldDescriptor = UnsureTypeField | NumberField | StringField;
+
+interface ModelDescriptor extends Omit<_ModelDescriptor, 'fields'> {
+  fields: FieldDescriptor[];
+}
+
+type NumberViewField = UnsureTypeViewField & NumberField;
+
+type StringViewField = UnsureTypeViewField & StringField;
+
+type ViewFieldDescriptor = UnsureTypeViewField | NumberViewField | StringViewField;
+
+interface ViewDescriptor<CT extends ConfigType = ConfigType>
+  extends Omit<_ViewDescriptor<CT>, 'fields'> {
+  fields: (ViewFieldDescriptor | string)[];
+}
+
+export {
+  ColumnContext,
+  CellRenderer,
+  TableColumn,
+  FieldRenderer,
+  FieldConfig,
+  TableViewConfig,
+  FieldDescriptor,
+  ModelDescriptor,
+  ViewFieldDescriptor,
+  ViewDescriptor,
+};
