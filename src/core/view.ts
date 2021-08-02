@@ -5,7 +5,7 @@ import {
   DataValue,
   ConfigType,
   ModuleContext,
-  GenericRenderer,
+  ComponentRenderer,
   ListViewContextDescriptor,
   ObjectViewContextDescriptor,
   ListViewContext,
@@ -23,7 +23,7 @@ const [getViewCreator, setViewCreator] = createCreator(
   (
     context: MixedViewContext<DataValue, ConfigType>, // eslint-disable-line @typescript-eslint/no-unused-vars
     provider: ViewProvider, // eslint-disable-line @typescript-eslint/no-unused-vars
-    renderer: GenericRenderer, // eslint-disable-line @typescript-eslint/no-unused-vars
+    renderer: ComponentRenderer, // eslint-disable-line @typescript-eslint/no-unused-vars
   ) => function () {} as ComponentCtor, // eslint-disable-line @typescript-eslint/no-empty-function
 );
 
@@ -47,7 +47,7 @@ function createView<VT, CT>(
     provider = { ...provider, ...providerGetter!() };
   }
 
-  let renderer: GenericRenderer;
+  let renderer: ComponentRenderer;
 
   if (isFunction(view.render)) {
     renderer = view.render as ComponentCtor;

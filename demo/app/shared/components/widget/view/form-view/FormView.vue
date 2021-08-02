@@ -12,11 +12,11 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 
-import FormRenderer from '../../../renderer/form-renderer';
+import { getRenderer } from '../../../../utils';
 import { ObjectViewWidget } from '../../base';
 
 @Component({
-  components: { FormRenderer },
+  components: { FormRenderer: getRenderer('FormRenderer')! },
 })
 export default class FormView extends ObjectViewWidget {
   private get id() {

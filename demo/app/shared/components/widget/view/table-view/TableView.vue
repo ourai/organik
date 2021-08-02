@@ -1,44 +1,14 @@
-<template>
-  <div class="TableView">
-    <div class="TableView-search" v-if="searchable">
-      <search-renderer />
-    </div>
-    <div class="TableView-tableActions" v-if="topActions.length > 0">
-      <action-renderer
-        :action="action"
-        :context-getter="contextInActionGetter"
-        :key="action.text"
-        v-for="action in topActions"
-      />
-    </div>
-    <data-table
-      class="TableView-dataTable"
-      :data="dataSource"
-      :current-page="pageNum"
-      :page-size="pageSize"
-      :total="total"
-      v-bind="tableProps"
-      v-loading="loading"
-      @selection-change="context.setValue($event)"
-      @current-change="context.setCurrentPage($event)"
-      @size-change="context.setPageSize($event)"
-    />
-  </div>
-</template>
-
 <script lang="ts">
+import { CreateElement, VNode } from 'vue';
 import { Component } from 'vue-property-decorator';
 
+import { getRenderer } from '../../../../utils';
 import DataTable from '../../../control/data-table';
-import SearchRenderer from '../../../renderer/search-renderer';
-import ActionRenderer from '../../../renderer/action-renderer';
 import { ListViewWidget } from '../../base';
 import { DataTableProps } from './typing';
 import { isActionsAuthorized, resolveAuthorizedActions, resolveTableProps } from './helper';
 
-@Component({
-  components: { DataTable, SearchRenderer, ActionRenderer },
-})
+@Component
 export default class TableView extends ListViewWidget {
   private tableProps: DataTableProps = {} as any;
 
@@ -68,6 +38,61 @@ export default class TableView extends ListViewWidget {
     this.tableProps = resolveTableProps(this.context, this.accessible);
 
     this.context.load();
+  }
+
+  private render(h: CreateElement): VNode {
+    const children: VNode[] = [];
+
+    if (this.searchable) {
+      children.push(
+        h('div', { staticClass: 'TableView-search' }, [h(getRenderer('SearchRenderer'))]),
+      );
+    }
+
+    if (this.topActions.length > 0) {
+      children.push(
+        h(
+          'div',
+          { staticClass: 'TableView-tableActions' },
+          this.topActions.map(action =>
+            h(getRenderer('ActionRenderer'), {
+              props: { action, contextGetter: this.contextInActionGetter },
+            }),
+          ),
+        ),
+      );
+    }
+
+    const { columns, hidePagination, ...others } = this.tableProps;
+
+    children.push(
+      h(DataTable, {
+        staticClass: 'TableView-dataTable',
+        props: {
+          columns,
+          data: this.dataSource,
+          currentPage: this.pageNum,
+          pageSize: this.pageSize,
+          total: this.total,
+          hidePagination,
+        },
+        attrs: others,
+        directives: [{ name: 'loading', value: this.loading }],
+        on: {
+          'selection-change': selected => this.context.setValue(selected),
+          'current-change': currentPage => this.context.setCurrentPage(currentPage),
+          'size-change': pageSize => this.context.setPageSize(pageSize),
+        },
+      }),
+    );
+
+    return h(
+      'div',
+      {
+        staticClass: 'TableView',
+      },
+      children,
+    );
   }
 }
 </script>

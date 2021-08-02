@@ -7,7 +7,7 @@ import {
   ResponseSuccess,
   ResponseFail,
   ConfigType,
-  SearchRenderer,
+  SearchComponentRenderer,
   SearchDescriptor,
   ModuleContext,
   SearchCondition,
@@ -30,7 +30,7 @@ class ListViewContext<
   >
   extends ViewContext<ValueType, Config>
   implements IListViewContext<ValueType, Config> {
-  private readonly search: SearchRenderer | undefined;
+  private readonly search: SearchComponentRenderer | undefined;
 
   private readonly childrenCreator: ChildrenCreator<ValueType>;
 
@@ -100,7 +100,7 @@ class ListViewContext<
     return this.children;
   }
 
-  public getSearch(): SearchRenderer | undefined {
+  public getSearch(): SearchComponentRenderer | undefined {
     return this.search;
   }
 

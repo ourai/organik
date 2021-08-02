@@ -1,11 +1,13 @@
 import { ComponentCtor, ComponentGetter } from '../component';
-import { ConfigType, GenericRenderer, InputDescriptor } from './base';
+import { ConfigType, ComponentRenderer, InputDescriptor } from './base';
 import { FieldDescriptor } from './model';
 import { ActionDescriptor } from './action';
 import { SearchDescriptor } from './search';
 
-interface ViewFieldDescriptor<RT extends any = GenericRenderer, CT extends ConfigType = ConfigType>
-  extends Omit<FieldDescriptor, 'dataType'>,
+interface ViewFieldDescriptor<
+  RT extends any = ComponentRenderer,
+  CT extends ConfigType = ConfigType
+> extends Omit<FieldDescriptor, 'dataType'>,
     InputDescriptor<RT, CT> {}
 
 type ViewCategory = 'list' | 'object';
@@ -13,7 +15,7 @@ type ViewCategory = 'list' | 'object';
 interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   name: string;
   category?: ViewCategory;
-  render: GenericRenderer;
+  render: ComponentRenderer;
   fields: (ViewFieldDescriptor | string)[];
   actions?: (ActionDescriptor | string)[];
   actionsAuthority?: string;
@@ -21,9 +23,9 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   config?: CT;
 }
 
-type ViewRenderer<CT extends ConfigType = ConfigType> =
+type ViewComponentRenderer<CT extends ConfigType = ConfigType> =
   | ViewDescriptor<CT>
   | ComponentCtor
   | ComponentGetter;
 
-export { ViewFieldDescriptor, ViewCategory, ViewDescriptor, ViewRenderer };
+export { ViewFieldDescriptor, ViewCategory, ViewDescriptor, ViewComponentRenderer };

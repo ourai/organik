@@ -1,13 +1,15 @@
-type ComponentType = 'control' | 'widget';
+type ComponentName = string;
+
+type ComponentType = 'control' | 'widget' | 'renderer';
 
 type ComponentCtor = Function; // eslint-disable-line @typescript-eslint/ban-types
 
 type ComponentGetter = () => ComponentCtor;
 
 interface ComponentDescriptor {
-  name: string;
+  name: ComponentName;
   ctor: ComponentCtor;
   type?: ComponentType;
 }
 
-export { ComponentType, ComponentCtor, ComponentGetter, ComponentDescriptor };
+export { ComponentName, ComponentType, ComponentCtor, ComponentGetter, ComponentDescriptor };

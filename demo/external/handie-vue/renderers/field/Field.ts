@@ -1,9 +1,10 @@
+import { capitalize } from '@ntks/toolbox';
+import { getWidget } from 'organik';
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { ComponentCtor, ViewFieldDescriptor } from '../../../types';
-import { capitalize } from '../../../utils';
-import * as fieldWidgets from '../../widget/field';
+import { ComponentCtor } from '../../types/component';
+import { ViewFieldDescriptor } from '../../types/input';
 import { getRenderType } from './helper';
 
 @Component({
@@ -21,19 +22,18 @@ export default class FieldRenderer extends Vue {
   private readonly readonly!: boolean;
 
   private render(h: CreateElement): VNode | null {
-    let widgetCtor: ComponentCtor;
+    let widgetCtor: ComponentCtor | undefined;
 
     if (this.field.render) {
       widgetCtor = this.field.render as ComponentCtor;
     } else {
       const dataType = this.field.dataType || '';
 
-      widgetCtor =
-        fieldWidgets[
-          `${capitalize(getRenderType(dataType))}${this.readonly ? 'Read' : 'Edit'}${capitalize(
-            dataType,
-          )}Field`
-        ];
+      widgetCtor = getWidget(
+        `${capitalize(getRenderType(dataType))}${this.readonly ? 'Read' : 'Edit'}${capitalize(
+          dataType,
+        )}Field`,
+      ) as ComponentCtor | undefined;
     }
 
     return widgetCtor

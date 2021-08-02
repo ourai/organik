@@ -1,7 +1,7 @@
 import { ComponentCtor } from '../component';
 import { ModelDescriptor } from './model';
 import { ServerAction } from './action';
-import { ViewRenderer } from './view';
+import { ViewComponentRenderer } from './view';
 
 type ModuleResourceType = 'services' | 'utils' | 'widgets';
 
@@ -17,7 +17,7 @@ type UnsureModuleActions<K extends string = string> = Record<K, ServerAction | A
 
 type ModuleActions<K extends string = string> = Record<K, ServerAction>;
 
-type ModuleViews = Record<string, ViewRenderer>;
+type ModuleViews = Record<string, ViewComponentRenderer>;
 
 type ModuleDescriptor<K extends string = string> = {
   name: string;

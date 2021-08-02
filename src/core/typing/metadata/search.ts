@@ -7,6 +7,6 @@ interface SearchDescriptor {
   filters: (FilterDescriptor | string)[];
 }
 
-type SearchRenderer = SearchDescriptor | ComponentCtor;
+type SearchComponentRenderer = SearchDescriptor | ComponentCtor;
 
-export { FilterDescriptor, SearchDescriptor, SearchRenderer };
+export { FilterDescriptor, SearchDescriptor, SearchComponentRenderer };

@@ -1,5 +1,5 @@
 export * from './typing';
-export { registerComponent } from './component';
+export { registerComponent, getControl, getWidget, getRenderer } from './component';
 export { registerDataType } from './data-type';
 export { registerModules, getComponents, getActions, getViews } from './module';
 export { registerAction, resolveAction } from './action';

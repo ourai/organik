@@ -1,5 +1,11 @@
 import { isString, isFunction } from '@ntks/toolbox';
-import { ComponentGetter, ViewDescriptor, ViewRenderer, getViews, createView } from 'organik';
+import {
+  ComponentGetter,
+  ViewDescriptor,
+  ViewComponentRenderer,
+  getViews,
+  createView,
+} from 'organik';
 import VueRouter from 'vue-router';
 
 import { RouteComponent, RouteConfig, ResolvedRouteConfig, RouterCreator } from '../types';
@@ -13,7 +19,10 @@ function setRouterCreator(creator: RouterCreator): void {
   }
 }
 
-function resolveRouteComponent(moduleName: string, viewRenderer: ViewRenderer): RouteComponent {
+function resolveRouteComponent(
+  moduleName: string,
+  viewRenderer: ViewComponentRenderer,
+): RouteComponent {
   let component: RouteComponent | undefined;
 
   if (isFunction(viewRenderer)) {

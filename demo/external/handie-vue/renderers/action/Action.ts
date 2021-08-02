@@ -1,14 +1,12 @@
+import { ActionDescriptor, ViewContext } from 'organik';
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { ActionDescriptor, ViewContext } from '../../../types';
-import { Button } from '../../control';
 import { getActionComponent, resolveVirtualNodeData } from './helper';
 
 @Component({
   // @ts-ignore
   abstract: true,
-  components: { Button },
 })
 export default class ActionRenderer extends Vue {
   @Prop({ type: Object, default: null })

@@ -1,4 +1,4 @@
-import { ConfigType, GenericRenderer } from './base';
+import { ConfigType, ComponentRenderer } from './base';
 
 type ActionConfig = ConfigType;
 
@@ -6,9 +6,9 @@ type ActionCategory = 'server' | 'client';
 
 type ActionContextType = 'free' | 'single' | 'batch' | 'both';
 
-type BuiltInActionRenderer = 'button' | 'link';
+type BuiltInActionComponentRenderer = 'button' | 'link';
 
-type ActionRenderer = GenericRenderer<BuiltInActionRenderer>;
+type ActionComponentRenderer = ComponentRenderer<BuiltInActionComponentRenderer>;
 
 interface ActionDescriptor {
   name?: string;
@@ -20,7 +20,7 @@ interface ActionDescriptor {
   primary?: boolean;
   danger?: boolean;
   confirm?: boolean | string;
-  render?: ActionRenderer;
+  render?: ActionComponentRenderer;
   config?: ActionConfig;
   execute?: <ViewContext>(viewContext: ViewContext, vm: any) => Promise<any> | any;
 }
@@ -39,8 +39,8 @@ type ActionGroupByContext = Record<ActionContextType, ActionDescriptor[]>;
 export {
   ActionCategory,
   ActionContextType,
-  BuiltInActionRenderer,
-  ActionRenderer,
+  BuiltInActionComponentRenderer,
+  ActionComponentRenderer,
   ActionDescriptor,
   ServerAction,
   ClientAction,

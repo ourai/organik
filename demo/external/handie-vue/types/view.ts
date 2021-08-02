@@ -1,6 +1,6 @@
 import {
   ConfigType,
-  GenericRenderer,
+  ComponentRenderer,
   ModelDescriptor as _ModelDescriptor,
   ViewDescriptor as _ViewDescriptor,
 } from 'organik';
@@ -9,17 +9,20 @@ import { FieldDescriptor, ViewFieldDescriptor } from './input';
 
 type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
 
-type CellRenderer<Column> = (h: (...args: any[]) => any, data: ColumnContext<Column>) => any; // eslint-disable-line @typescript-eslint/ban-types
+type CellComponentRenderer<Column> = (
+  h: (...args: any[]) => any,
+  data: ColumnContext<Column>,
+) => any; // eslint-disable-line @typescript-eslint/ban-types
 
 interface TableColumn {
   width?: string | number;
   align?: string;
-  render?: CellRenderer<TableColumn>;
+  render?: CellComponentRenderer<TableColumn>;
   isValid?: () => boolean;
   [key: string]: any;
 }
 
-type FieldRenderer = GenericRenderer | CellRenderer<TableColumn>;
+type FieldComponentRenderer = ComponentRenderer | CellComponentRenderer<TableColumn>;
 
 type FieldConfig = Omit<TableColumn, 'prop' | 'label' | 'render' | 'isValid'>;
 
@@ -40,9 +43,9 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType>
 
 export {
   ColumnContext,
-  CellRenderer,
+  CellComponentRenderer,
   TableColumn,
-  FieldRenderer,
+  FieldComponentRenderer,
   FieldConfig,
   TableViewConfig,
   ModelDescriptor,

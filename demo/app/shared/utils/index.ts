@@ -1,2 +1,2 @@
 export * from '@ntks/toolbox';
-export { getComponents, createModuleContext } from 'handie-vue';
+export { getComponents, getRenderer, createModuleContext } from 'handie-vue';

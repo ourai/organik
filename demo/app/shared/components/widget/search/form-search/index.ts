@@ -1,3 +1,1 @@
-import FormSearch from './FormSearch.vue';
-
-export default FormSearch;
+export { default } from './FormSearch.vue';

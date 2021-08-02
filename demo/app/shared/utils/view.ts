@@ -3,7 +3,7 @@ import { createView } from 'handie-vue';
 import {
   ComponentCtor,
   ModuleContext,
-  GenericRenderer,
+  ComponentRenderer,
   ViewCategory,
   ListViewContextDescriptor,
   ObjectViewContextDescriptor,
@@ -20,7 +20,7 @@ type UnionViewContextDescriptor<VT, CT> =
   | ObjectViewContextDescriptor<VT, CT>;
 
 type PartialOptions<OT> = Omit<OT, 'type' | 'render'> & {
-  render?: GenericRenderer;
+  render?: ComponentRenderer;
 };
 
 function resolveView<VT, CT>(

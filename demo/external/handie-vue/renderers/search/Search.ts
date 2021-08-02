@@ -1,9 +1,9 @@
-import { VueConstructor, CreateElement, VNode } from 'vue';
+import { isFunction } from '@ntks/toolbox';
+import { ListViewContext, getWidget } from 'organik';
+import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Inject } from 'vue-property-decorator';
 
-import { ListViewContext } from '../../../types';
-import { isFunction } from '../../../utils';
-import FormSearch from '../../widget/search/form-search';
+import { ComponentCtor } from '../../types/component';
 
 @Component({
   // @ts-ignore
@@ -16,6 +16,6 @@ export default class SearchRenderer extends Vue {
   private render(h: CreateElement): VNode | null {
     const search = this.context.getSearch();
 
-    return h(isFunction(search) ? (search as VueConstructor) : FormSearch);
+    return h(isFunction(search) ? (search as ComponentCtor) : getWidget('FormSearch'));
   }
 }

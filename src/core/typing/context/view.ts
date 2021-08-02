@@ -6,7 +6,7 @@ import {
   ViewFieldDescriptor,
   ActionContextType,
   ActionDescriptor,
-  SearchRenderer,
+  SearchComponentRenderer,
   ViewDescriptor,
 } from '../metadata';
 
@@ -39,7 +39,7 @@ interface ViewContext<VT = any, CT = ConfigType>
 
 interface InternalListViewContext<Child, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
   getChildren: () => Child[];
-  getSearch: () => SearchRenderer | undefined;
+  getSearch: () => SearchComponentRenderer | undefined;
   getSearchContext: () => SearchContext | undefined;
   getTotal: () => number;
   getCurrentPage: () => number;

@@ -1,9 +1,9 @@
 export * from './value';
 export {
   ColumnContext,
-  CellRenderer,
+  CellComponentRenderer,
   TableColumn,
-  FieldRenderer,
+  FieldComponentRenderer,
   FieldConfig,
   TableViewConfig,
 } from './view';

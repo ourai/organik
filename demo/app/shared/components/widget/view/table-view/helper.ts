@@ -2,23 +2,22 @@ import { VueConstructor, CreateElement } from 'vue';
 
 import {
   ColumnContext,
-  CellRenderer,
-  FieldRenderer,
+  CellComponentRenderer,
+  FieldComponentRenderer,
   TableColumn,
   ActionDescriptor,
   TableViewConfig,
   ListViewContext,
 } from '../../../../types';
-import { isBoolean, isNumber, isFunction, omit } from '../../../../utils';
-import ActionRenderer from '../../../renderer/action-renderer';
+import { isBoolean, isNumber, isFunction, omit, getRenderer } from '../../../../utils';
 import { DataTableProps } from './typing';
 
-function resolveCellRenderer(renderer: FieldRenderer): CellRenderer<TableColumn> {
+function resolveCellRenderer(renderer: FieldComponentRenderer): CellComponentRenderer<TableColumn> {
   if (isFunction(renderer)) {
     return (renderer as any).extendOptions
       ? (h: CreateElement, data: ColumnContext<TableColumn>) =>
           h(renderer as VueConstructor, { props: { value: data.row[data.column.prop!], ...data } })
-      : (renderer as CellRenderer<TableColumn>);
+      : (renderer as CellComponentRenderer<TableColumn>);
   }
 
   return (h: CreateElement) => h('div');
@@ -69,7 +68,7 @@ function resolveOperationColumn(
       return h(
         'div',
         actions.map(action =>
-          h(ActionRenderer, {
+          h(getRenderer('ActionRenderer'), {
             props: {
               action,
               contextGetter: () => context.getChildren()[index],

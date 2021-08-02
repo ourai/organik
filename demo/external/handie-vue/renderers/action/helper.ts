@@ -1,30 +1,31 @@
+import { isString, noop } from '@ntks/toolbox';
+import {
+  ComponentCtor,
+  ComponentRenderer,
+  BuiltInActionComponentRenderer,
+  ActionComponentRenderer,
+  ActionDescriptor,
+  ViewContext,
+  getControl,
+} from 'organik';
 import Vue, { VNodeData, VueConstructor } from 'vue';
 import { MessageBox } from 'element-ui';
 
-import {
-  GenericRenderer,
-  BuiltInActionRenderer,
-  ActionRenderer,
-  ActionDescriptor,
-  ViewContext,
-} from '../../../types';
-import { isString, noop } from '../../../utils';
-
 const DEFAULT_ACTION_RENDER_TYPE = 'button';
 
-function resolveActionComponent(renderer: BuiltInActionRenderer): string {
-  return renderer === 'button' ? 'Button' : 'OlLink';
+function resolveActionComponent(renderer: BuiltInActionComponentRenderer): ComponentCtor {
+  return renderer === 'link' ? getControl('Link')! : getControl('Button')!;
 }
 
-function getDefaultActionComponent(): string {
+function getDefaultActionComponent(): ComponentCtor {
   return resolveActionComponent(DEFAULT_ACTION_RENDER_TYPE);
 }
 
 function getActionComponent(
-  renderer: ActionRenderer = DEFAULT_ACTION_RENDER_TYPE,
-): GenericRenderer {
+  renderer: ActionComponentRenderer = DEFAULT_ACTION_RENDER_TYPE,
+): ComponentRenderer {
   return isString(renderer)
-    ? resolveActionComponent(renderer as BuiltInActionRenderer)
+    ? resolveActionComponent(renderer as BuiltInActionComponentRenderer)
     : (renderer as VueConstructor);
 }
 
@@ -33,7 +34,7 @@ function resolveVirtualNodeData(
   viewContext: ViewContext,
   vm: Vue,
 ): VNodeData {
-  const nodeData: VNodeData = { staticClass: 'ActionRenderer' };
+  const nodeData: VNodeData = { staticClass: 'ActionComponentRenderer' };
   const renderer = action.render || DEFAULT_ACTION_RENDER_TYPE;
 
   if (renderer === 'button') {

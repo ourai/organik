@@ -1,9 +1,9 @@
+import { ValidationResult, getControl } from 'organik';
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-import { ValidationResult, ViewFieldDescriptor } from '../../../types';
-import Form, { FormItem } from '../../control/form';
-import FieldRenderer from '../field-renderer';
+import { ViewFieldDescriptor } from '../../types/input';
+import FieldRenderer from '../field';
 
 @Component({
   // @ts-ignore
@@ -32,7 +32,7 @@ export default class FormRenderer extends Vue {
 
       children.push(
         h(
-          FormItem,
+          getControl('FormItem'),
           {
             attrs: {
               label,
@@ -55,7 +55,7 @@ export default class FormRenderer extends Vue {
     });
 
     return h(
-      Form,
+      getControl('Form'),
       {
         attrs: {
           labelWidth: '100px',
