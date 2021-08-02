@@ -1,4 +1,4 @@
-import { mixin, pick } from '@ntks/toolbox';
+import { mixin, omit } from '@ntks/toolbox';
 
 import {
   ModelDescriptor,
@@ -25,12 +25,7 @@ function resolveFilters(filters: FilterDescriptor[], model?: ModelDescriptor): F
 
   return filters.map(filter =>
     fieldMap[filter.name]
-      ? (mixin(
-          true,
-          {},
-          pick(fieldMap[filter.name], ['name', 'dataType', 'label']),
-          filter,
-        ) as FilterDescriptor)
+      ? (mixin(true, {}, omit(fieldMap[filter.name], ['readonly']), filter) as FilterDescriptor)
       : filter,
   );
 }

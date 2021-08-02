@@ -9,7 +9,7 @@
         />
       </el-form-item>
       <el-form-item>
-        <kokiri-button type="primary" @click.prevent="submit">查询</kokiri-button>
+        <kokiri-button color="primary" @click.prevent="submit">查询</kokiri-button>
         <kokiri-button @click="reset">重置</kokiri-button>
       </el-form-item>
     </el-form>

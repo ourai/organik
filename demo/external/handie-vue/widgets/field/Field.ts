@@ -2,7 +2,7 @@ import { ValueChecker, EventHandler, EventHandlers, ObjectViewContext } from 'or
 import Vue from 'vue';
 import { Component, Prop, Inject } from 'vue-property-decorator';
 
-import { ViewFieldDescriptor } from '../../types/field';
+import { ViewFieldDescriptor } from '../../types/input';
 import { getEventWithNamespace, resolveBindEvent } from '../helper';
 
 @Component

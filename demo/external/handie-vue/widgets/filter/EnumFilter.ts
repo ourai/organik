@@ -1,17 +1,17 @@
 import { Component, Prop, Watch } from 'vue-property-decorator';
 
 import { EnumFieldOption, EnumField } from '../../types/input';
-import FieldWidget from './Field';
+import FilterWidget from './Filter';
 
 @Component
-export default class EnumFieldWidget extends FieldWidget<number | string> {
+export default class EnumFilterWidget extends FilterWidget<number | string> {
   @Prop({ type: [Number, String], default: '' })
   protected readonly value: number | string = '';
 
   protected internalValue: number | string = '';
 
   protected get options(): EnumFieldOption[] {
-    return (this.field as EnumField).options;
+    return (this.filter as EnumField).options;
   }
 
   protected get displayText(): string {

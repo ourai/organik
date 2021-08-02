@@ -27,6 +27,6 @@ export default {
     { name: 'deleteOne', authority: 'animation:edit' },
   ],
   search: {
-    filters: ['title', 'description'],
+    filters: ['title', 'form', 'description'],
   },
 } as ViewDescriptor;

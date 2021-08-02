@@ -1,5 +1,6 @@
 export {
   FilterWidget,
+  EnumFilterWidget,
   SearchWidget,
   FieldWidget,
   EnumFieldWidget,

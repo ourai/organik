@@ -2,8 +2,11 @@ import {
   RequestParams,
   ResponseResult,
   FieldDescriptor as UnsureTypeField,
+  FilterDescriptor as UnsureTypeFilter,
   ViewFieldDescriptor as UnsureTypeViewField,
 } from 'organik';
+
+// Model fields
 
 interface UnknownField extends UnsureTypeField {
   dynamic?: boolean;
@@ -40,22 +43,48 @@ interface StaticRelationField extends UnknownField {
   dynamic: false;
 }
 
+type RequestFunction = (params: RequestParams) => Promise<ResponseResult>;
+
 interface DynamicRelationField extends UnknownField {
   dataType: RelationFieldType;
   dynamic: true;
-  referenceValueGetter: (params: RequestParams) => Promise<ResponseResult>;
-  relatedListGetter: (params: RequestParams) => Promise<ResponseResult>;
+  referenceValueGetter: RequestFunction;
+  relatedListGetter: RequestFunction;
   relatedPrimaryKey: string;
   relatedLabelKey?: string;
-}
-
-interface UnknownViewField extends UnsureTypeViewField {
-  dynamic?: boolean;
 }
 
 type RelationField = StaticRelationField | DynamicRelationField;
 
 type FieldDescriptor = UnknownField | NumberField | StringField | EnumField | RelationField;
+
+// Filters
+
+interface UnknownFilter extends UnsureTypeFilter {
+  dynamic?: boolean;
+}
+
+type Filterize<T extends UnknownField = UnknownField> = Omit<T, 'readonly'>;
+
+type NumberFilter = UnknownFilter & Filterize<NumberField>;
+
+type StringFilter = UnknownFilter & Filterize<StringField>;
+
+type EnumFilter = UnknownFilter & Filterize<EnumField>;
+
+type StaticRelationFilter = UnknownFilter & Filterize<StaticRelationField>;
+
+type DynamicRelationFilter = UnknownFilter & Filterize<DynamicRelationField>;
+
+type RelationFilter = StaticRelationFilter | DynamicRelationFilter;
+
+type FilterDescriptor = UnknownFilter | NumberFilter | StringFilter | EnumFilter | RelationFilter;
+
+// View fields
+
+interface UnknownViewField extends UnsureTypeViewField {
+  dynamic?: boolean;
+}
 
 type NumberViewField = UnknownViewField & NumberField;
 
@@ -76,4 +105,11 @@ type ViewFieldDescriptor =
   | EnumViewField
   | RelationViewField;
 
-export { EnumFieldOption, EnumField, DynamicRelationField, FieldDescriptor, ViewFieldDescriptor };
+export {
+  EnumFieldOption,
+  EnumField,
+  DynamicRelationField,
+  FieldDescriptor,
+  FilterDescriptor,
+  ViewFieldDescriptor,
+};

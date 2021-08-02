@@ -5,7 +5,7 @@ import {
   ViewDescriptor as _ViewDescriptor,
 } from 'organik';
 
-import { FieldDescriptor, ViewFieldDescriptor } from './field';
+import { FieldDescriptor, ViewFieldDescriptor } from './input';
 
 type ColumnContext<Column> = { row: Record<string, any>; column: Column; index: number };
 
