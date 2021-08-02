@@ -1,5 +1,5 @@
 <template>
-  <div class="AnimationListSearch">
+  <div class="FormSearch">
     <el-form :model="condition" size="small" inline>
       <el-form-item :label="filter.label" :key="filter.name" v-for="filter in filters">
         <filter-renderer
@@ -19,14 +19,13 @@
 <script lang="ts">
 import { Component } from 'vue-property-decorator';
 
-import KokiriButton from '../../control/button';
-import ElInput from '../../control/input';
-import ElForm, { FormItem as ElFormItem } from '../../control/form';
-import FilterRenderer from '../../renderer/filter-renderer';
-import { SearchWidget } from '../base';
+import KokiriButton from '../../../control/button';
+import ElForm, { FormItem as ElFormItem } from '../../../control/form';
+import FilterRenderer from '../../../renderer/filter-renderer';
+import { SearchWidget } from '../../base';
 
 @Component({
-  components: { KokiriButton, ElInput, ElForm, ElFormItem, FilterRenderer },
+  components: { KokiriButton, ElForm, ElFormItem, FilterRenderer },
 })
 export default class FormSearch extends SearchWidget {
   protected created(): void {

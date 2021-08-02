@@ -3,7 +3,7 @@ import { Vue, Component, Inject } from 'vue-property-decorator';
 
 import { ListViewContext } from '../../../types';
 import { isFunction } from '../../../utils';
-import FormSearch from '../../widget/form-search';
+import FormSearch from '../../widget/search/form-search';
 
 @Component({
   // @ts-ignore
