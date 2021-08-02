@@ -8,6 +8,7 @@ export {
   ResponseExtra,
   ResponseResult,
   ModelDescriptor,
+  FilterDescriptor,
   ActionDescriptor,
   ViewFieldDescriptor,
   ViewDescriptor,
