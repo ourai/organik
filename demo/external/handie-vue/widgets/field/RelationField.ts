@@ -1,3 +1,5 @@
+import { noop } from '@ntks/toolbox';
+import { RequestParams, ResponseSuccess, ResponseFail } from 'organik';
 import { Component, Watch } from 'vue-property-decorator';
 
 import { ObjectValue, ListValue } from '../../types/value';
@@ -20,9 +22,33 @@ export default class RelationFieldWidget<
   private fetchReferenceValue(data: ValueType): void {
     const { referenceValueGetter } = this.field as DynamicRelationField;
 
+    if (!referenceValueGetter) {
+      return;
+    }
+
     referenceValueGetter(data).then(result => {
       if (result.success) {
         this.internalValue = result.data;
+      }
+    });
+  }
+
+  protected fetchRelatedList(
+    params: RequestParams,
+    success: ResponseSuccess = noop,
+    fail: ResponseFail = noop,
+  ): void {
+    const { dynamic, relatedListGetter } = this.field as DynamicRelationField;
+
+    if (!dynamic || !relatedListGetter) {
+      return;
+    }
+
+    relatedListGetter(params).then(result => {
+      if (result.success) {
+        success(result.data, result.extra, result);
+      } else {
+        fail(result.message, result);
       }
     });
   }

@@ -44,8 +44,9 @@ interface DynamicRelationField extends UnknownField {
   dataType: RelationFieldType;
   dynamic: true;
   referenceValueGetter: (params: RequestParams) => Promise<ResponseResult>;
-  referencePrimaryKey: string;
-  referenceLabelKey?: string;
+  relatedListGetter: (params: RequestParams) => Promise<ResponseResult>;
+  relatedPrimaryKey: string;
+  relatedLabelKey?: string;
 }
 
 interface UnknownViewField extends UnsureTypeViewField {
