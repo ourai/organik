@@ -44,7 +44,7 @@ export default class FormSearch extends SearchWidget {
             },
           },
         },
-        '查询',
+        '重置',
       ),
     );
 
