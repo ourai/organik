@@ -1,7 +1,1 @@
-export {
-  ActionRenderer,
-  FilterRenderer,
-  SearchRenderer,
-  FieldRenderer,
-  FormRenderer,
-} from 'handie-vue';
+export * from 'handie-vue/renderers';

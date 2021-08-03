@@ -11,7 +11,7 @@ export default class EnumFilterWidget extends FilterWidget<number | string> {
   protected internalValue: number | string = '';
 
   protected get options(): EnumFieldOption[] {
-    return (this.filter as EnumField).options;
+    return (this.filter as EnumField).options || [];
   }
 
   protected get displayText(): string {

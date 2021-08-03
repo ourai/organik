@@ -60,6 +60,7 @@ export default class FormRenderer extends Vue {
         attrs: {
           labelWidth: '100px',
           labelPosition: 'right',
+          size: 'small',
         },
       },
       children,

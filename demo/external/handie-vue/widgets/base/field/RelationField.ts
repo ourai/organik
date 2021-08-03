@@ -2,8 +2,8 @@ import { noop } from '@ntks/toolbox';
 import { RequestParams, ResponseSuccess, ResponseFail } from 'organik';
 import { Component, Watch } from 'vue-property-decorator';
 
-import { ObjectValue, ListValue } from '../../types/value';
-import { DynamicRelationField } from '../../types/input';
+import { ObjectValue, ListValue } from '../../../types/value';
+import { DynamicRelationField } from '../../../types/input';
 import FieldWidget from './Field';
 
 @Component

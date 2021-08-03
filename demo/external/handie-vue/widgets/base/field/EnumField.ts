@@ -1,6 +1,6 @@
 import { Component, Prop, Watch } from 'vue-property-decorator';
 
-import { EnumFieldOption, EnumField } from '../../types/input';
+import { EnumFieldOption, EnumField } from '../../../types/input';
 import FieldWidget from './Field';
 
 @Component
@@ -11,7 +11,7 @@ export default class EnumFieldWidget extends FieldWidget<number | string> {
   protected internalValue: number | string = '';
 
   protected get options(): EnumFieldOption[] {
-    return (this.field as EnumField).options;
+    return (this.field as EnumField).options || [];
   }
 
   protected get displayText(): string {

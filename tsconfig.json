@@ -19,6 +19,7 @@
     "paths": {
       "organik": ["src/index.ts"],
       "handie-vue": ["demo/external/handie-vue/index.ts"],
+      "handie-vue/*": ["demo/external/handie-vue/*"],
       "@/*": ["demo/app/shared/*"]
     }
   },
