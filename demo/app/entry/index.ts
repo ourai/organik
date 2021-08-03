@@ -6,6 +6,7 @@ import modules from '../domain';
 import actions from './actions';
 import { setInterceptors } from './aspects';
 import routes from './routes';
+import theme from './theme';
 
 setInterceptors();
 
@@ -14,6 +15,7 @@ createApp({
   creators: { store: moduleTree => new Vuex.Store({ modules: moduleTree }) },
   components,
   metadata: { actions, modules },
+  theme,
   el: '#app',
   routes,
 });

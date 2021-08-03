@@ -1,4 +1,5 @@
 export {
+  ThemeOptions,
   ComponentCtor,
   ComponentType,
   ComponentDescriptor,

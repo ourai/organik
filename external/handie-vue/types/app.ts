@@ -5,6 +5,7 @@ import { ComponentCtor } from './component';
 import { RouterCreator, RouteConfig } from './router';
 import { StoreCreator, StoreModule } from './store';
 import { ModuleDescriptor } from './module';
+import { ThemeOptions } from './theme';
 
 type RuntimePlugin<T extends any = never> = PluginObject<T> | PluginFunction<T>;
 
@@ -25,6 +26,7 @@ interface AppDescriptor {
     actions?: ActionDescriptor[];
     modules?: ModuleDescriptor[];
   };
+  theme?: ThemeOptions;
   root?: ComponentCtor;
   el?: MountEl;
   routes: RouteConfig[];

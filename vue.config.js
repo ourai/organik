@@ -16,8 +16,8 @@ module.exports = {
     resolve: {
       alias: {
         organik: resolve('./src'),
-        kokiri: resolve('./demo/external/kokiri'),
-        'handie-vue': resolve('./demo/external/handie-vue'),
+        kokiri: resolve('./external/kokiri'),
+        'handie-vue': resolve('./external/handie-vue'),
         '@': resolve(`${APP_SRC}/shared`),
       },
     },

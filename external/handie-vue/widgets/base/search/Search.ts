@@ -1,17 +1,10 @@
-import {
-  FilterDescriptor,
-  EventHandler,
-  EventHandlers,
-  SearchCondition,
-  SearchContext,
-} from 'organik';
-import Vue from 'vue';
+import { FilterDescriptor, SearchCondition, SearchContext } from 'organik';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { getEventWithNamespace, resolveBindEvent } from '../helper';
+import BaseWidget from '../BaseWidget';
 
 @Component
-export default class SearchWidget extends Vue {
+export default class SearchWidget extends BaseWidget {
   @Inject({ from: 'searchContext', default: null })
   protected readonly context!: SearchContext;
 
@@ -19,14 +12,6 @@ export default class SearchWidget extends Vue {
 
   protected get filters(): FilterDescriptor[] {
     return this.context ? this.context.getFilters() : [];
-  }
-
-  protected on(event: string | EventHandlers, handler?: EventHandler): void {
-    this.context.on(resolveBindEvent(this, event), handler);
-  }
-
-  protected off(event?: string, handler?: EventHandler): void {
-    this.context.off(getEventWithNamespace(this, event), handler);
   }
 
   protected initCondition(condition: SearchCondition = {}): void {
@@ -52,9 +37,5 @@ export default class SearchWidget extends Vue {
       change: value => (this.condition = { ...value }),
       filterChange: ({ name, value }) => (this.condition[name] = value),
     });
-  }
-
-  protected beforeDestroy(): void {
-    this.off();
   }
 }

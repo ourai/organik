@@ -18,12 +18,12 @@
     "baseUrl": ".",
     "paths": {
       "organik": ["src/index.ts"],
-      "kokiri": ["demo/external/kokiri/index.ts"],
-      "kokiri/*": ["demo/external/kokiri/*"],
-      "handie-vue": ["demo/external/handie-vue/index.ts"],
-      "handie-vue/*": ["demo/external/handie-vue/*"],
+      "kokiri": ["external/kokiri/index.ts"],
+      "kokiri/*": ["external/kokiri/*"],
+      "handie-vue": ["external/handie-vue/index.ts"],
+      "handie-vue/*": ["external/handie-vue/*"],
       "@/*": ["demo/app/shared/*"]
     }
   },
-  "include": ["src", "demo/app", "demo/external"]
+  "include": ["src", "demo/app", "external"]
 }

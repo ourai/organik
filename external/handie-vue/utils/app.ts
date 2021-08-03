@@ -2,11 +2,11 @@ import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 import VueRouter from 'vue-router';
 
-import { StoreModule, AppCreators, AppDescriptor, AppInstance } from './types';
-import { ModuleDescriptor } from './types/module';
-
-import { setRouterCreator, createRouter } from './adapters/router';
-import { setStoreCreator, createStore } from './adapters/store';
+import { StoreModule, AppCreators, AppDescriptor, AppInstance } from '../types';
+import { ModuleDescriptor } from '../types/module';
+import { setRouterCreator, createRouter } from '../adapters/router';
+import { setStoreCreator, createStore } from '../adapters/store';
+import { setDefaultTheme } from './theme';
 
 function setCreators({ router, store }: AppCreators): void {
   if (router) {
@@ -44,6 +44,7 @@ function createApp({
   creators,
   components,
   metadata = {},
+  theme,
   root,
   el,
   routes,
@@ -77,6 +78,8 @@ function createApp({
   if (modules) {
     registerModules(modules);
   }
+
+  setDefaultTheme(theme || {}, true);
 
   const opts = {
     render: h => h(root || Vue.extend({ name: 'HandieApp', render: h => h('router-view') })),

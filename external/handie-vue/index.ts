@@ -11,8 +11,7 @@ export * from 'organik';
 
 export * from './types';
 export * from './adapters';
-
-export { createApp } from './app';
+export * from './utils';
 
 export {
   ComponentCtor,

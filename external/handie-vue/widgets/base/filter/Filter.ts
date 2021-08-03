@@ -1,9 +1,10 @@
 import { FilterDescriptor } from 'organik';
-import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import BaseWidget from '../BaseWidget';
+
 @Component
-export default class FilterWidget<ValueType = any> extends Vue {
+export default class FilterWidget<ValueType = any> extends BaseWidget {
   @Prop({ type: Object, default: () => ({}) })
   protected readonly filter!: FilterDescriptor;
 
