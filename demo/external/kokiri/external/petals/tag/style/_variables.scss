@@ -1,0 +1,5 @@
+@import '../../border/style/variables';
+
+@import './properties';
+
+$petals--tag-border-radius: var($__petals--border-radius-sm, $petals--border-radius-sm) !default;

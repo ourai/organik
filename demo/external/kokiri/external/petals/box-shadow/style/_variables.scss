@@ -1,0 +1,6 @@
+@import './properties';
+
+$petals--box-shadow: var($__petals--box-shadow, 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04)) !default;
+$petals--box-shadow-sm: var($__petals--box-shadow-sm, 0 0.125rem 0.25rem rgba($__petals--black, 0.075)) !default;
+$petals--box-shadow-lg: var($__petals--box-shadow-lg, 0 1rem 3rem rgba($__petals--black, 0.175)) !default;
+$petals--box-shadow-inset: var($__petals--box-shadow-inset, inset 0 1px 2px rgba($__petals--black, 0.075)) !default;

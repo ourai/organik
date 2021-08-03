@@ -1,4 +1,4 @@
-import { registerComponent, registerAction, registerModules, getRenderer } from 'organik';
+import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 import VueRouter from 'vue-router';
 

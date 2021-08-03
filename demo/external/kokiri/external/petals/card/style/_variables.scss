@@ -1,0 +1,29 @@
+@import "../../border/style/variables";
+@import "./metadata";
+@import "./properties";
+
+$petals--card-padding-y: 0 !default;
+$petals--card-padding-x: 16px !default;
+$petals--card-bg: $__petals--white !default;
+$petals--card-border-width: var($__petals--border-width, $petals--border-width) !default;
+$petals--card-border-color: var($__petals--border-color, $petals--border-color) !default;
+$petals--card-border-radius: var($__petals--border-radius-lg, $petals--border-radius-lg) !default;
+$petals--card-box-shadow: none !default;
+
+$petals--card-header-height: 61px !default;
+$petals--card-header-padding-y: 0 !default;
+$petals--card-header-padding-x: 0 !default;
+$petals--card-header-border-width: var($__petals--card-border-width, $petals--card-border-width) !default;
+$petals--card-header-border-color: var($__petals--card-border-color, $petals--card-border-color) !default;
+$petals--card-header-font-size: 18px !default;
+$petals--card-header-font-weight: bold !default;
+$petals--card-header-letter-spacing: 0 !default;
+$petals--card-header-color: var($__petals--text-heading, $petals--text-heading) !default;
+
+$petals--card-body-padding-y: 24px !default;
+$petals--card-body-padding-x: 0 !default;
+
+$petals--card-footer-padding-y: 0 !default;
+$petals--card-footer-padding-x: 0 !default;
+$petals--card-footer-border-width: var($__petals--card-border-width, $petals--card-border-width) !default;
+$petals--card-footer-border-color: var($__petals--card-border-color, $petals--card-border-color) !default;

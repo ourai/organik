@@ -1,0 +1,3 @@
+interface IAppComponent {}
+
+export { IAppComponent };

@@ -1,0 +1,13 @@
+@import '../../border/style/variables';
+@import './properties';
+
+$petals--hover-bg: $__petals--white !default;
+
+$petals--active-border-color: var($__petals--primary-active, $petals--primary-active) !default;
+$petals--active-color: var($__petals--primary-active, $petals--primary-active) !default;
+$petals--active-bg: var($__petals--primary-active, $petals--primary-active) !default;
+
+$petals--disabled-border-color: var($__petals--border-color, $petals--border-color) !default;
+$petals--disabled-color: var($__petals--text-placeholder, $petals--text-placeholder) !default;
+$petals--disabled-bg: #edf2fc !default;
+$petals--disabled-opacity: 1 !default;

@@ -1,1 +1,1 @@
-export * from 'kokiri/dist/components/layout';
+export * from 'kokiri/components/layout';

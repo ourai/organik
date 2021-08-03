@@ -1,0 +1,147 @@
+// Font
+
+$petals--font-family: -apple-system, blinkmacsystemfont, segoe ui, roboto, helvetica neue, arial, noto sans, sans-serif,
+  apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji !default;
+$petals--font-size: 14px !default;
+
+$petals--line-height: 1.5715 !default;
+
+// Text color
+
+$petals--text-secondary: rgba(0, 0, 0, 0.45) !default;
+$petals--text-regular: rgba(0, 0, 0, 0.85) !default;
+
+// Theme color
+
+$petals--primary: #1890ff !default;
+$petals--primary-hover: #40a9ff !default;
+$petals--primary-active: #096dd9 !default;
+
+$petals--success: #52c41a !default;
+
+$petals--warning: #faad14 !default;
+
+$petals--danger: #ff4d4f !default;
+$petals--danger-hover: #ff7875 !default;
+$petals--danger-active: #d9363e !default;
+
+$petals--default-border-color: #d9d9d9 !default;
+$petals--default-disabled-color: rgba(0, 0, 0, 0.25) !default;
+$petals--default-disabled-bg: #f5f5f5 !default;
+
+// Border
+
+$petals--border-radius: 2px !default;
+$petals--border-radius-lg: $petals--border-radius !default;
+$petals--border-radius-sm: $petals--border-radius !default;
+
+// Layout
+
+$petals--layout-container-bg: #f0f2f5 !default;
+
+$petals--layout-header-height: 48px !default;
+$petals--layout-header-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08) !default;
+
+$petals--layout-main-margin: 24px !default;
+
+$petals--layout-aside-width: 208px !default;
+$petals--layout-aside-bg: #001529 !default;
+
+// Button
+
+$petals--button-padding-y: 4px !default;
+$petals--button-padding-x: 15px !default;
+
+$petals--button-padding-y-lg: 6.4px !default;
+$petals--button-padding-x-lg: $petals--button-padding-x !default;
+
+$petals--button-padding-y-sm: 0 !default;
+$petals--button-padding-x-sm: 7px !default;
+$petals--button-font-size-sm: $petals--font-size !default;
+
+$petals--button-borderless-hover-color: $petals--text-regular !default;
+$petals--button-borderless-hover-bg: rgba(0, 0, 0, 0.018) !default;
+$petals--button-borderless-focus-color: $petals--button-borderless-hover-color !default;
+$petals--button-borderless-focus-bg: rgba(0, 0, 0, 0.028) !default;
+
+$petals--button-primary-outlined-color: $petals--primary !default;
+$petals--button-primary-outlined-hover-color: $petals--primary-hover !default;
+$petals--button-primary-outlined-focus-color: $petals--primary-active !default;
+$petals--button-danger-outlined-color: $petals--danger !default;
+$petals--button-danger-outlined-hover-color: $petals--danger-hover !default;
+$petals--button-danger-outlined-focus-color: $petals--danger-active !default;
+
+// Link
+
+$petals--link-hover-decoration: none !default;
+
+// Grid
+
+$petals--grid-breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+) !default;
+
+// Paragraph
+
+$petals--paragraph-between-gap: 1em !default;
+
+// Heading
+
+$petals--heading-level1-font-size: 38px !default;
+$petals--heading-level1-font-weight: 600 !default;
+$petals--heading-level1-line-height: 1.23 !default;
+$petals--heading-level1-margin-bottom: 0.5em !default;
+
+$petals--heading-level2-font-size: 30px !default;
+$petals--heading-level2-font-weight: $petals--heading-level1-font-weight !default;
+$petals--heading-level2-line-height: 1.35 !default;
+$petals--heading-level2-margin-top: 1.2em !default;
+$petals--heading-level2-margin-bottom: $petals--heading-level1-margin-bottom !default;
+
+$petals--heading-level3-font-size: 24px !default;
+$petals--heading-level3-font-weight: $petals--heading-level2-font-weight !default;
+$petals--heading-level3-line-height: $petals--heading-level2-line-height !default;
+$petals--heading-level3-margin-top: $petals--heading-level2-margin-top !default;
+$petals--heading-level3-margin-bottom: $petals--heading-level2-margin-bottom !default;
+
+$petals--heading-level4-font-size: 20px !default;
+$petals--heading-level4-font-weight: $petals--heading-level3-font-weight !default;
+$petals--heading-level4-line-height: 1.4 !default;
+$petals--heading-level4-margin-top: $petals--heading-level3-margin-top !default;
+$petals--heading-level4-margin-bottom: $petals--heading-level3-margin-bottom !default;
+
+$petals--heading-level5-font-size: 16px !default;
+$petals--heading-level5-font-weight: $petals--heading-level4-font-weight !default;
+$petals--heading-level5-line-height: 1.5 !default;
+$petals--heading-level5-margin-top: $petals--heading-level4-margin-top !default;
+$petals--heading-level5-margin-bottom: $petals--heading-level4-margin-bottom !default;
+
+$petals--heading-level6-font-weight: $petals--heading-level5-font-weight !default;
+$petals--heading-level6-margin-top: $petals--heading-level5-margin-top !default;
+$petals--heading-level6-margin-bottom: $petals--heading-level5-margin-bottom !default;
+
+// Panel
+
+$petals--panel-header-font-size: 16px !default;
+$petals--panel-header-font-weight: 500 !default;
+$petals--panel-header-color: $petals--text-regular !default;
+
+// Card
+
+$petals--card-padding-x: 0 !default;
+
+$petals--card-header-height: 58px !default;
+$petals--card-header-padding-x: 24px !default;
+$petals--card-border-color: #f0f0f0 !default;
+$petals--card-header-font-size: 16px !default;
+$petals--card-header-font-weight: 500 !default;
+$petals--card-header-color: $petals--text-regular !default;
+
+$petals--card-body-padding-y: 24px !default;
+$petals--card-body-padding-x: 24px !default;
+
+$petals--card-footer-padding-y: 12px !default;

@@ -1,0 +1,21 @@
+@import './bootstrap-functions';
+
+@function get-selector($component-name) {
+  @if $petals--component-prefix == '' {
+    @return '.' + $component-name;
+  } @else {
+    @return '.' + $petals--component-prefix + '-' + $component-name;
+  }
+}
+
+@function whether-zero-pixel($number) {
+  @return $number == 0 or $number == 0px or $number == 0%;
+}
+
+@function whether-non-zero($number) {
+  @return not whether-zero-pixel($number);
+}
+
+@function half($number) {
+  @return $number / 2;
+}

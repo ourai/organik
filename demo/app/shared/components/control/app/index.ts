@@ -1,1 +1,1 @@
-export { App as default } from 'kokiri/dist/components/app';
+export { App as default } from 'kokiri/components/app';

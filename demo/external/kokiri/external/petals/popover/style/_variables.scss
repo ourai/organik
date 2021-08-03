@@ -1,0 +1,31 @@
+@import '../../popup/style/variables';
+
+@import './properties';
+
+// Popovers
+
+$petals--popover-component-name: 'Popover' !default;
+
+$petals--popover-font-size: $petals--font-size !default;
+$petals--popover-bg: $__petals--white !default;
+$petals--popover-max-width: 276px !default;
+$petals--popover-border-width: var($__petals--popup-border-width, $petals--popup-border-width) !default;
+$petals--popover-border-color: var($__petals--popup-border-color, $petals--popup-border-color) !default;
+$petals--popover-border-radius: var($__petals--popup-border-radius, $petals--popup-border-radius) !default;
+$petals--popover-inner-border-radius: subtract($petals--popover-border-radius, $petals--popover-border-width) !default;
+$petals--popover-box-shadow: var($__petals--popup-box-shadow, $petals--popup-box-shadow) !default;
+
+$petals--popover-header-bg: darken($petals--popover-bg, 3%) !default;
+$petals--popover-header-color: $petals--text-primary !default;
+$petals--popover-header-padding-y: 0.5rem !default;
+$petals--popover-header-padding-x: 0.75rem !default;
+
+$petals--popover-body-color: $petals--body-color !default;
+$petals--popover-body-padding-y: 12px !default;
+$petals--popover-body-padding-x: 12px !default;
+
+$petals--popover-arrow-width: 1rem !default;
+$petals--popover-arrow-height: 6px !default;
+$petals--popover-arrow-color: $petals--popover-bg !default;
+
+// $petals--popover-arrow-outer-color: fade-in($petals--popover-border-color, 0.05) !default;

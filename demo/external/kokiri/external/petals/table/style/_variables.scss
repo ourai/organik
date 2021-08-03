@@ -1,0 +1,46 @@
+@import '../../border/style/variables';
+
+@import './properties';
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+$petals--table-cell-padding: 0.5rem !default;
+$petals--table-cell-padding-sm: 0.25rem !default;
+
+$petals--table-cell-padding-y: 5px !default;
+
+$petals--table-cell-vertical-align: top !default;
+
+$petals--table-font-size: var($__petals--font-size, $petals--font-size) !default;
+$petals--table-color: var($__petals--text-regular, $petals--text-regular) !default;
+$petals--table-bg: null !default;
+$petals--table-accent-bg: rgba($__petals--black, 0.05) !default;
+$petals--table-hover-color: var($__petals--table-color, $petals--table-color) !default;
+$petals--table-hover-bg: var($__petals--hover-bg, $petals--hover-bg) !default;
+$petals--table-active-bg: var($__petals--table-hover-bg, $petals--table-hover-bg) !default;
+
+$petals--table-border-width: $petals--border-width !default;
+$petals--table-border-color: $petals--border-color !default;
+
+$petals--table-head-bg: #f6f7fb !default;
+$petals--table-head-color: var($__petals--text-secondary, $petals--text-secondary) !default;
+$petals--table-head-border-width: var($__petals--border-width, $petals--border-width) !default;
+$petals--table-head-border-color: var($__petals--border-color, $petals--border-color) !default;
+$petals--table-head-border-radius: var($__petals--border-radius, $petals--border-radius) !default;
+$petals--table-head-padding-y: 12px !default;
+
+// $petals--table-dark-color: $__petals--white !default;
+// $petals--table-dark-bg: $petals--gray-800 !default;
+// $petals--table-dark-accent-bg: rgba($__petals--white, 0.05) !default;
+// $petals--table-dark-hover-color: $petals--table-dark-color !default;
+// $petals--table-dark-hover-bg: rgba($__petals--white, 0.075) !default;
+// $petals--table-dark-border-color: lighten($petals--table-dark-bg, 7.5%) !default;
+
+$petals--table-striped-order: odd !default;
+
+// $petals--table-caption-color: $petals--text-muted !default;
+
+$petals--table-bg-level: -9 !default;
+$petals--table-border-level: -6 !default;

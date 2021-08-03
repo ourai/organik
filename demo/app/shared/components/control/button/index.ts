@@ -1,1 +1,1 @@
-export { Button as default } from 'kokiri/dist/components/button';
+export { Button as default } from 'kokiri/components/button';

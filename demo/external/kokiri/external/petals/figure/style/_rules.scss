@@ -1,0 +1,46 @@
+.Figure {
+  position: relative;
+  margin: 0;
+  text-align: center;
+  background-color: $petals--figure-bg-color;
+
+  @if whether-non-zero($petals--figure-border-radius) {
+    &,
+    > div {
+      @include border-radius($petals--figure-border-radius);
+    }
+  }
+
+  > div {
+    @include aspect_ratio($petals--figure-aspect-ratio-width, $petals--figure-aspect-ratio-height);
+  }
+
+  a {
+    @include text-middle('> img');
+  }
+
+  img {
+    max-height: 100%;
+  }
+
+  figcaption {
+    font-size: $petals--figure-caption-font-size;
+    color: $petals--figure-caption-text-color;
+    background-color: $petals--figure-caption-bg-color;
+    @include stretch(auto);
+
+    @if whether-non-zero($petals--figure-caption-vertical-padding) or
+      whether-non-zero($petals--figure-caption-horizontal-padding)
+    {
+      @if $petals--figure-caption-vertical-padding == $petals--figure-caption-horizontal-padding {
+        padding: $petals--figure-caption-vertical-padding;
+      } @else {
+        padding: $petals--figure-caption-vertical-padding $petals--figure-caption-horizontal-padding;
+      }
+    }
+
+    @if whether-non-zero($petals--figure-border-radius) {
+      @include border-radius(0 0 $petals--figure-border-radius $petals--figure-border-radius);
+    }
+  }
+}
