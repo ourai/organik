@@ -15,6 +15,12 @@ export default class FieldWidget<ValueType = any> extends BaseWidget {
   @Prop()
   protected readonly value!: ValueType;
 
+  protected getPlaceholder(): string {
+    return this.getCommonBehavior('field.showHintAsPlaceholder')
+      ? (this.field.config || {}).hint || ''
+      : '';
+  }
+
   protected setValueChecker(checker: ValueChecker): void {
     this.context.setFieldChecker(this.field.name, checker);
   }

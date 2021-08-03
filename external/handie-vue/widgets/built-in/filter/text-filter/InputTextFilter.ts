@@ -10,6 +10,10 @@ export default class InputTextFilter extends FilterWidget<string> {
   protected readonly value: string = '';
 
   private render(h: CreateElement): VNode {
-    return h(getControl('Input'), { props: { value: this.value }, on: { input: this.onChange } });
+    return h(getControl('Input'), {
+      props: { value: this.value },
+      attrs: { placeholder: this.getPlaceholder() },
+      on: { input: this.onChange },
+    });
   }
 }

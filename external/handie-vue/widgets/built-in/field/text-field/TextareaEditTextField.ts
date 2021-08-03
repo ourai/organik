@@ -20,6 +20,7 @@ export default class TextareaEditTextField extends FieldWidget<string> {
         showWordLimit: true,
       },
       attrs: {
+        placeholder: this.getPlaceholder(),
         maxlength: (this.field as StringField).max,
       },
       on: { input: this.onChange },
