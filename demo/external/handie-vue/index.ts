@@ -11,8 +11,6 @@ export * from 'organik';
 
 export * from './types';
 export * from './adapters';
-export * from './widgets';
-export * from './renderers';
 
 export { createApp } from './app';
 
