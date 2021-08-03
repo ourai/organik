@@ -1,18 +1,11 @@
-<template>
-  <div class="DetailView">
-    <form-renderer :fields="fields" :value="value" readonly />
-  </div>
-</template>
-
 <script lang="ts">
+import { CreateElement, VNode } from 'vue';
 import { Component } from 'vue-property-decorator';
 
 import { getRenderer } from '../../../../utils';
 import { ObjectViewWidget } from '../../base';
 
-@Component({
-  components: { FormRenderer: getRenderer('FormRenderer')! },
-})
+@Component
 export default class DetailView extends ObjectViewWidget {
   private get id() {
     return this.$route.params.id || '';
@@ -27,6 +20,14 @@ export default class DetailView extends ObjectViewWidget {
         this.context.setValue(data);
       });
     }
+  }
+
+  private render(h: CreateElement): VNode {
+    return h('div', { staticClass: 'DetailView' }, [
+      h(getRenderer('FormRenderer'), {
+        props: { fields: this.fields, value: this.value, readonly: true },
+      }),
+    ]);
   }
 }
 </script>
