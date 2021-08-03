@@ -106,6 +106,8 @@ type ViewFieldDescriptor =
   | RelationViewField;
 
 export {
+  NumberField,
+  StringField,
   EnumFieldOption,
   EnumField,
   DynamicRelationField,
