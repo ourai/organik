@@ -5,4 +5,5 @@ export default {
   formControlLabelWidth: '',
   formControlSize: 'medium',
   resettable: true,
+  actionsStandalone: false,
 } as FormSearchWidgetBehaviors;

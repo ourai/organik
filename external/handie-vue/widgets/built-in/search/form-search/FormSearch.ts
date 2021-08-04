@@ -21,7 +21,8 @@ export default class FormSearch extends SearchWidget {
 
   private render(h: CreateElement): VNode {
     const formControlSize = this.getBehavior('formControlSize');
-    const children: VNode[] = this.filters.map(filter =>
+
+    const formChildren: VNode[] = this.filters.map(filter =>
       h(getControl('FormItem'), { props: { label: filter.label } }, [
         h(getRenderer('FilterRenderer'), {
           props: { filter, value: this.condition[filter.name] },
@@ -30,10 +31,11 @@ export default class FormSearch extends SearchWidget {
       ]),
     );
 
-    children.push(
+    const buttons: VNode[] = [
       h(
         getControl('Button'),
         {
+          staticClass: 'FormSearch-button',
           props: { color: 'primary', size: formControlSize },
           on: {
             click: evt => {
@@ -44,13 +46,14 @@ export default class FormSearch extends SearchWidget {
         },
         '查询',
       ),
-    );
+    ];
 
     if (this.getBehavior('resettable') === true) {
-      children.push(
+      buttons.push(
         h(
           getControl('Button'),
           {
+            staticClass: 'FormSearch-button',
             props: { size: formControlSize },
             on: {
               click: evt => {
@@ -64,19 +67,30 @@ export default class FormSearch extends SearchWidget {
       );
     }
 
-    return h('div', { staticClass: 'FormSearch' }, [
-      h(
-        getControl('Form'),
-        {
-          props: {
-            model: this.condition,
-            size: formControlSize,
-            inline: this.getBehavior('formLayout') === 'inline',
-            labelWidth: this.resolveLabelWidth(),
-          },
+    const standalone = this.getBehavior('actionsStandalone') === true;
+    const buttonGroup: VNode = h(
+      'div',
+      { staticClass: 'FormSearch-buttonGroup', class: { 'is-standalone': standalone } },
+      buttons,
+    );
+
+    if (!standalone) {
+      formChildren.push(buttonGroup);
+    }
+
+    const form = h(
+      getControl('Form'),
+      {
+        props: {
+          model: this.condition,
+          size: formControlSize,
+          inline: this.getBehavior('formLayout') === 'inline',
+          labelWidth: this.resolveLabelWidth(),
         },
-        children,
-      ),
-    ]);
+      },
+      formChildren,
+    );
+
+    return h('div', { staticClass: 'FormSearch' }, standalone ? [form, buttonGroup] : [form]);
   }
 }

@@ -3,6 +3,7 @@ interface FormSearchWidgetBehaviors {
   formControlLabelWidth?: number | string;
   formControlSize?: 'large' | 'medium' | 'small';
   resettable?: boolean;
+  actionsStandalone?: boolean;
 }
 
 export { FormSearchWidgetBehaviors };
