@@ -2,11 +2,11 @@ import { registerComponent, registerAction, registerModules } from 'organik';
 import Vue, { ComponentOptions } from 'vue';
 import VueRouter from 'vue-router';
 
+import { setDefaultTheme } from '../common/utils/theme';
 import { StoreModule, AppCreators, AppDescriptor, AppInstance } from '../types';
 import { ModuleDescriptor } from '../types/module';
 import { setRouterCreator, createRouter } from '../adapters/router';
 import { setStoreCreator, createStore } from '../adapters/store';
-import { setDefaultTheme } from './theme';
 
 function setCreators({ router, store }: AppCreators): void {
   if (router) {

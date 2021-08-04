@@ -1,6 +1,6 @@
-import { retrieveData } from '@ntks/toolbox';
+import { retrieveData, mixin } from '@ntks/toolbox';
 
-import { ThemeOptions } from '../types';
+import { ThemeStyle, ThemeBehavior, ThemeOptions } from '../types';
 
 let defaultTheme: ThemeOptions = {
   behavior: {
@@ -41,14 +41,8 @@ function setDefaultTheme(options: ThemeOptions, merge?: boolean): void {
     const { style, behavior, template } = options;
 
     defaultTheme = {
-      style: {
-        ...(defaultTheme.style || {}),
-        ...(style || {}),
-      },
-      behavior: {
-        ...(defaultTheme.behavior || {}),
-        ...(behavior || {}),
-      },
+      style: mixin(true, {}, defaultTheme.style || {}, style || {}) as ThemeStyle,
+      behavior: mixin(true, {}, defaultTheme.behavior || {}, behavior || {}) as ThemeBehavior,
       template: template || defaultTheme.template,
     };
 

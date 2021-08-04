@@ -44,4 +44,4 @@ interface ThemeOptions {
   template?: string;
 }
 
-export { ThemeOptions };
+export { ThemeStyle, ThemeBehavior, ThemeOptions };

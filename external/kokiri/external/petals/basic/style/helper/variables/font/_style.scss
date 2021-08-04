@@ -1,7 +1,7 @@
-@import './properties';
+@import "./properties";
 
-$petals--font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, 'Pingfang SC', 'Microsoft Yahei', Sans-serif !default;
-$petals--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$petals--font-family-sans-serif: "Helvetica Neue", helvetica, arial, "Pingfang SC", "Microsoft Yahei", sans-serif !default;
+$petals--font-family-monospace: sfmono-regular, menlo, monaco, consolas, "Liberation Mono", "Courier New", monospace !default;
 $petals--font-family: $petals--font-family-sans-serif !default;
 
 // $petals--font-size-root effects the value of `rem`, which is used for as well font sizes, paddings and margins

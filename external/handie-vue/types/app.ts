@@ -1,11 +1,11 @@
 import { ComponentDescriptor, ActionDescriptor } from 'organik';
 import { PluginObject, PluginFunction } from 'vue';
 
+import { ThemeOptions } from '../common/types/theme';
 import { ComponentCtor } from './component';
 import { RouterCreator, RouteConfig } from './router';
 import { StoreCreator, StoreModule } from './store';
 import { ModuleDescriptor } from './module';
-import { ThemeOptions } from './theme';
 
 type RuntimePlugin<T extends any = never> = PluginObject<T> | PluginFunction<T>;
 

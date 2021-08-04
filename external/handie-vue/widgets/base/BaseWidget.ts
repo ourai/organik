@@ -3,7 +3,7 @@ import { EventWithNamespace, EventHandler, EventHandlers } from 'organik';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
-import { getBehaviorByKey } from '../../utils/theme';
+import { getBehaviorByKey } from '../../common/utils/theme';
 
 type WidgetBehaviors = { [key: string]: any };
 

@@ -7,7 +7,7 @@ import { ModuleDescriptor, ModuleContext } from './types/module';
 
 import { createModuleContext } from './adapters/context';
 
-export * from 'organik';
+export * from './common';
 
 export * from './types';
 export * from './adapters';
