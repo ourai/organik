@@ -1,7 +1,9 @@
-import { ValidationResult, getControl } from 'organik';
+import { isNumber } from '@ntks/toolbox';
+import { ConfigType, ValidationResult, getControl } from 'organik';
 import { CreateElement, VNode } from 'vue';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
+import { getBehaviorByKey } from '../../common/utils/theme';
 import { ViewFieldDescriptor } from '../../types/input';
 import FieldRenderer from '../field';
 
@@ -21,6 +23,23 @@ export default class FormRenderer extends Vue {
 
   @Prop({ type: Object, default: () => ({}) })
   private readonly validation!: Record<string, ValidationResult>;
+
+  @Prop({ type: Object, default: () => ({}) })
+  private readonly config!: ConfigType;
+
+  private resolveLabelWidth(): string {
+    const labelWidth =
+      this.config.formControlLabelWidth ||
+      getBehaviorByKey('common.view.objectViewFormControlLabelWidth', '');
+
+    return isNumber(labelWidth) ? `${labelWidth}px` : labelWidth;
+  }
+
+  private resolveFormControlSize(): string {
+    return (
+      this.config.formControlSize || getBehaviorByKey('common.view.objectViewFormControlSize', '')
+    );
+  }
 
   private render(h: CreateElement): VNode {
     const children: VNode[] = [];
@@ -58,9 +77,9 @@ export default class FormRenderer extends Vue {
       getControl('Form'),
       {
         attrs: {
-          labelWidth: '100px',
+          labelWidth: this.resolveLabelWidth(),
           labelPosition: 'right',
-          size: 'small',
+          size: this.resolveFormControlSize(),
         },
       },
       children,

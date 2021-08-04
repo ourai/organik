@@ -1,4 +1,4 @@
-import { ValidationResult, ViewFieldDescriptor, ObjectViewContext } from 'organik';
+import { ConfigType, ValidationResult, ViewFieldDescriptor, ObjectViewContext } from 'organik';
 import { Component } from 'vue-property-decorator';
 
 import ViewWidget from './View';
@@ -13,6 +13,10 @@ export default class ObjectViewWidget extends ViewWidget<ObjectViewContext> {
 
   protected get fields(): ViewFieldDescriptor[] {
     return this.context.getFields();
+  }
+
+  protected get config(): ConfigType {
+    return this.context.getConfig() || {};
   }
 
   protected onFieldValueChange(fieldName: string, value: any): void {

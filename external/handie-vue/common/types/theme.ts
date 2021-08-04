@@ -22,6 +22,7 @@ interface FieldCommonBehaviors {
 interface ViewCommonBehaviors {
   objectViewFormLayout?: 'grid' | 'flex' | 'vertical' | 'inline'; // 表单布局
   objectViewFormControlLabelWidth?: number | string; // 表单控件文本标签宽度
+  objectViewFormControlSize?: 'large' | 'medium' | 'small';
 }
 
 interface CommonWidgetBehaviors {

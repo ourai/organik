@@ -1,4 +1,4 @@
-import { ValueChecker, ObjectViewContext } from 'organik';
+import { ConfigType, ValueChecker, ObjectViewContext } from 'organik';
 import { Component, Prop, Inject } from 'vue-property-decorator';
 
 import { ViewFieldDescriptor } from '../../../types/input';
@@ -14,6 +14,10 @@ export default class FieldWidget<ValueType = any> extends BaseWidget {
 
   @Prop()
   protected readonly value!: ValueType;
+
+  protected get config(): ConfigType {
+    return this.field.config || {};
+  }
 
   protected getPlaceholder(): string {
     return this.getCommonBehavior('field.showHintAsPlaceholder')

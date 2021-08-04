@@ -25,6 +25,7 @@ let defaultTheme: ThemeOptions = {
       view: {
         objectViewFormLayout: 'flex',
         objectViewFormControlLabelWidth: 200,
+        objectViewFormControlSize: 'medium',
       },
     },
   },
