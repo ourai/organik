@@ -1,11 +1,11 @@
-import { generateRandomId, clone, pick } from '@ntks/toolbox';
+import { isString, generateRandomId, clone, pick } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
   DataValue,
   ConfigType,
   ActionContextType,
-  ActionDescriptor,
+  ClientAction,
   ActionGroupByContext,
   ViewFieldDescriptor,
   ViewDescriptor,
@@ -31,13 +31,28 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
 
   private readonly fields: ViewFieldDescriptor[];
 
-  private readonly actions: ActionDescriptor[];
+  private readonly actions: ClientAction[];
 
   protected readonly actionContextGroups: ActionGroupByContext;
 
   private dataSource: ValueType;
 
   private busy: boolean = false;
+
+  private runExpression(expression: string): boolean {
+    const func = new Function('$dataSource', '$value', `return ${expression}`); // eslint-disable-line no-new-func
+
+    let result: boolean;
+
+    try {
+      result = !!func.call(null, this.getDataSource(), this.getValue()); // eslint-disable-line no-useless-call
+    } catch (err) {
+      console.error(err);
+      result = false;
+    }
+
+    return result;
+  }
 
   constructor(moduleContext: ModuleContext, options: ViewContextDescriptor<ValueType, Config>) {
     super(pick(options, ['defaultValue', 'initialValue']) as ValueContextDescriptor<ValueType>);
@@ -52,14 +67,14 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
 
     const actions = (options.actions || [])
       .map(resolveAction)
-      .filter(action => !!action) as ActionDescriptor[];
-    const actionContextGroups = {} as Record<ActionContextType, ActionDescriptor[]>;
+      .filter(action => !!action) as ClientAction[];
+    const actionContextGroups = {} as Record<ActionContextType, ClientAction[]>;
 
     actions.forEach(action => {
       const contextType = action.context || 'single';
 
       if (!actionContextGroups[contextType]) {
-        actionContextGroups[contextType] = [] as ActionDescriptor[];
+        actionContextGroups[contextType] = [] as ClientAction[];
       }
 
       actionContextGroups[contextType].push(action);
@@ -93,11 +108,13 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
     return clone(this.fields);
   }
 
-  public getActions(): ActionDescriptor[] {
-    return this.actions;
+  public getActions(): ClientAction[] {
+    return this.actions.filter(action =>
+      isString(action.available) ? this.runExpression(action.available!) : action,
+    );
   }
 
-  public getActionsByContextType(contextType: ActionContextType): ActionDescriptor[] {
+  public getActionsByContextType(contextType: ActionContextType): ClientAction[] {
     return this.actionContextGroups[contextType] || [];
   }
 

@@ -32,9 +32,10 @@ interface ServerAction extends ActionDescriptor {
 
 interface ClientAction extends ActionDescriptor {
   category: 'client';
+  available?: string;
 }
 
-type ActionGroupByContext = Record<ActionContextType, ActionDescriptor[]>;
+type ActionGroupByContext = Record<ActionContextType, ClientAction[]>;
 
 export {
   ActionCategory,

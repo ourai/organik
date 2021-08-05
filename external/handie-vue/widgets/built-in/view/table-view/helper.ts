@@ -55,7 +55,7 @@ function resolveOperationColumn(
 ): TableColumn | null {
   const actionsAuthority = context.getActionsAuthority();
 
-  const actions = resolveAuthorizedActions(
+  const allSingleActions = resolveAuthorizedActions(
     context.getActionsByContextType('single'),
     actionsAuthority,
     authority,
@@ -64,15 +64,12 @@ function resolveOperationColumn(
   const col: TableColumn = {
     label: '操作',
     render: (h, { index }) => {
+      const ctx = context.getChildren()[index];
+
       return h(
         'div',
-        actions.map(action =>
-          h(getRenderer('ActionRenderer'), {
-            props: {
-              action,
-              contextGetter: () => context.getChildren()[index],
-            },
-          }),
+        resolveAuthorizedActions(ctx.getActions(), actionsAuthority, authority).map(action =>
+          h(getRenderer('ActionRenderer'), { props: { action, contextGetter: () => ctx } }),
         ),
       );
     },
@@ -85,7 +82,9 @@ function resolveOperationColumn(
       : (operationColumnWidth as string);
   }
 
-  return isActionsAuthorized(actionsAuthority, authority) && actions.length > 0 ? col : null;
+  return isActionsAuthorized(actionsAuthority, authority) && allSingleActions.length > 0
+    ? col
+    : null;
 }
 
 function resolveTableColumns(

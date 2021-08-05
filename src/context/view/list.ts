@@ -65,6 +65,7 @@ class ListViewContext<
           category: 'object',
           render: '',
           fields: this.getFields(),
+          actions: this.getActionsByContextType('single'),
           initialValue: record,
           parent: this,
         }),
