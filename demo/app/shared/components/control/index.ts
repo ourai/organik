@@ -3,9 +3,7 @@ import { Loading } from 'element-ui';
 
 Vue.use(Loading);
 
-export { default as Button } from './button';
-export { default as Input } from './input';
-export { default as Radio, RadioGroup } from './radio';
-export { default as Select, Option } from './select';
-export { default as Form, FormItem } from './form';
+export * from 'handie-vue/controls';
+export { Input, Select, Option, OptionGroup, Radio, RadioGroup, Form, FormItem } from 'element-ui';
+
 export { default as DataTable } from './data-table';

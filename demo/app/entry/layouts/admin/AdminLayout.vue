@@ -41,13 +41,13 @@
 import { Vue, Component, Inject } from 'vue-property-decorator';
 
 import { RouteConfig } from '@/types';
-import AppContainer from '@/components/control/app';
 import {
+  App as AppContainer,
   LayoutContainer,
   LayoutHeader,
   LayoutMain,
   LayoutAside,
-} from '@/components/control/layout';
+} from '@/components/control';
 
 import { NavMenu } from './typing';
 import { resolveAvailableNavs, canAccessCurrentRoute } from './helper';
