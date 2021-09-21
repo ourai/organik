@@ -1,16 +1,11 @@
-import { ConfigType, ComponentRenderer } from './base';
-
-type ActionConfig = ConfigType;
+import { RenderType } from '../render-type';
+import { ConfigType, ComponentRenderer, ContextExpression } from './base';
 
 type ActionCategory = 'server' | 'client';
 
 type ActionContextType = 'free' | 'single' | 'batch' | 'both';
 
-type BuiltInActionComponentRenderer = 'button' | 'link';
-
-type ActionComponentRenderer = ComponentRenderer<BuiltInActionComponentRenderer>;
-
-interface ActionDescriptor {
+interface ActionDescriptor<CT extends ConfigType = ConfigType> {
   name?: string;
   category?: ActionCategory;
   type?: string;
@@ -20,8 +15,9 @@ interface ActionDescriptor {
   primary?: boolean;
   danger?: boolean;
   confirm?: boolean | string;
-  render?: ActionComponentRenderer;
-  config?: ActionConfig;
+  renderType?: RenderType;
+  widget?: ComponentRenderer;
+  config?: CT;
   execute?: <ViewContext>(viewContext: ViewContext, vm: any) => Promise<any> | any;
 }
 
@@ -30,9 +26,9 @@ interface ServerAction extends ActionDescriptor {
   execute: <RT, PT>(params?: PT) => Promise<RT>;
 }
 
-interface ClientAction extends ActionDescriptor {
+interface ClientAction<CT extends ConfigType = ConfigType> extends ActionDescriptor<CT> {
   category: 'client';
-  available?: string;
+  available?: ContextExpression;
 }
 
 type ActionGroupByContext = Record<ActionContextType, ClientAction[]>;
@@ -40,8 +36,6 @@ type ActionGroupByContext = Record<ActionContextType, ClientAction[]>;
 export {
   ActionCategory,
   ActionContextType,
-  BuiltInActionComponentRenderer,
-  ActionComponentRenderer,
   ActionDescriptor,
   ServerAction,
   ClientAction,

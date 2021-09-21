@@ -43,14 +43,14 @@ interface InternalListViewContext<Child, VT = any, CT = ConfigType> extends View
   getSearchContext: () => SearchContext | undefined;
   getTotal: () => number;
   getCurrentPage: () => number;
-  setCurrentPage: (current: number) => void;
+  setCurrentPage: (current: number, silent?: boolean) => void;
   getPageSize: () => number;
-  setPageSize: (size: number) => void;
+  setPageSize: (size: number, silent?: boolean) => void;
   load: () => Promise<any>;
   reload: () => Promise<any>;
   getList: ShorthandRequest;
-  deleteOne: ShorthandRequest<string | Record<string, any>>;
-  deleteList: ShorthandRequest<string[] | Record<string, any>>;
+  deleteOne: ShorthandRequest<string | number | Record<string, any>>;
+  deleteList: ShorthandRequest<string[] | number[] | Record<string, any>>;
 }
 
 interface InternalObjectViewContext<Parent, VT = any, CT = ConfigType> extends ViewContext<VT, CT> {
@@ -60,7 +60,7 @@ interface InternalObjectViewContext<Parent, VT = any, CT = ConfigType> extends V
   setFieldValue: <FV>(name: string, value: FV) => void;
   setFieldChecker: (name: string, checker: ValueChecker) => void;
   isModified: () => boolean;
-  getOne: ShorthandRequest<string>;
+  getOne: ShorthandRequest<string | number>;
   insert: ShorthandRequest;
   update: ShorthandRequest;
 }
@@ -103,6 +103,8 @@ interface ObjectShorthandRequest {
   getOne?: string;
 }
 
+type ValidationTiming = 'immediate' | 'submit' | 'none';
+
 interface ObjectViewContextDescriptor<
   VT extends DataValue = DataValue,
   CT extends ConfigType = ConfigType
@@ -110,6 +112,12 @@ interface ObjectViewContextDescriptor<
     ObjectShorthandRequest {
   parent?: ListViewContext<VT, CT>;
   indexInParent?: number;
+  validate?: ValidationTiming;
+}
+
+interface ExpressionContext<VT extends DataValue = DataValue> {
+  value: VT;
+  dataSource?: VT;
 }
 
 export {
@@ -117,8 +125,10 @@ export {
   ListShorthandRequest,
   ListViewContextDescriptor,
   ObjectShorthandRequest,
+  ValidationTiming,
   ObjectViewContextDescriptor,
   ViewContext,
   ListViewContext,
   ObjectViewContext,
+  ExpressionContext,
 };

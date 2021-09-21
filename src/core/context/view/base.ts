@@ -5,6 +5,7 @@ import {
   ViewFieldDescriptor,
   ListViewContext,
   ObjectViewContext,
+  ExpressionContext,
 } from '../../typing';
 import { resolveFieldMap } from '../../model';
 
@@ -43,4 +44,23 @@ function resolveFields(
   );
 }
 
-export { resolveFields, getViewContext, setViewContext };
+function runExpression(
+  { dataSource, value }: ExpressionContext,
+  expression: string,
+  defaultReturnValue?: any,
+): any {
+  const func = new Function('$dataSource', '$value', `return ${expression}`); // eslint-disable-line no-new-func
+
+  let result: boolean;
+
+  try {
+    result = func.call(null, dataSource, value); // eslint-disable-line no-useless-call
+  } catch (err) {
+    console.error(err);
+    result = defaultReturnValue;
+  }
+
+  return result;
+}
+
+export { resolveFields, runExpression, getViewContext, setViewContext };

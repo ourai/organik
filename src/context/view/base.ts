@@ -16,6 +16,7 @@ import {
   resolveAction,
   setViewContext,
   resolveFields,
+  runExpression,
 } from '../../core';
 import { resolveInput } from '../../core/input';
 import { ValueContext } from '../value';
@@ -38,21 +39,6 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
   private dataSource: ValueType;
 
   private busy: boolean = false;
-
-  private runExpression(expression: string): boolean {
-    const func = new Function('$dataSource', '$value', `return ${expression}`); // eslint-disable-line no-new-func
-
-    let result: boolean;
-
-    try {
-      result = !!func.call(null, this.getDataSource(), this.getValue()); // eslint-disable-line no-useless-call
-    } catch (err) {
-      console.error(err);
-      result = false;
-    }
-
-    return result;
-  }
 
   constructor(moduleContext: ModuleContext, options: ViewContextDescriptor<ValueType, Config>) {
     super(pick(options, ['defaultValue', 'initialValue']) as ValueContextDescriptor<ValueType>);
@@ -110,7 +96,13 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
 
   public getActions(): ClientAction[] {
     return this.actions.filter(action =>
-      isString(action.available) ? this.runExpression(action.available!) : action,
+      isString(action.available)
+        ? !!runExpression(
+            { dataSource: this.getDataSource(), value: this.getValue() },
+            action.available!,
+            false,
+          )
+        : action,
     );
   }
 

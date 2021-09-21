@@ -1,5 +1,6 @@
 import { ComponentCtor, ComponentGetter } from '../component';
-import { ConfigType, ComponentRenderer, InputDescriptor } from './base';
+import { RenderType } from '../render-type';
+import { ConfigType, ComponentRenderer, ContextExpression, InputDescriptor } from './base';
 import { FieldDescriptor } from './model';
 import { ActionDescriptor } from './action';
 import { SearchDescriptor } from './search';
@@ -7,15 +8,20 @@ import { SearchDescriptor } from './search';
 interface ViewFieldDescriptor<
   RT extends any = ComponentRenderer,
   CT extends ConfigType = ConfigType
-> extends Omit<FieldDescriptor, 'dataType'>,
-    InputDescriptor<RT, CT> {}
+> extends Omit<FieldDescriptor, 'dataType' | 'required' | 'readonly'>,
+    InputDescriptor<RT, CT> {
+  required?: boolean | ContextExpression;
+  readonly?: boolean | ContextExpression;
+  hidden?: boolean;
+}
 
 type ViewCategory = 'list' | 'object';
 
 interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   name: string;
   category?: ViewCategory;
-  render: ComponentRenderer;
+  renderType?: RenderType;
+  widget?: ComponentRenderer;
   fields: (ViewFieldDescriptor | string)[];
   actions?: (ActionDescriptor | string)[];
   actionsAuthority?: string;

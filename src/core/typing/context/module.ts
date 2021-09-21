@@ -30,7 +30,9 @@ interface ModuleContext<K extends string = string> {
   getModuleName: () => string;
   getModel: () => ModelDescriptor | undefined;
   getDependencies: (refPath?: string) => ModuleDependencies | ModuleResources | undefined;
-  getComponents: () => Record<string, ComponentCtor>;
+  getComponents: (newComponents?: {
+    [key: string]: ComponentCtor;
+  }) => Record<string, ComponentCtor>;
   execute: ServerActionExecutor<K>;
 }
 

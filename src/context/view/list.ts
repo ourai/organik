@@ -63,7 +63,7 @@ class ListViewContext<
         createViewContext(moduleContext, {
           name: `ObjectViewIn${options.name}`,
           category: 'object',
-          render: '',
+          widget: '',
           fields: this.getFields(),
           actions: this.getActionsByContextType('single'),
           initialValue: record,
@@ -80,15 +80,12 @@ class ListViewContext<
         moduleContext.getModel(),
       );
 
-      const loadData = this.load.bind(this);
+      const loadData = () => this.setCurrentPage(1);
 
       searchContext.on({
         change: value => (this.searchCondition = value),
         filterChange: ({ name, value }) => (this.searchCondition[name] = value),
-        ready: () => {
-          this.conditionInited = true;
-          loadData();
-        },
+        ready: () => (this.conditionInited = true),
         submit: loadData,
         reset: loadData,
       });
@@ -117,18 +114,36 @@ class ListViewContext<
     return this.currentPage;
   }
 
-  public setCurrentPage(current: number): void {
+  public setCurrentPage(current: number, silent?: boolean): void {
+    const changed = this.currentPage !== current;
+
     this.currentPage = current;
-    this.load();
+
+    if (silent !== true) {
+      if (changed) {
+        this.emit('currentPageChange', current);
+      }
+
+      this.load();
+    }
   }
 
   public getPageSize(): number {
     return this.currentPageSize;
   }
 
-  public setPageSize(size: number): void {
+  public setPageSize(size: number, silent?: boolean): void {
+    const changed = this.currentPageSize !== size;
+
     this.currentPageSize = size;
-    this.load();
+
+    if (silent !== true) {
+      if (changed) {
+        this.emit('pageSizeChange', size);
+      }
+
+      this.load();
+    }
   }
 
   public setDataSource(data: ValueType): void {
@@ -154,20 +169,10 @@ class ListViewContext<
 
     this.getList(
       resolveListRequestParams(this.searchCondition, this.currentPage, this.currentPageSize),
-      (data, { pageNum, pageSize, total }) => {
+      (data, { total }) => {
         this.setDataSource(data);
         this.totalPage = total;
         this.emit('totalChange', total);
-
-        if (this.currentPage !== pageNum) {
-          this.currentPage = pageNum;
-          this.emit('currentPageChange', pageNum);
-        }
-
-        if (this.currentPageSize !== pageSize) {
-          this.currentPageSize = pageSize;
-          this.emit('pageSizeChange', pageSize);
-        }
       },
     ).finally(() => this.setBusy(false));
   }
@@ -190,7 +195,7 @@ class ListViewContext<
   }
 
   public deleteOne(
-    params: string | Record<string, any>,
+    params: string | number | Record<string, any>,
     success?: ResponseSuccess,
     fail?: ResponseFail,
   ): Promise<ResponseResult> {
@@ -203,7 +208,7 @@ class ListViewContext<
   }
 
   public deleteList(
-    params: string[] | Record<string, any>,
+    params: string[] | number[] | Record<string, any>,
     success?: ResponseSuccess,
     fail?: ResponseFail,
   ): Promise<ResponseResult> {

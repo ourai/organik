@@ -29,6 +29,7 @@ function createValueContext<ValueType extends any = any, EventNames extends stri
     getDefaultValue,
     getValue,
     setValue,
+    isReady: () => valueInited,
     submit: () => emit('submit'),
     reset: () => {
       setValue(getDefaultValue());

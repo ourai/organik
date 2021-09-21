@@ -1,4 +1,4 @@
-import { isFunction } from '@ntks/toolbox';
+import { isFunction, capitalize } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
@@ -49,10 +49,16 @@ function createView<VT, CT>(
 
   let renderer: ComponentRenderer;
 
-  if (isFunction(view.render)) {
-    renderer = view.render as ComponentCtor;
+  const { renderType, widget } = view;
+
+  if (widget) {
+    if (isFunction(widget)) {
+      renderer = widget as ComponentCtor;
+    } else {
+      renderer = getWidget(widget as string) || widget;
+    }
   } else {
-    renderer = getWidget(view.render as string) || view.render;
+    renderer = getWidget(`${capitalize(renderType || '')}ViewWidget`) || '';
   }
 
   return getViewCreator()(resolved, provider, renderer);

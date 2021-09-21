@@ -1,4 +1,5 @@
 import { clone } from '@ntks/toolbox';
+import EventEmitter from '@ntks/event-emitter';
 
 import {
   DataValue,
@@ -6,7 +7,6 @@ import {
   ValueEvents,
   ValueContext as IValueContext,
 } from '../core';
-import { EventEmitter } from './event';
 
 class ValueContext<ValueType extends DataValue = DataValue, EventNames extends string = ValueEvents>
   extends EventEmitter<EventNames>
@@ -40,6 +40,10 @@ class ValueContext<ValueType extends DataValue = DataValue, EventNames extends s
       this.valueInited = true;
       this.emit('ready');
     }
+  }
+
+  public isReady(): boolean {
+    return this.valueInited;
   }
 
   public submit(): void {

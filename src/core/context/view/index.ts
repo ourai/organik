@@ -5,7 +5,7 @@ import {
   ObjectViewContextDescriptor,
   ObjectViewContext,
 } from '../../typing';
-import { resolveFields, getViewContext, setViewContext } from './base';
+import { resolveFields, runExpression, getViewContext, setViewContext } from './base';
 import { setListViewContextCreator, resolveListRequestParams, createListViewContext } from './list';
 import { setObjectViewContextCreator, createObjectViewContext } from './object';
 
@@ -26,6 +26,7 @@ function createViewContext<VT, CT>(
 
 export {
   resolveFields,
+  runExpression,
   getViewContext,
   setViewContext,
   setListViewContextCreator,

@@ -12,6 +12,7 @@ import {
   ModuleContext,
   ListViewContext as IListViewContext,
   ObjectShorthandRequest,
+  ValidationTiming,
   ObjectViewContextDescriptor,
   ObjectViewContext as IObjectViewContext,
   createInputValidator,
@@ -28,13 +29,36 @@ class ObjectViewContext<
 
   private readonly indexInParent: number;
 
+  private readonly validationTiming: ValidationTiming;
+
   private readonly shorthandNames: ObjectShorthandRequest;
 
-  private readonly validatorMap: { [key: string]: Validator };
+  private readonly validatorMap: { [key: string]: Validator }; // map of fields and validators
 
   private invalidFieldMap: { [key: string]: boolean } = {};
 
   private modified: boolean = false;
+
+  private validateFieldValue<FV>(name: string, value: FV): void {
+    const validator = this.validatorMap[name];
+
+    if (validator === undefined) {
+      return;
+    }
+
+    const validationResult = validator.validate(value, {
+      dataSource: this.getDataSource(),
+      value: this.getValue(),
+    });
+
+    if (validationResult.success) {
+      delete this.invalidFieldMap[name];
+    } else {
+      this.invalidFieldMap[name] = true;
+    }
+
+    this.emit('fieldValidate', { name, result: validationResult });
+  }
 
   constructor(
     moduleContext: ModuleContext,
@@ -48,6 +72,7 @@ class ObjectViewContext<
 
     this.parent = options.parent;
     this.indexInParent = options.indexInParent === undefined ? -1 : options.indexInParent;
+    this.validationTiming = options.validate || 'immediate';
     this.shorthandNames = pick(options, ['getOne', 'insert', 'update']);
 
     this.validatorMap = this.getFields().reduce(
@@ -85,21 +110,14 @@ class ObjectViewContext<
   }
 
   public setFieldValue<FV>(name: string, value: FV): void {
-    const validator = this.validatorMap[name];
-
-    if (validator === undefined) {
+    if (this.validatorMap[name] === undefined) {
       return;
     }
 
-    const validationResult = validator.validate(value);
-
-    if (validationResult.success) {
-      delete this.invalidFieldMap[name];
-    } else {
-      this.invalidFieldMap[name] = true;
+    if (this.validationTiming === 'immediate') {
+      this.validateFieldValue<FV>(name, value);
     }
 
-    this.emit('fieldValidate', { name, result: validationResult });
     this.setValue({ ...(this.getValue() as any), [name]: value });
     this.emit('fieldChange', { name, value });
   }
@@ -117,6 +135,12 @@ class ObjectViewContext<
   }
 
   public submit(): void {
+    if (this.validationTiming === 'submit') {
+      this.getFields().forEach(({ name }) =>
+        this.validateFieldValue(name, this.getFieldValue(name)),
+      );
+    }
+
     if (Object.keys(this.invalidFieldMap).length > 0) {
       return;
     }
@@ -127,14 +151,14 @@ class ObjectViewContext<
   }
 
   public reset(): void {
+    super.reset();
+
     this.invalidFieldMap = {};
     this.modified = false;
-
-    super.reset();
   }
 
   public getOne(
-    params: string,
+    params: string | number,
     success?: ResponseSuccess,
     fail?: ResponseFail,
   ): Promise<ResponseResult> {

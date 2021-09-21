@@ -10,6 +10,7 @@ import {
   InputDescriptor,
 } from './typing';
 import { getDataType, isDataTypeValid, isDataValueValid } from './data-type';
+import { runExpression } from './context/view/base';
 
 const propCheckerMap = new Map<DataType, InputPropChecker[]>();
 
@@ -32,15 +33,19 @@ function getDefaultValue({ dataType }: InputDescriptor): any {
 }
 
 function createValueValidator(valueCheckers: ValueChecker[]): ValueChecker {
-  return value => {
+  return (value, ctx) => {
     const checkers = ([] as ValueChecker[]).concat(valueCheckers);
 
-    let result = { success: true };
+    let result = { success: true } as ValidationResult;
 
     while (checkers.length > 0) {
       const validate = checkers.shift()!;
 
-      result = validate(value);
+      result = validate(value, ctx);
+
+      if (!result.type) {
+        result.type = 'custom';
+      }
 
       if (!result.success) {
         break;
@@ -56,21 +61,30 @@ function createInputValidator(input: InputDescriptor): Validator {
   const { dataType } = input;
 
   if (input.required) {
-    checkers.push(value => {
-      const result: ValidationResult = { success: true };
+    checkers.push((value, ctx) => {
+      const result: ValidationResult = { type: 'required', success: true };
+      const dynamicRequired = isString(input.required);
 
-      if (value == null) {
-        result.success = false;
-      } else if (isString(value)) {
-        result.success = value !== '';
-      } else if (isArray(value)) {
-        result.success = value.length > 0;
-      } else if (isPlainObject(value)) {
-        result.success = Object.keys(value).length > 0;
+      let computedResult = false;
+
+      if (dynamicRequired) {
+        computedResult = !!runExpression(ctx, input.required as string);
       }
 
-      if (!result.success) {
-        result.message = `请填入 '${input.label || input.name}' 的值`;
+      if (!dynamicRequired || computedResult) {
+        if (value == null) {
+          result.success = false;
+        } else if (isString(value)) {
+          result.success = value !== '';
+        } else if (isArray(value)) {
+          result.success = value.length > 0;
+        } else if (isPlainObject(value)) {
+          result.success = Object.keys(value).length > 0;
+        }
+
+        if (!result.success) {
+          result.message = `请填入 '${input.label || input.name}' 的值`;
+        }
       }
 
       return result;
@@ -82,8 +96,9 @@ function createInputValidator(input: InputDescriptor): Validator {
       const valid = isDataValueValid(dataType, value);
 
       return valid
-        ? { success: true }
+        ? { type: 'data-type', success: true }
         : {
+            type: 'data-type',
             success: false,
             message: `'${input.label || input.name}' 的值 ${value} 与数据类型 '${dataType}' 不符`,
           };

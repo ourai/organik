@@ -1,17 +1,16 @@
 export * from './typing';
 export { registerComponent, getControl, getWidget, getRenderer } from './component';
 export { registerDataType } from './data-type';
+export { registerRenderType } from './render-type';
 export { registerModules, getComponents, getActions, getViews } from './module';
 export { registerAction, resolveAction } from './action';
 export { registerInputPropCheckers, createInputValidator } from './input';
 export {
-  bindEvent,
-  unbindEvent,
-  triggerEvent,
   createModuleContext,
   setSearchContextCreator,
   createSearchContext,
   resolveFields,
+  runExpression,
   setViewContext,
   getViewContext,
   setListViewContextCreator,
