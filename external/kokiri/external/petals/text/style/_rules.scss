@@ -1,7 +1,0 @@
-@import "../../typography/style/mixins";
-
-@include component-rules($petals--text-component-name) {
-  @include typo-common-rules;
-
-  display: inline;
-}

@@ -1,1 +1,0 @@
-export { setDefaultTheme } from './theme';

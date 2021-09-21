@@ -1,3 +1,0 @@
-interface IBoxComponent {}
-
-export { IBoxComponent };

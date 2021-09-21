@@ -16,14 +16,7 @@
     "sourceMap": false,
     "noImplicitAny": false,
     "baseUrl": ".",
-    "paths": {
-      "organik": ["src/index.ts"],
-      "kokiri": ["external/kokiri/index.ts"],
-      "kokiri/*": ["external/kokiri/*"],
-      "handie-vue": ["external/handie-vue/index.ts"],
-      "handie-vue/*": ["external/handie-vue/*"],
-      "@/*": ["demo/app/shared/*"]
-    }
+    "paths": {}
   },
-  "include": ["src", "demo/app", "external"]
+  "include": ["src"]
 }

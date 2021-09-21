@@ -1,1 +1,0 @@
-export { resolveVuexModuleTree } from './store';

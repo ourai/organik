@@ -1,9 +1,0 @@
-@import './properties';
-
-// Body
-//
-// Settings for the `<body>` element.
-
-$petals--body-bg: $__petals--white !default;
-$petals--body-color: var($__petals--text-regular, $petals--text-regular) !default;
-$petals--body-text-align: null !default;
