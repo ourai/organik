@@ -1,12 +1,13 @@
 import { ComponentCtor } from '../component';
-import { InputDescriptor } from './base';
+import { ConfigType, InputDescriptor } from './base';
 
 interface FilterDescriptor extends InputDescriptor {
   hidden?: boolean;
 }
 
-interface SearchDescriptor {
+interface SearchDescriptor<CT extends ConfigType = ConfigType> {
   filters: (FilterDescriptor | string)[];
+  config?: CT;
 }
 
 type SearchComponentRenderer = SearchDescriptor | ComponentCtor;
