@@ -29,7 +29,7 @@ interface ViewContext<VT = any, CT = ConfigType>
   getFields: () => ViewFieldDescriptor[];
   getActions: () => ActionDescriptor[];
   getActionsByContextType: (contextType: ActionContextType) => ActionDescriptor[];
-  getActionsAuthority: () => string | undefined;
+  getActionsAuthority: () => string | ((...args: any[]) => string) | undefined;
   getConfig: () => CT;
   getDataSource: () => VT;
   setDataSource: (data: VT) => void;

@@ -24,7 +24,7 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   widget?: ComponentRenderer;
   fields: (ViewFieldDescriptor | string)[];
   actions?: (ActionDescriptor | string)[];
-  actionsAuthority?: string;
+  actionsAuthority?: string | ((...args: any[]) => string);
   search?: SearchDescriptor | ComponentCtor;
   config?: CT;
 }

@@ -110,7 +110,7 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
     return this.actionContextGroups[contextType] || [];
   }
 
-  public getActionsAuthority(): string | undefined {
+  public getActionsAuthority(): string | ((...args: any[]) => string) | undefined {
     return this.options.actionsAuthority;
   }
 

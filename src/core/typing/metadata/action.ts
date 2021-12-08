@@ -10,7 +10,7 @@ interface ActionDescriptor<CT extends ConfigType = ConfigType> {
   category?: ActionCategory;
   type?: string;
   context?: ActionContextType;
-  authority?: string;
+  authority?: string | ((...args: any[]) => string);
   text?: string;
   primary?: boolean;
   danger?: boolean;
