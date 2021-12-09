@@ -5,12 +5,14 @@ type ActionCategory = 'server' | 'client';
 
 type ActionContextType = 'free' | 'single' | 'batch' | 'both';
 
+type ActionAuthorityGetter = (...args: any[]) => string;
+
 interface ActionDescriptor<CT extends ConfigType = ConfigType> {
   name?: string;
   category?: ActionCategory;
   type?: string;
   context?: ActionContextType;
-  authority?: string | ((...args: any[]) => string);
+  authority?: string | ActionAuthorityGetter;
   text?: string;
   primary?: boolean;
   danger?: boolean;
@@ -36,6 +38,7 @@ type ActionGroupByContext = Record<ActionContextType, ClientAction[]>;
 export {
   ActionCategory,
   ActionContextType,
+  ActionAuthorityGetter,
   ActionDescriptor,
   ServerAction,
   ClientAction,

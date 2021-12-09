@@ -2,7 +2,7 @@ import { ComponentCtor, ComponentGetter } from '../component';
 import { RenderType } from '../render-type';
 import { ConfigType, ComponentRenderer, ContextExpression, InputDescriptor } from './base';
 import { FieldDescriptor } from './model';
-import { ActionDescriptor } from './action';
+import { ActionAuthorityGetter, ActionDescriptor } from './action';
 import { SearchDescriptor } from './search';
 
 interface ViewFieldDescriptor<
@@ -24,7 +24,7 @@ interface ViewDescriptor<CT extends ConfigType = ConfigType> {
   widget?: ComponentRenderer;
   fields: (ViewFieldDescriptor | string)[];
   actions?: (ActionDescriptor | string)[];
-  actionsAuthority?: string | ((...args: any[]) => string);
+  actionsAuthority?: string | ActionAuthorityGetter;
   search?: SearchDescriptor | ComponentCtor;
   config?: CT;
 }

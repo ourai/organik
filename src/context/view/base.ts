@@ -5,6 +5,7 @@ import {
   DataValue,
   ConfigType,
   ActionContextType,
+  ActionAuthorityGetter,
   ClientAction,
   ActionGroupByContext,
   ViewFieldDescriptor,
@@ -110,7 +111,7 @@ class ViewContext<ValueType extends DataValue = DataValue, Config extends Config
     return this.actionContextGroups[contextType] || [];
   }
 
-  public getActionsAuthority(): string | ((...args: any[]) => string) | undefined {
+  public getActionsAuthority(): string | ActionAuthorityGetter | undefined {
     return this.options.actionsAuthority;
   }
 

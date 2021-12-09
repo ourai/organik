@@ -5,6 +5,7 @@ import {
   ConfigType,
   ViewFieldDescriptor,
   ActionContextType,
+  ActionAuthorityGetter,
   ActionDescriptor,
   SearchComponentRenderer,
   ViewDescriptor,
@@ -29,7 +30,7 @@ interface ViewContext<VT = any, CT = ConfigType>
   getFields: () => ViewFieldDescriptor[];
   getActions: () => ActionDescriptor[];
   getActionsByContextType: (contextType: ActionContextType) => ActionDescriptor[];
-  getActionsAuthority: () => string | ((...args: any[]) => string) | undefined;
+  getActionsAuthority: () => string | ActionAuthorityGetter | undefined;
   getConfig: () => CT;
   getDataSource: () => VT;
   setDataSource: (data: VT) => void;
