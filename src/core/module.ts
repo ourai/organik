@@ -1,4 +1,4 @@
-import { isBoolean, isString, isFunction } from '@ntks/toolbox';
+import { isBoolean, isString, isFunction, includes } from '@ntks/toolbox';
 
 import {
   ComponentCtor,
@@ -183,6 +183,16 @@ function getComponents(
   return components;
 }
 
+function isWidgetDependency(moduleName: string, widgetName: string): boolean {
+  const module = moduleMap.get(moduleName);
+
+  if (!module || (module.imports || []).length === 0 || !module.componentRefs[widgetName]) {
+    return false;
+  }
+
+  return includes(module.componentRefs[widgetName], module.imports);
+}
+
 export {
   convertAsyncFunctionMapToServerActionMap,
   ensureModuleExists,
@@ -191,4 +201,5 @@ export {
   getViews,
   getDependencies,
   getComponents,
+  isWidgetDependency,
 };
